@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Design tokens — Santo Terço style guide v1.0
+   Breakpoints (custom properties don't work inside media queries):
+     mobile  ≤ 640px
+     tablet  ≤ 1024px  → @media (min-width: 40.0625em)
+     desktop > 1024px  → @media (min-width: 64.0625em)
+   ========================================================================== */
+
+:root {
+  /* Base colors */
+  --color-beige: #f4f1ea;
+  --color-beige-light: #faf8f5;
+  --color-white: #ffffff;
+  --color-navy: #1c2b4b;
+  --color-gold: #c29b62; /* decoration only, never text */
+  --color-gold-bright: #d4af37; /* hover and highlights on navy */
+
+  /* Derived colors */
+  --color-gold-heading: #9c7638; /* headings 24px+ */
+  --color-gold-text: #7d5d28; /* small text */
+  --color-gold-soft: #f2e6cb;
+  --color-cream: #f7f0e1;
+  --color-navy-hover: #2a3d66;
+  --color-navy-2: #26375c;
+  --color-text: #3a4660;
+  --color-text-muted: #5b6478;
+  --color-border: #e6dfd0;
+  --color-damask: #e0d5be;
+  --color-success: #2f6b4a;
+  --color-success-bg: #e7f1ea;
+  --color-danger: #9b2c2c;
+  --color-danger-bg: #fbefef;
+
+  /* Typography */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Lato", system-ui, sans-serif;
+
+  /* Fluid type scale: mobile (≈ -35%) → desktop */
+  --text-display: clamp(2.5rem, 1.75rem + 3vw, 4rem); /* 40 → 64 */
+  --text-h1: clamp(2rem, 1.375rem + 2.5vw, 3.25rem); /* 32 → 52 */
+  --text-h2: clamp(1.375rem, 1rem + 1.5vw, 2.125rem); /* 22 → 34 */
+  --text-h3: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem); /* 20 → 24 */
+  --text-quote: clamp(1.375rem, 1.1875rem + 0.75vw, 1.75rem); /* 22 → 28 */
+  --text-prayer: clamp(1.0625rem, 0.96875rem + 0.375vw, 1.25rem); /* 17 → 20 */
+  --text-body-lg: 1.125rem; /* 18 */
+  --text-body: 1rem; /* 16 */
+  --text-button: clamp(1rem, 0.96875rem + 0.125vw, 1.0625rem); /* 16 → 17 */
+  --text-caption: clamp(0.8125rem, 0.78125rem + 0.125vw, 0.875rem); /* 13 → 14 */
+  --text-eyebrow: 0.875rem; /* 14 */
+
+  --leading-display: 1.05;
+  --leading-h1: 1.1;
+  --leading-h2: 1.25;
+  --leading-h3: 1.3;
+  --leading-quote: 1.45;
+  --leading-prayer: 1.7;
+  --leading-body: 1.6;
+
+  --tracking-eyebrow: 0.16em;
+
+  /* Spacing (base 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii */
+  --radius-sm: 12px; /* icon chips, segments */
+  --radius-md: 16px; /* mobile buttons, fields */
+  --radius-lg: 22px; /* cards */
+  --radius-xl: 28px; /* hero, large blocks */
+  --radius-pill: 999px; /* pill buttons, badges, beads */
+
+  /* Shadows */
+  --shadow-sm: 0 6px 18px rgba(28, 43, 75, 0.05);
+  --shadow-md: 0 8px 24px rgba(28, 43, 75, 0.08);
+  --shadow-lg: 0 24px 60px rgba(28, 43, 75, 0.1);
+  --shadow-gold: 0 10px 24px rgba(156, 118, 56, 0.28);
+
+  /* Layout */
+  --width-reading: 720px;
+  --width-page: 1200px;
+  --gutter: 16px;
+
+  /* Touch targets */
+  --tap-min: 44px;
+  --tap-primary-mobile: 52px;
+
+  /* Motion */
+  --transition: 200ms ease;
+}
