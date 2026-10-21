@@ -35,7 +35,7 @@ src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG m
 src/js/
   app.js               initApp(): shared behavior for every page
   config.js            data URL and constants
-  services/            data access and persistence (api, mysteries, prayers, storage, history)
+  services/            data access and persistence (api, mysteries, prayers, rosary, storage, progress, history)
   utils/               small pure helpers (dom, date)
   components/          reusable UI behavior: initTabs, initAccordion, initBeadCounter, ...
   pages/               one entry module per page

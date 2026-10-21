@@ -10,3 +10,17 @@
   color: var(--color-navy);
   white-space: pre-line;
 }
+
+/* Boxed: the prayer being prayed in the guided terço */
+.prayer-text--boxed {
+  padding: var(--space-4);
+  background-color: var(--color-beige-light);
+  border-left: 4px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+@media (min-width: 40.0625em) {
+  .prayer-text--boxed {
+    padding: var(--space-4) var(--space-6);
+  }
+}

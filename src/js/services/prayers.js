@@ -45,3 +45,12 @@ export async function getPrayerBook() {
 
   return data;
 }
+
+/**
+ * @param {PrayerBook} book
+ * @returns {Map<string, Prayer>} Rosary and complementary prayers by id.
+ */
+export function getPrayersById(book) {
+  const prayers = [...book.rosaryGroups.flatMap((group) => group.prayers), ...book.complementary];
+  return new Map(prayers.map((prayer) => [prayer.id, prayer]));
+}

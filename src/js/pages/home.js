@@ -3,6 +3,7 @@ import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
 import { getSetIdsPrayedOn } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
+import { hasProgress } from '../services/progress.js';
 import { formatShortDate, getWeek, toDateKey, weekdayName, weekdayShortName } from '../utils/date.js';
 import { cloneTemplate, qs, qsa } from '../utils/dom.js';
 
@@ -27,7 +28,7 @@ function initHome(root) {
       const sets = await getMysterySets();
       const todaySet = getSetForDate(sets, today);
 
-      renderToday(root, todaySet);
+      renderToday(root, todaySet, hasProgress(todaySet.id, toDateKey(today)));
       renderWeek(qs('[data-week]', root), sets, today);
       renderRosary(root, sets, todaySet, getSetIdsPrayedOn(toDateKey(today)));
     },
@@ -35,8 +36,8 @@ function initHome(root) {
   );
 }
 
-/** Hero: name, summary and start link of today's set. */
-function renderToday(root, set) {
+/** Hero: name, summary and start link of today's set ("Continuar" once it was started today). */
+function renderToday(root, set, started) {
   const name = document.createElement('span');
   name.className = 'today__set';
   name.textContent = set.name;
@@ -44,6 +45,7 @@ function renderToday(root, set) {
   qs('[data-today-title]', root).replaceChildren('Hoje rezamos os ', name);
   qs('[data-today-lead]', root).textContent = `${set.summary} ${DURATION_NOTE}`;
   qs('[data-today-start]', root).href = prayUrl(set);
+  qs('[data-today-start-label]', root).textContent = started ? 'Continuar o terço de hoje' : 'Começar o terço de hoje';
   qs('[data-today-badge]', root).hidden = false;
   setIllustration(qs('[data-today-illustration]', root), set.illustration);
   setIllustration(qs('[data-today-art]', root), set.illustration);

@@ -1,0 +1,42 @@
+{
+  "opening": {
+    "title": "Orações iniciais",
+    "trailLabel": "Início",
+    "illustration": "oracao",
+    "lead": "Reze com calma, uma de cada vez. Ao terminar, toque em “Rezei” para acender a próxima.",
+    "completedTitle": "Primeira medalha conquistada!",
+    "completedText": "As orações iniciais estão completas. Vamos ao 1º mistério.",
+    "steps": [
+      { "prayer": "sign-of-the-cross", "subtitle": "Começamos em nome da Trindade" },
+      { "prayer": "offering", "subtitle": "Entregamos este terço a Jesus" },
+      { "prayer": "creed", "subtitle": "Profissão de fé · opcional" },
+      { "prayer": "our-father", "subtitle": "A oração que Jesus ensinou" },
+      {
+        "prayer": "hail-mary",
+        "title": "3 Ave-Marias",
+        "subtitle": "Uma para cada virtude",
+        "count": 3,
+        "intentions": ["Fé", "Esperança", "Caridade"]
+      },
+      { "prayer": "glory-be", "subtitle": "Encerra a abertura" }
+    ]
+  },
+  "mystery": {
+    "steps": [
+      { "prayer": "our-father", "subtitle": "Abre a dezena · 1 vez" },
+      { "prayer": "hail-mary", "title": "10 Ave-Marias", "subtitle": "Uma conta para cada Ave Maria", "count": 10 },
+      { "prayer": "glory-be", "title": "Glória e Ó meu Jesus", "subtitle": "Fecha a dezena", "also": ["fatima-prayer"] }
+    ]
+  },
+  "closing": {
+    "title": "Orações finais",
+    "trailLabel": "Final",
+    "illustration": "salve-rainha",
+    "lead": "Agradecemos a Nossa Senhora e encerramos o terço com calma.",
+    "steps": [
+      { "prayer": "thanksgiving", "subtitle": "Infinitas graças" },
+      { "prayer": "hail-holy-queen", "subtitle": "Saudação a Nossa Senhora" },
+      { "prayer": "sign-of-the-cross", "subtitle": "Encerramento" }
+    ]
+  }
+}

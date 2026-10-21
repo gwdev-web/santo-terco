@@ -248,3 +248,9 @@
 .site-main--flush-top {
   padding-top: 0;
 }
+
+/* Focus pages (guided terço): no tab bar, so no room is reserved for it */
+
+.page--focus {
+  padding-bottom: 0;
+}

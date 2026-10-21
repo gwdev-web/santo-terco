@@ -195,14 +195,16 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 
 ### 6.3 Guided rosary
 
-- **Prayer step card:** number, title (Playfair 24px), optional hint (e.g. "Abre a dezena · 1 vez") and the prayer text in a light-beige box with a 4px gold left border (Playfair 20/1.75; 18/1.7 on mobile).
-  - States: *current* (gold border + soft gold shadow), *done* (soft green border `#BFD9C8`), *upcoming* (neutral border).
-  - One "Rezei" button per step lights up the next step. Marking is optional.
-- **Mark toggle:** pill with label on desktop, 44px circle with check on mobile. Uses `aria-pressed`.
-- **Decade beads:** 10 beads, 52–56px, all clickable. *Gold* = prayed · *dashed and pulsing* = next · *white* = remaining. Tapping the last gold bead unmarks it. Desktop: row/grid; mobile: a ring of beads around a navy center button ("+ Rezei uma"). The opening has 3 larger beads for the three Hail Marys.
-- **Steps:** Início · 1º–5º · Final. Done (soft gold + ✓) · current (navy) · upcoming (white). On mobile it becomes a segmented bar.
-- **Daily trail ("Sua caminhada de hoje"):** row of medals for the day's steps plus the streak ("3 dias seguidos ✦"). A completed step turns its medal gold.
-- **Medals:** small circular badges with an illustration; earned for finishing the opening, each mystery, a terço, a full Rosary and streaks.
+- **Focus page:** the guided terço has its own header ("Sair do terço", the set with its illustration, "Trocar de mistério"), no tab bar and no footer. One stage per URL: `pray.html?mystery=<set>&step=<opening | 1–5 | closing>`; without `step` it opens the first stage not finished today.
+- **Prayer step card:** number, illustration, title (Playfair 24px; 21px on mobile), a short hint (e.g. "Abre a dezena · 1 vez") and the full prayer in a light-beige box with a 4px gold left border (`--text-prayer`).
+  - States: *current* (gold border + gold halo, `aria-current="step"`), *done* (soft green border, number in green, text folded with "Mostrar o texto da oração"), *upcoming* (neutral border).
+  - "Rezei" lights up the next step; if the next step is off screen it scrolls into view. Marking is optional.
+- **Mark toggle ("Rezei"):** a box and the verb, `aria-pressed`. Pressed: soft green with a filled check. Full width and 52px on mobile, a pill beside the title from tablet. The label stays "Rezei"; screen readers also hear the prayer's name.
+- **Beads:** round buttons with `aria-pressed`, 56px (64–68px for the opening's three). *Gold* = prayed · *navy outline, breathing* = next (only in the current step) · *white* = remaining. Tapping a bead marks every bead up to it; tapping the last gold bead unmarks it. The opening's three show their virtue (Fé, Esperança, Caridade). A decade is 2 rows of 5 on mobile and one row of 10 from tablet (the ring around a "+ Rezei uma" button comes with the mysteries stage).
+- **Daily trail ("Sua caminhada de hoje"):** "N de 71 orações", the percentage, a progress bar with a slow sheen, the streak ("✦ 3 dias seguidos", from 2 days) and seven medals: Início · 1º–5º · Final. The gold line reaches the stage after the last one completed. On mobile it stays at the top under the header, with small medals and no visible labels.
+- **Medals:** round, with an illustration. *Done* = navy with a gold drawing · *current* = navy outline with a gold halo · *to do* = white. A medal earned during the visit pops in (800ms). Finishing a stage shows "Primeira medalha conquistada!" (or "Mais uma medalha!") with its medal.
+- **"A seguir":** navy card with the next stage and "Ir para o 1º mistério" (gold, breathing once the stage is done). On mobile it is a bar fixed at the bottom.
+- **Stage list ("Nesta etapa"):** the step names with a green check when done; beside the stage on desktop, below it on tablet, hidden on mobile.
 
 ### 6.4 Other components
 

@@ -146,6 +146,32 @@
   color: var(--color-gold-bright);
 }
 
+/* A <button> that looks like a text link (e.g. "Mostrar o texto da oração") */
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap-min);
+  padding: 0;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+  background: none;
+  border: 0;
+  transition:
+    color var(--transition),
+    text-decoration-color var(--transition);
+}
+
+.link-button:hover {
+  color: var(--color-gold-text);
+  text-decoration-color: currentColor;
+}
+
 /* Mobile: primary actions are 52px tall */
 
 @media (max-width: 40em) {

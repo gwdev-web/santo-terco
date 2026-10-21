@@ -97,6 +97,7 @@
 
   --shadow-card-hover: 0 12px 28px rgba(28, 43, 75, 0.1);
   --shadow-current: 0 12px 30px rgba(194, 155, 98, 0.18); /* current prayer step */
+  --shadow-halo: 0 0 0 4px rgba(194, 155, 98, 0.16); /* current step, medal and bead */
 
   /* Layout */
   --width-reading: 720px;
