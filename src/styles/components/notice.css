@@ -4,15 +4,21 @@
    ========================================================================== */
 
 .notice {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
   gap: var(--space-3) var(--space-4);
   padding: var(--space-4) var(--space-6);
   color: var(--color-text);
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+}
+
+/* The action sits under the text on mobile, at the right from tablet */
+.notice__action {
+  grid-column: 2;
+  justify-self: start;
 }
 
 .notice__icon {
@@ -22,7 +28,6 @@
 }
 
 .notice__body {
-  flex: 1 1 16rem;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -41,4 +46,29 @@
 .notice--error .notice__icon,
 .notice--error .notice__title {
   color: var(--color-danger);
+}
+
+.notice--navy {
+  color: var(--color-on-navy-muted);
+  background-color: var(--color-navy);
+  border-color: var(--color-navy);
+}
+
+.notice--navy .notice__icon {
+  color: var(--color-gold-light);
+}
+
+.notice--navy .notice__title {
+  color: var(--color-white);
+}
+
+@media (min-width: 40.0625em) {
+  .notice {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .notice__action {
+    grid-column: auto;
+    align-self: center;
+  }
 }

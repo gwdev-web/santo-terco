@@ -46,19 +46,19 @@
       </section>
 
       <div class="home__sections container">
-        <div class="notice notice--error" role="alert" hidden data-home-error>
+        <div class="notice notice--error" role="alert" hidden data-load-error>
           <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
           <div class="notice__body">
             <p class="notice__title">Não conseguimos carregar os mistérios agora.</p>
             <p>Confira a sua conexão com a internet e tente de novo.</p>
           </div>
-          <button class="button button--outline button--small" type="button" data-home-retry>
+          <button class="button button--outline button--small notice__action" type="button" data-load-retry>
             <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
             Tentar de novo
           </button>
         </div>
 
-        <section class="week" aria-labelledby="week-title" data-home-data>
+        <section class="week" aria-labelledby="week-title" data-load-content>
           <div class="home__heading">
             <h2 id="week-title" class="home__title">Os mistérios da semana</h2>
             <p class="caption">A Igreja propõe um conjunto para cada dia</p>
@@ -66,7 +66,7 @@
           <ol class="week__list" data-week data-skeleton></ol>
         </section>
 
-        <section class="rosary-today card" aria-labelledby="rosary-title" data-home-data>
+        <section class="rosary-today card" aria-labelledby="rosary-title" data-load-content>
           <div class="rosary-today__header">
             <div class="rosary-today__intro">
               <h2 id="rosary-title" class="rosary-today__title">Rosário de hoje</h2>

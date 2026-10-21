@@ -1,4 +1,5 @@
 import { initApp } from '../app.js';
+import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
 import { getSetIdsPrayedOn } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
@@ -17,40 +18,21 @@ initHome(qs('[data-home]'));
  */
 function initHome(root) {
   const today = new Date();
-  const error = qs('[data-home-error]', root);
-  const retry = qs('[data-home-retry]', root);
 
   qs('[data-today-date]', root).textContent = `${weekdayName(today)}, ${formatShortDate(today)}`;
-  retry.addEventListener('click', load);
-  load();
 
-  async function load() {
-    root.setAttribute('aria-busy', 'true');
-    retry.disabled = true;
-
-    try {
+  initDataLoader(
+    root,
+    async () => {
       const sets = await getMysterySets();
       const todaySet = getSetForDate(sets, today);
 
       renderToday(root, todaySet);
       renderWeek(qs('[data-week]', root), sets, today);
       renderRosary(root, sets, todaySet, getSetIdsPrayedOn(toDateKey(today)));
-      showData(true);
-    } catch (loadError) {
-      console.error(loadError);
-      renderTodayFallback(root);
-      showData(false);
-    } finally {
-      root.setAttribute('aria-busy', 'false');
-      retry.disabled = false;
-    }
-  }
-
-  /** Shows the data sections, or the error notice in their place. */
-  function showData(visible) {
-    error.hidden = visible;
-    for (const section of qsa('[data-home-data]', root)) section.hidden = !visible;
-  }
+    },
+    { onError: () => renderTodayFallback(root) },
+  );
 }
 
 /** Hero: name, summary and start link of today's set. */

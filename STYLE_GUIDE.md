@@ -209,8 +209,9 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Badges:** "Do dia" (soft gold, uppercase), "Rezado hoje" (success with check), "Exemplo" (dashed border), mystery chip ("1º Batismo no Jordão").
 - **Mystery card:** set illustration in a cream chip, name, days, the 5 mysteries each with its own illustration and ordinal, and the action ("Rezar este terço" / "Rezar novamente").
 - **Week strip:** the seven days, Monday to Sunday, each with its date and set illustration; today in navy with "Hoje" (`aria-current="date"`). Always seven columns: compact on mobile (set name for screen readers only), with the set name from tablet, as cards on desktop.
-- **Rosary progress:** 4 segments or a ring, "1 de 4 terços". Below it, one link card per set ("Rezar →", or "Rezado" when done today); today's set has a gold border and "Do dia".
-- **Notice:** icon, short bold title, one sentence and at most one action. `.notice--error` (soft red) for loading failures, with "Tentar de novo"; never a technical message.
+- **Rosary progress:** 4 segments (Home) or a ring (Mysteries), "1 de 4 terços", filling in 700ms. Below it, one link card per set ("Rezar →", or "Rezado" when done today); today's set has a gold border and "Do dia".
+- **Notice:** icon, short bold title, one sentence and at most one action (under the text on mobile, at the right from tablet). `.notice--error` (soft red) for loading failures, with "Tentar de novo", never a technical message; `.notice--navy` for tips ("Dica").
+- **Tabs:** segmented control on a track background; the selected tab is white with a gold border. Used on mobile to show one item at a time (mystery sets, prayer groups); from tablet every panel is shown and the tabs are hidden. Arrow keys, Home and End move between tabs.
 - **Loading (skeleton):** soft shimmering bars where the text will appear, keeping the final layout. Static under reduced motion.
 - **Litany:** invocation (left, navy) and response (right or below, gold text), "Mostrar a ladainha inteira".
 - **Text size control:** three "A" buttons with `aria-pressed`.

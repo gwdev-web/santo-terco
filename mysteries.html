@@ -8,14 +8,99 @@
   <body class="page">
     <!-- @include header -->
 
-    <main id="main" class="site-main" tabindex="-1">
-      <div class="container">
-        <header class="page-intro motion-fade-up">
-          <p class="eyebrow">Escolha o que rezar</p>
-          <h1 class="page-intro__title">Os quatro mistérios do Rosário</h1>
-          <p class="page-intro__lead">Esta página está sendo preparada.</p>
-        </header>
+    <main id="main" class="site-main" tabindex="-1" aria-busy="true" data-mysteries>
+      <div class="mysteries container">
+        <div class="mysteries__top">
+          <header class="page-intro motion-fade-up">
+            <p class="eyebrow">Escolha o que rezar</p>
+            <h1 class="page-intro__title">Os quatro mistérios do Rosário</h1>
+            <p class="page-intro__lead">Cada terço medita cinco mistérios da vida de Jesus e de Maria. Rezando os quatro no mesmo dia, você completa um Rosário inteiro.</p>
+          </header>
+
+          <div class="rosary-ring" data-load-content>
+            <svg class="rosary-ring__chart" viewBox="0 0 56 56" aria-hidden="true">
+              <circle class="rosary-ring__track" cx="28" cy="28" r="23"></circle>
+              <circle class="rosary-ring__value" cx="28" cy="28" r="23" pathLength="100" transform="rotate(-90 28 28)" data-ring-value></circle>
+            </svg>
+            <div class="rosary-ring__text">
+              <p class="caption">Rosário de hoje</p>
+              <p class="rosary-ring__count" data-ring-count><span class="skeleton">0 de 4 terços</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice notice--error" role="alert" hidden data-load-error>
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Não conseguimos carregar os mistérios agora.</p>
+            <p>Confira a sua conexão com a internet e tente de novo.</p>
+          </div>
+          <button class="button button--outline button--small notice__action" type="button" data-load-retry>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            Tentar de novo
+          </button>
+        </div>
+
+        <div class="mysteries__sets" data-load-content data-mysteries-sets>
+          <div class="tabs__list mysteries__tabs" role="tablist" aria-label="Mistérios" data-tab-list data-skeleton></div>
+          <div class="mysteries__grid" data-card-grid data-skeleton></div>
+        </div>
+
+        <aside class="notice notice--navy" aria-label="Dica">
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Dica</p>
+            <p>Não há regra rígida. Os mistérios do dia são uma sugestão da Igreja, mas você pode rezar qualquer um, a qualquer momento.</p>
+          </div>
+        </aside>
       </div>
+
+      <template id="mystery-tab-template">
+        <button class="tabs__tab" type="button" role="tab" aria-selected="false" data-tab>
+          <span class="illustration" aria-hidden="true" data-tab-illustration hidden></span>
+          <span data-tab-label>Mistérios</span>
+        </button>
+      </template>
+
+      <template id="mystery-card-template">
+        <article class="mystery-card card motion-fade-up" data-card>
+          <div class="mystery-card__top">
+            <span class="mystery-card__chip" aria-hidden="true">
+              <span class="illustration illustration--lg" data-card-illustration hidden></span>
+            </span>
+            <span class="badge badge--success" data-card-done hidden>
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
+              Rezado hoje
+            </span>
+            <span class="badge badge--day" data-card-today hidden>Do dia</span>
+          </div>
+
+          <div>
+            <h2 class="mystery-card__title" data-card-title><span class="visually-hidden">Mistérios </span><span data-card-name></span></h2>
+            <p class="mystery-card__days" data-card-days></p>
+          </div>
+
+          <ol class="mystery-card__list" data-card-list></ol>
+
+          <a class="button button--secondary button--full" data-card-action>
+            <span data-card-action-label>Rezar este terço</span>
+            <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+          </a>
+        </article>
+      </template>
+
+      <template id="mystery-item-template">
+        <li class="mystery-card__item">
+          <span class="mystery-card__item-chip" aria-hidden="true">
+            <span class="illustration" data-item-illustration hidden></span>
+          </span>
+          <span class="mystery-card__item-text">
+            <span class="mystery-card__ordinal" data-item-ordinal></span>
+            <span class="mystery-card__item-title" data-item-title></span>
+            <span class="caption" data-item-reference></span>
+          </span>
+        </li>
+      </template>
     </main>
 
     <!-- @include footer -->
