@@ -24,10 +24,14 @@ npm run preview   # serve the build
 ## Architecture
 
 ```
-*.html                 one HTML file per page (index, mysteries, prayers, pray, rosary-complete, history, about)
-partials/              shared HTML (head, header, tab bar, footer) included at build time
+*.html                 one HTML file per page (index, mysteries, prayers, pray, rosary-complete, history, about, symbols)
+components.html        dev-only review page for components, icons and illustrations (not built)
+partials/              shared HTML (head, header, tab bar, footer) included at build time (see vite.config.js)
 data/                  JSON content, consumed from GitHub raw (see Data)
-public/                static files: favicon, app icons, manifest, og-image, icons.svg sprite
+assets-src/brand/      brand sources for generated icons; run `npm run icons` after changing them
+public/                static files: favicon, app icons, manifest, og-image, icons.svg sprite, images/ (logo)
+scripts/               build helpers (generate-icons.js)
+src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
 src/js/
   app.js               initApp(): shared behavior for every page
   config.js            data URL and constants
@@ -59,13 +63,16 @@ src/styles/
 
 ## Style guide rules
 
+The full visual and editorial rules are in [STYLE_GUIDE.md](STYLE_GUIDE.md). Key rules:
+
 - Use tokens from `src/styles/tokens.css`; no hard-coded colors, spacing, radii or shadows.
 - Fonts: Playfair Display (headings, prayer text, quotes) and Lato (UI).
 - Gold (`--color-gold`) is decoration only, **never text**. Use `--color-gold-text` for small text and `--color-gold-heading` for 24px+ headings. Never put white text on gold.
 - One primary (gold) button per screen.
 - Color proportion: beige 60%, white 20%, navy 12%, gold 8%.
-- Icons: Phosphor (Light weight, Regular at 14–18px, Fill only for "play") served from the `public/icons.svg` sprite. Never emoji.
-- Logo: the Marian medallion (24-bead halo, "M" and cross).
+- Icons: Phosphor (Light weight, Regular at 14–18px, Fill only for "play") from the `public/icons.svg` sprite for menu, arrows and buttons; the 38 custom rosary illustrations (mystery sets, each mystery, prayers) are applied as CSS masks colored by `currentColor`. Never emoji.
+- Logo: emblem of Our Lady in prayer inside a circle wrapped by the rosary, plus the "Santo ✦ Terço" small-caps wordmark. Favicon is a gold "M" on navy.
+- Everything clickable looks clickable: filled or gold-bordered buttons, gold-underlined links, cards with border and arrow, the next step gently pulsing.
 - Voice: close, simple, unhurried, never demanding. Address the user as "você". Marking prayers is always optional.
 - Prayer texts are complete, in the traditional version used in Brazil. Ordinals use "º"/"ª". Bible references use the "Lc 22,39-46" format.
 
@@ -87,7 +94,8 @@ Mobile-first, fluid sizes with `clamp()`, four ranges:
 
 ## Motion
 
-- Use the motion tokens (`--duration-*`, `--ease-*`) and the shared patterns in `motion.css`: entrance fade-up with stagger, hover/press feedback, bead "pop", progress transitions, accordion via `grid-template-rows`, cross-document View Transitions.
+- Use the motion tokens (`--duration-*`, `--ease-*`) and the shared patterns in `motion.css`: entrance fade-up with stagger, hover/press feedback, bead fill, next-step pulse, progress transitions, accordion via `grid-template-rows`, celebration, cross-document View Transitions.
+- 150–450ms for interactions, 700ms for progress bars, curve `cubic-bezier(.3, .7, .4, 1)`.
 - Motion is subtle and serene; nothing flashy.
 - Everything is disabled under `prefers-reduced-motion: reduce`.
 

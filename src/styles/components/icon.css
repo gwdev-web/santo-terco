@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Icon — Phosphor interface icons from the public/icons.svg sprite
+   Always next to a visible label: never an icon on its own.
+   ========================================================================== */
+
+.icon {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--icon-size, 1.25rem);
+  block-size: var(--icon-size, 1.25rem);
+  vertical-align: middle;
+  fill: currentColor;
+}
+
+.icon--sm {
+  --icon-size: 1.125rem; /* 18px: buttons and notices */
+}
+
+.icon--menu {
+  --icon-size: 1.5rem; /* 24px: menu, Light weight */
+}
+
+.icon--lg {
+  --icon-size: 2.125rem; /* 34px: feature cards */
+}

@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Illustration — the 38 custom rosary drawings (mystery sets, mysteries, prayers)
+   Each SVG is a single path used as a mask, so the color comes from `color`.
+   Use from 32px (mysteries from 40px); always with the name written nearby.
+   ========================================================================== */
+
+.illustration {
+  display: inline-block;
+  flex: none;
+  inline-size: var(--illustration-size, 2rem);
+  block-size: var(--illustration-size, 2rem);
+  background-color: currentColor;
+  -webkit-mask: var(--illustration) center / contain no-repeat;
+  mask: var(--illustration) center / contain no-repeat;
+}
+
+/* Sizes */
+
+.illustration--sm {
+  --illustration-size: 2rem; /* 32px */
+}
+
+.illustration--md {
+  --illustration-size: 2.75rem; /* 44px */
+}
+
+.illustration--lg {
+  --illustration-size: 3.5rem; /* 56px */
+}
+
+.illustration--xl {
+  --illustration-size: 4.5rem; /* 72px */
+}
+
+/* Drawings */
+
+.illustration--ave-maria {
+  --illustration: url("../../assets/illustrations/ave-maria.svg");
+}
+
+.illustration--creio {
+  --illustration: url("../../assets/illustrations/creio.svg");
+}
+
+.illustration--dezenas {
+  --illustration: url("../../assets/illustrations/dezenas.svg");
+}
+
+.illustration--dolorosos-coracao {
+  --illustration: url("../../assets/illustrations/dolorosos-coracao.svg");
+}
+
+.illustration--dolorosos {
+  --illustration: url("../../assets/illustrations/dolorosos.svg");
+}
+
+.illustration--gloria {
+  --illustration: url("../../assets/illustrations/gloria.svg");
+}
+
+.illustration--gloriosos-coroa {
+  --illustration: url("../../assets/illustrations/gloriosos-coroa.svg");
+}
+
+.illustration--gloriosos {
+  --illustration: url("../../assets/illustrations/gloriosos.svg");
+}
+
+.illustration--gozosos {
+  --illustration: url("../../assets/illustrations/gozosos.svg");
+}
+
+.illustration--ladainha-nossa-senhora {
+  --illustration: url("../../assets/illustrations/ladainha-nossa-senhora.svg");
+}
+
+.illustration--ladainha-sagrado-coracao {
+  --illustration: url("../../assets/illustrations/ladainha-sagrado-coracao.svg");
+}
+
+.illustration--ladainha-todos-santos {
+  --illustration: url("../../assets/illustrations/ladainha-todos-santos.svg");
+}
+
+.illustration--luminosos {
+  --illustration: url("../../assets/illustrations/luminosos.svg");
+}
+
+.illustration--m-agonia {
+  --illustration: url("../../assets/illustrations/m-agonia.svg");
+}
+
+.illustration--m-anunciacao {
+  --illustration: url("../../assets/illustrations/m-anunciacao.svg");
+}
+
+.illustration--m-anuncio-reino {
+  --illustration: url("../../assets/illustrations/m-anuncio-reino.svg");
+}
+
+.illustration--m-apresentacao {
+  --illustration: url("../../assets/illustrations/m-apresentacao.svg");
+}
+
+.illustration--m-ascensao {
+  --illustration: url("../../assets/illustrations/m-ascensao.svg");
+}
+
+.illustration--m-assuncao {
+  --illustration: url("../../assets/illustrations/m-assuncao.svg");
+}
+
+.illustration--m-batismo {
+  --illustration: url("../../assets/illustrations/m-batismo.svg");
+}
+
+.illustration--m-bodas-cana {
+  --illustration: url("../../assets/illustrations/m-bodas-cana.svg");
+}
+
+.illustration--m-carregamento-cruz {
+  --illustration: url("../../assets/illustrations/m-carregamento-cruz.svg");
+}
+
+.illustration--m-coroacao-espinhos {
+  --illustration: url("../../assets/illustrations/m-coroacao-espinhos.svg");
+}
+
+.illustration--m-coroacao {
+  --illustration: url("../../assets/illustrations/m-coroacao.svg");
+}
+
+.illustration--m-crucifixao {
+  --illustration: url("../../assets/illustrations/m-crucifixao.svg");
+}
+
+.illustration--m-eucaristia {
+  --illustration: url("../../assets/illustrations/m-eucaristia.svg");
+}
+
+.illustration--m-flagelacao {
+  --illustration: url("../../assets/illustrations/m-flagelacao.svg");
+}
+
+.illustration--m-nascimento {
+  --illustration: url("../../assets/illustrations/m-nascimento.svg");
+}
+
+.illustration--m-pentecostes {
+  --illustration: url("../../assets/illustrations/m-pentecostes.svg");
+}
+
+.illustration--m-perda-encontro {
+  --illustration: url("../../assets/illustrations/m-perda-encontro.svg");
+}
+
+.illustration--m-ressurreicao {
+  --illustration: url("../../assets/illustrations/m-ressurreicao.svg");
+}
+
+.illustration--m-transfiguracao {
+  --illustration: url("../../assets/illustrations/m-transfiguracao.svg");
+}
+
+.illustration--m-visitacao {
+  --illustration: url("../../assets/illustrations/m-visitacao.svg");
+}
+
+.illustration--oferecimento {
+  --illustration: url("../../assets/illustrations/oferecimento.svg");
+}
+
+.illustration--oracao {
+  --illustration: url("../../assets/illustrations/oracao.svg");
+}
+
+.illustration--pai-nosso {
+  --illustration: url("../../assets/illustrations/pai-nosso.svg");
+}
+
+.illustration--salve-rainha {
+  --illustration: url("../../assets/illustrations/salve-rainha.svg");
+}
+
+.illustration--terco {
+  --illustration: url("../../assets/illustrations/terco.svg");
+}

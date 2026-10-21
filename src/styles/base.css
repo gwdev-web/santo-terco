@@ -100,15 +100,21 @@ small {
 
 /* Links */
 
+/* Text links are always underlined in gold: nothing clickable is loose text */
 a {
   color: var(--color-navy);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  transition: color var(--transition);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+  transition:
+    color var(--transition),
+    text-decoration-color var(--transition);
 }
 
 a:hover {
-  color: var(--color-navy-hover);
+  color: var(--color-gold-text);
+  text-decoration-color: currentColor;
 }
 
 /* Focus */
