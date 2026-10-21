@@ -242,3 +242,9 @@
     padding-block: var(--space-section);
   }
 }
+
+/* Pages that open with a full-width band (Home hero); last, so it wins at every width */
+
+.site-main--flush-top {
+  padding-top: 0;
+}

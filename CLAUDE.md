@@ -58,8 +58,9 @@ src/styles/
 
 - JSON files live in `/data` in this repository and are fetched from `https://raw.githubusercontent.com/gwdev-web/santo-terco/main/data/<file>.json`.
 - Always load them through `fetchJson()` (`src/js/services/api.js`): timeout, `response.ok` check, per-URL cache.
-- Data only becomes reachable after it is pushed to `main`.
-- User progress and history are stored only in the browser with `localStorage`, through `services/storage.js`. Nothing is sent to a server.
+- In development (`npm run dev`) the local `/data` files are served instead, so data can be tested before it is pushed. The production build only reaches data after it is pushed to `main`.
+- User progress and history are stored only in the browser with `localStorage`, through `services/storage.js` (keys prefixed `santo-terco:`). Nothing is sent to a server.
+- Pages that load data show a skeleton while loading and a `.notice--error` with "Tentar de novo" on failure.
 
 ## Style guide rules
 

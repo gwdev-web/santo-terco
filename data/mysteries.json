@@ -1,0 +1,312 @@
+{
+  "sets": [
+    {
+      "id": "joyful",
+      "name": "Mistérios Gozosos",
+      "shortName": "Gozosos",
+      "singular": "Gozoso",
+      "weekdays": [1, 6],
+      "weekdaysLabel": "Segunda e sábado",
+      "summary": "Contemplamos a alegria da encarnação e a infância de Jesus.",
+      "illustration": "gozosos",
+      "mysteries": [
+        {
+          "title": "A Anunciação do Anjo a Maria",
+          "shortTitle": "Anunciação do Anjo a Maria",
+          "illustration": "m-anunciacao",
+          "reference": "Lc 1,26-38",
+          "quote": "Eis aqui a serva do Senhor; faça-se em mim segundo a tua palavra.",
+          "reflections": [
+            "Maria escuta, pergunta e confia. Deus também fala com você no silêncio.",
+            "Que “sim” Deus está pedindo a você nesta semana?",
+            "Entregue a Ele aquilo que você ainda não entende."
+          ],
+          "fruit": "humildade"
+        },
+        {
+          "title": "A Visitação de Maria a Isabel",
+          "shortTitle": "Visitação de Maria a Isabel",
+          "illustration": "m-visitacao",
+          "reference": "Lc 1,39-56",
+          "quote": "Bendita és tu entre as mulheres, e bendito é o fruto do teu ventre.",
+          "reflections": [
+            "Maria vai depressa ajudar a prima. Quem você pode visitar ou ligar hoje?",
+            "A alegria de Deus cresce quando é partilhada.",
+            "Agradeça por alguém que cuidou de você."
+          ],
+          "fruit": "caridade com o próximo"
+        },
+        {
+          "title": "O Nascimento de Jesus em Belém",
+          "shortTitle": "Nascimento de Jesus",
+          "illustration": "m-nascimento",
+          "reference": "Lc 2,1-20",
+          "quote": "Hoje nasceu para vós um Salvador, que é o Cristo Senhor.",
+          "reflections": [
+            "Deus escolhe a simplicidade de uma manjedoura.",
+            "Que espaço da sua vida pode ficar mais simples e acolhedor?",
+            "Ofereça a Jesus o seu coração, como os pastores."
+          ],
+          "fruit": "desapego e simplicidade"
+        },
+        {
+          "title": "A Apresentação de Jesus no Templo",
+          "shortTitle": "Apresentação no Templo",
+          "illustration": "m-apresentacao",
+          "reference": "Lc 2,22-38",
+          "quote": "Meus olhos viram a tua salvação.",
+          "reflections": [
+            "Maria e José oferecem o Filho a Deus com fidelidade.",
+            "Simeão esperou a vida inteira e não perdeu a esperança.",
+            "Apresente a Deus as pessoas da sua família."
+          ],
+          "fruit": "obediência e pureza"
+        },
+        {
+          "title": "A Perda e o Encontro de Jesus no Templo",
+          "shortTitle": "Perda e encontro no Templo",
+          "illustration": "m-perda-encontro",
+          "reference": "Lc 2,41-52",
+          "quote": "Não sabíeis que devo estar na casa de meu Pai?",
+          "reflections": [
+            "Maria procura Jesus com aflição e não desiste.",
+            "Se você se sente longe de Deus, volte a procurá-Lo: Ele se deixa encontrar.",
+            "Que lugar a oração ocupa no seu dia?"
+          ],
+          "fruit": "buscar a Deus em todas as coisas"
+        }
+      ]
+    },
+    {
+      "id": "sorrowful",
+      "name": "Mistérios Dolorosos",
+      "shortName": "Dolorosos",
+      "singular": "Doloroso",
+      "weekdays": [2, 5],
+      "weekdaysLabel": "Terça e sexta",
+      "summary": "Acompanhamos Jesus em sua paixão, do Horto até a Cruz.",
+      "illustration": "dolorosos",
+      "mysteries": [
+        {
+          "title": "A Agonia de Jesus no Horto",
+          "shortTitle": "Agonia de Jesus no Horto",
+          "illustration": "m-agonia",
+          "reference": "Lc 22,39-46",
+          "quote": "Pai, não se faça a minha vontade, mas a tua.",
+          "reflections": [
+            "Jesus sente medo e, mesmo assim, reza e confia.",
+            "Que preocupação você pode entregar ao Pai agora?",
+            "Peça força para vigiar e rezar nas horas difíceis."
+          ],
+          "fruit": "conformidade com a vontade de Deus"
+        },
+        {
+          "title": "A Flagelação de Jesus",
+          "shortTitle": "Flagelação",
+          "illustration": "m-flagelacao",
+          "reference": "Jo 19,1",
+          "quote": "Então Pilatos mandou flagelar Jesus.",
+          "reflections": [
+            "Jesus sofre em silêncio por amor a nós.",
+            "Lembre-se de quem sofre no corpo: doentes, idosos, feridos.",
+            "Ofereça uma dor sua unida à de Jesus."
+          ],
+          "fruit": "paciência e pureza"
+        },
+        {
+          "title": "A Coroação de Espinhos",
+          "shortTitle": "Coroação de espinhos",
+          "illustration": "m-coroacao-espinhos",
+          "reference": "Mt 27,27-31",
+          "quote": "Teceram uma coroa de espinhos e a puseram em sua cabeça.",
+          "reflections": [
+            "Jesus é humilhado e não responde com ódio.",
+            "Há alguém que você precisa perdoar?",
+            "Peça a graça de não se deixar levar pelo orgulho."
+          ],
+          "fruit": "humildade e mansidão"
+        },
+        {
+          "title": "Jesus Carrega a Cruz",
+          "shortTitle": "Jesus carrega a cruz",
+          "illustration": "m-carregamento-cruz",
+          "reference": "Jo 19,17",
+          "quote": "Carregando a sua cruz, saiu para o lugar chamado Calvário.",
+          "reflections": [
+            "Simão de Cirene ajudou Jesus a carregar a cruz.",
+            "De quem você pode ser “Cirineu” hoje?",
+            "Cada passo com fé tem sentido, mesmo quando pesa."
+          ],
+          "fruit": "perseverança nas provações"
+        },
+        {
+          "title": "A Crucifixão e Morte de Jesus",
+          "shortTitle": "Crucifixão e morte",
+          "illustration": "m-crucifixao",
+          "reference": "Lc 23,33-46",
+          "quote": "Pai, em tuas mãos entrego o meu espírito.",
+          "reflections": [
+            "Na cruz, Jesus perdoa e entrega Maria como nossa Mãe.",
+            "Agradeça pelo amor que vai até o fim.",
+            "Reze pelas pessoas que estão perto da morte."
+          ],
+          "fruit": "amor a Deus e salvação das almas"
+        }
+      ]
+    },
+    {
+      "id": "glorious",
+      "name": "Mistérios Gloriosos",
+      "shortName": "Gloriosos",
+      "singular": "Glorioso",
+      "weekdays": [3, 0],
+      "weekdaysLabel": "Quarta e domingo",
+      "summary": "Celebramos a vitória de Cristo sobre a morte e a glória de Maria.",
+      "illustration": "gloriosos",
+      "mysteries": [
+        {
+          "title": "A Ressurreição de Jesus",
+          "shortTitle": "Ressurreição de Jesus",
+          "illustration": "m-ressurreicao",
+          "reference": "Mt 28,1-10",
+          "quote": "Ele não está aqui; ressuscitou, como havia dito.",
+          "reflections": [
+            "O túmulo vazio é a vitória da vida sobre a morte.",
+            "Que situação da sua vida precisa de esperança nova?",
+            "Leve a alguém a alegria da Páscoa."
+          ],
+          "fruit": "fé"
+        },
+        {
+          "title": "A Ascensão de Jesus ao Céu",
+          "shortTitle": "Ascensão ao Céu",
+          "illustration": "m-ascensao",
+          "reference": "At 1,6-11",
+          "quote": "Sereis minhas testemunhas até os confins da terra.",
+          "reflections": [
+            "Jesus volta ao Pai e nos confia uma missão.",
+            "Como você pode testemunhar Jesus no seu dia?",
+            "O Céu é a nossa casa definitiva."
+          ],
+          "fruit": "esperança e desejo do Céu"
+        },
+        {
+          "title": "A Vinda do Espírito Santo",
+          "shortTitle": "Vinda do Espírito Santo",
+          "illustration": "m-pentecostes",
+          "reference": "At 2,1-13",
+          "quote": "Todos ficaram cheios do Espírito Santo.",
+          "reflections": [
+            "Os apóstolos rezavam com Maria quando o Espírito desceu.",
+            "Peça ao Espírito Santo um dom para esta semana.",
+            "Medo vira coragem quando Deus age."
+          ],
+          "fruit": "os dons do Espírito Santo"
+        },
+        {
+          "title": "A Assunção de Maria ao Céu",
+          "shortTitle": "Assunção de Maria",
+          "illustration": "m-assuncao",
+          "reference": "Ap 12,1",
+          "quote": "Apareceu no céu um grande sinal: uma mulher vestida de sol.",
+          "reflections": [
+            "Maria é levada ao Céu em corpo e alma.",
+            "Ela nos mostra o destino de quem confia em Deus.",
+            "Peça a Maria a graça de uma boa morte."
+          ],
+          "fruit": "graça de uma boa morte"
+        },
+        {
+          "title": "A Coroação de Maria",
+          "shortTitle": "Coroação de Maria",
+          "illustration": "m-coroacao",
+          "reference": "Ap 12,1",
+          "quote": "Sobre a sua cabeça, uma coroa de doze estrelas.",
+          "reflections": [
+            "Maria é Rainha porque foi a primeira a servir.",
+            "Consagre a ela a sua família e o seu dia.",
+            "Confie: uma Mãe nunca esquece os filhos."
+          ],
+          "fruit": "confiança em Maria"
+        }
+      ]
+    },
+    {
+      "id": "luminous",
+      "name": "Mistérios Luminosos",
+      "shortName": "Luminosos",
+      "singular": "Luminoso",
+      "weekdays": [4],
+      "weekdaysLabel": "Quinta-feira",
+      "summary": "Meditamos a vida pública de Jesus, luz do mundo.",
+      "illustration": "luminosos",
+      "mysteries": [
+        {
+          "title": "O Batismo de Jesus no Jordão",
+          "shortTitle": "Batismo no Jordão",
+          "illustration": "m-batismo",
+          "reference": "Mt 3,13-17",
+          "quote": "Este é o meu Filho amado, no qual pus todo o meu agrado.",
+          "reflections": [
+            "Lembre-se do seu próprio batismo: você também é filho amado de Deus.",
+            "Que promessa do batismo você quer renovar hoje?",
+            "Peça ao Espírito Santo que ilumine as suas escolhas desta semana."
+          ],
+          "fruit": "fidelidade às promessas do batismo"
+        },
+        {
+          "title": "As Bodas de Caná",
+          "shortTitle": "Bodas de Caná",
+          "illustration": "m-bodas-cana",
+          "reference": "Jo 2,1-12",
+          "quote": "Fazei tudo o que ele vos disser.",
+          "reflections": [
+            "Maria percebe a necessidade antes que alguém peça. Quem precisa da sua atenção hoje?",
+            "Entregue a Jesus aquilo que parece faltar na sua casa.",
+            "Escute o conselho de Maria: fazer o que Ele disser."
+          ],
+          "fruit": "confiança em Jesus pela intercessão de Maria"
+        },
+        {
+          "title": "O Anúncio do Reino de Deus",
+          "shortTitle": "Anúncio do Reino",
+          "illustration": "m-anuncio-reino",
+          "reference": "Mc 1,14-15",
+          "quote": "Convertei-vos e crede no Evangelho.",
+          "reflections": [
+            "O Reino começa nas pequenas atitudes do dia a dia.",
+            "Que hábito você gostaria de mudar com a ajuda de Deus?",
+            "A misericórdia de Deus é maior que qualquer falha."
+          ],
+          "fruit": "conversão e confiança na misericórdia"
+        },
+        {
+          "title": "A Transfiguração do Senhor",
+          "shortTitle": "Transfiguração",
+          "illustration": "m-transfiguracao",
+          "reference": "Lc 9,28-36",
+          "quote": "Este é o meu Filho, o Escolhido. Escutai-o.",
+          "reflections": [
+            "Reserve um momento de silêncio para escutar Jesus.",
+            "Onde você já percebeu a luz de Deus na sua vida?",
+            "Peça a coragem de descer do monte e servir."
+          ],
+          "fruit": "desejo de santidade"
+        },
+        {
+          "title": "A Instituição da Eucaristia",
+          "shortTitle": "Instituição da Eucaristia",
+          "illustration": "m-eucaristia",
+          "reference": "Lc 22,14-20",
+          "quote": "Isto é o meu corpo, que é dado por vós.",
+          "reflections": [
+            "Jesus quis ficar conosco de forma permanente.",
+            "Como você pode se preparar melhor para a próxima Missa?",
+            "Agradeça por alguém que é “pão partido” na sua vida."
+          ],
+          "fruit": "amor à Eucaristia"
+        }
+      ]
+    }
+  ]
+}

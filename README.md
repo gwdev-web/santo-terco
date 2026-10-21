@@ -19,7 +19,7 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 - [Vite](https://vite.dev/) (multi-page app)
 - Semantic HTML5 (W3C valid)
 - CSS3 with BEM and design tokens (custom properties)
-- Vanilla JavaScript (ES modules), no runtime dependencies
+- Vanilla JavaScript (ES modules), no runtime dependencies so far
 - [sharp](https://sharp.pixelplumbing.com/) (dev only) to generate icons
 
 ## Getting started
@@ -61,7 +61,9 @@ The content lives as JSON in [`/data`](data) and is fetched at runtime from GitH
 https://raw.githubusercontent.com/gwdev-web/santo-terco/main/data/<file>.json
 ```
 
-Updating a JSON file on `main` updates the site without a new build. User progress and history are stored only in the browser (`localStorage`).
+Updating a JSON file on `main` updates the site without a new build. During development (`npm run dev`) the local files in `/data` are used, so changes can be tested before they are pushed.
+
+User progress and history are stored only in the browser (`localStorage`).
 
 ## Design
 

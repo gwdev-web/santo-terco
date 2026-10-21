@@ -52,6 +52,11 @@ button {
   cursor: pointer;
 }
 
+/* `hidden` always wins over component display rules */
+[hidden] {
+  display: none !important;
+}
+
 /* Headings */
 
 h1,

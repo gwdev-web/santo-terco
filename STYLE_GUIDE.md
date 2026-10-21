@@ -208,8 +208,10 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 
 - **Badges:** "Do dia" (soft gold, uppercase), "Rezado hoje" (success with check), "Exemplo" (dashed border), mystery chip ("1º Batismo no Jordão").
 - **Mystery card:** set illustration in a cream chip, name, days, the 5 mysteries each with its own illustration and ordinal, and the action ("Rezar este terço" / "Rezar novamente").
-- **Week strip:** the seven days with each day's set illustration; today highlighted in navy (desktop) or gold (mobile).
-- **Rosary progress:** 4 segments or a ring, "1 de 4 terços".
+- **Week strip:** the seven days, Monday to Sunday, each with its date and set illustration; today in navy with "Hoje" (`aria-current="date"`). Always seven columns: compact on mobile (set name for screen readers only), with the set name from tablet, as cards on desktop.
+- **Rosary progress:** 4 segments or a ring, "1 de 4 terços". Below it, one link card per set ("Rezar →", or "Rezado" when done today); today's set has a gold border and "Do dia".
+- **Notice:** icon, short bold title, one sentence and at most one action. `.notice--error` (soft red) for loading failures, with "Tentar de novo"; never a technical message.
+- **Loading (skeleton):** soft shimmering bars where the text will appear, keeping the final layout. Static under reduced motion.
 - **Litany:** invocation (left, navy) and response (right or below, gold text), "Mostrar a ladainha inteira".
 - **Text size control:** three "A" buttons with `aria-pressed`.
 - **Inline confirmation:** destructive actions show "Apagar todo o histórico?" with Cancel / Confirm in place, no browser dialogs.
@@ -271,7 +273,7 @@ Sizes: `--sm` 32px, `--md` 44px, `--lg` 56px, `--xl` 72px (or set `--illustratio
 
 - **Short and soft:** 150–450ms for taps and state changes, 700ms for progress bars.
 - **Curve:** `cubic-bezier(.3, .7, .4, 1)`.
-- **Patterns:** entrance fade-up with stagger; hover lift on cards; press scale(.95–.98); bead fill; next step breathing (1.8s, ease-in-out, infinite); progress fill; accordion open.
+- **Patterns:** entrance fade-up with stagger; hover lift on cards; press scale(.95–.98); bead fill; next step breathing (1.8s, ease-in-out, infinite); progress fill; accordion open; loading shimmer (1.6s, linear).
 - **Celebration** (end of a terço and full Rosary): the ring draws, medals pop in one by one, a rotating ray halo, sparkles, ripples and falling gold beads/confetti. A "Ver de novo" button is always present.
 - **Reduced motion:** with `prefers-reduced-motion`, everything becomes an instant change without losing information (no entrance animations, no loops).
 

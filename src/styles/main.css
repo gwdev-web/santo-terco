@@ -13,3 +13,8 @@
 @import "./components/card.css";
 @import "./components/damask.css";
 @import "./components/page-intro.css";
+@import "./components/notice.css";
+@import "./components/skeleton.css";
+
+/* Pages */
+@import "./pages/home.css";
