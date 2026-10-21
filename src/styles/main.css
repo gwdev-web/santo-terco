@@ -16,7 +16,11 @@
 @import "./components/notice.css";
 @import "./components/skeleton.css";
 @import "./components/tabs.css";
+@import "./components/prayer-text.css";
+@import "./components/text-size.css";
+@import "./components/disclosure.css";
 
 /* Pages */
 @import "./pages/home.css";
 @import "./pages/mysteries.css";
+@import "./pages/prayers.css";

@@ -53,7 +53,9 @@
   --text-h2: clamp(1.375rem, 1rem + 1.5vw, 2.125rem); /* 22 → 34 */
   --text-h3: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem); /* 20 → 24 */
   --text-quote: clamp(1.375rem, 1.1875rem + 0.75vw, 1.75rem); /* 22 → 28 */
-  --text-prayer: clamp(1.0625rem, 0.96875rem + 0.375vw, 1.25rem); /* 17 → 20 */
+  --prayer-scale: 1; /* text size control: 1, 1.15 or 1.3 */
+  --text-prayer: calc(clamp(1.0625rem, 0.96875rem + 0.375vw, 1.25rem) * var(--prayer-scale)); /* 17 → 20 */
+  --text-litany: calc(var(--text-body-lg) * var(--prayer-scale)); /* 18 */
   --text-body-lg: 1.125rem; /* 18 */
   --text-body: 1rem; /* 16 */
   --text-button: clamp(1rem, 0.96875rem + 0.125vw, 1.0625rem); /* 16 → 17 */
@@ -117,4 +119,14 @@
   --ease-standard: cubic-bezier(0.3, 0.7, 0.4, 1);
   --ease-in-out: ease-in-out;
   --transition: var(--duration-base) var(--ease-standard);
+}
+
+/* Prayer text size chosen by the user (set on <html> by the text size control) */
+
+:root[data-text-size="large"] {
+  --prayer-scale: 1.15;
+}
+
+:root[data-text-size="x-large"] {
+  --prayer-scale: 1.3;
 }

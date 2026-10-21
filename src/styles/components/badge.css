@@ -32,3 +32,8 @@
   background-color: var(--color-white);
   border: 1px dashed var(--color-border-strong);
 }
+
+.badge--cream {
+  color: var(--color-gold-text);
+  background-color: var(--color-cream);
+}

@@ -10,7 +10,7 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 - **Guided rosary**: opening prayers, the five mysteries (Bible reference, quote, reflections, fruit) with an Our Father, a 10 Hail Mary counter and the Glory Be, then the closing prayers.
 - **Optional marking**: mark each prayer as you go; progress is saved so you can continue where you stopped.
 - **Full Rosary**: pray the four sets of mysteries on the same day to complete a Rosary.
-- **Prayers**: the rosary prayers and other complementary prayers, with search and categories.
+- **Prayers**: the rosary prayers in the order they are prayed, complementary prayers and three litanies, with an adjustable text size and a copy button.
 - **History**: days of prayer, streaks, a 12-week heatmap and totals per mystery.
 - **Privacy**: no sign-up, no ads. Data stays in your browser and can be cleared at any time.
 

@@ -18,3 +18,6 @@ export const FETCH_TIMEOUT_MS = 10000;
 
 /** Prefix for every localStorage key, so the app never collides with other data. */
 export const STORAGE_PREFIX = 'santo-terco:';
+
+/** Mobile range (≤ 640px), where some pages show one group at a time in tabs. */
+export const MOBILE_MEDIA_QUERY = '(max-width: 40em)';

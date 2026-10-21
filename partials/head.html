@@ -4,6 +4,13 @@
     <link rel="canonical" href="{{url}}">
     <meta name="theme-color" content="#FAF8F5">
     <meta name="color-scheme" content="light">
+    <script>
+      /* Applies the saved prayer text size before the first paint (see src/js/components/text-size.js) */
+      try {
+        const size = JSON.parse(localStorage.getItem('santo-terco:text-size'));
+        if (size === 'large' || size === 'x-large') document.documentElement.dataset.textSize = size;
+      } catch {}
+    </script>
 
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">

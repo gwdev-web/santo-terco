@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Disclosure — a panel that opens below, driven by the toggle's aria-expanded
+   Markup: .disclosure > .disclosure__panel > .disclosure__inner, and a direct
+   child .disclosure__toggle with .disclosure__closed / .disclosure__open labels.
+   Closed panels are `visibility: hidden`, so their content can't be focused or read.
+   ========================================================================== */
+
+.disclosure__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--duration-slow) var(--ease-standard),
+    visibility 0s linear var(--duration-slow);
+}
+
+.disclosure__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.disclosure:has(> .disclosure__toggle[aria-expanded="true"]) > .disclosure__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.disclosure__toggle[aria-expanded="true"] .disclosure__closed,
+.disclosure__toggle[aria-expanded="false"] .disclosure__open {
+  display: none;
+}
+
+.disclosure__icon {
+  transition: transform var(--transition);
+}
+
+.disclosure__toggle[aria-expanded="true"] .disclosure__icon {
+  transform: rotate(180deg);
+}

@@ -61,7 +61,8 @@ button {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--font-heading);
   color: var(--color-navy);
   overflow-wrap: break-word;
@@ -80,7 +81,8 @@ h2 {
   line-height: var(--leading-h2);
 }
 
-h3 {
+h3,
+h4 {
   font-size: var(--text-h3);
   font-weight: 600;
   line-height: var(--leading-h3);

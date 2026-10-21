@@ -1,0 +1,752 @@
+{
+  "rosaryGroups": [
+    {
+      "id": "opening",
+      "title": "No início",
+      "description": "Abrem o terço, antes do 1º mistério.",
+      "prayers": [
+        {
+          "id": "sign-of-the-cross",
+          "title": "Sinal da Cruz",
+          "illustration": "oracao",
+          "when": "Início e fim",
+          "text": "Pelo sinal da Santa Cruz, livrai-nos, Deus, Nosso Senhor, dos nossos inimigos.\nEm nome do Pai, do Filho e do Espírito Santo. Amém."
+        },
+        {
+          "id": "offering",
+          "title": "Oferecimento",
+          "illustration": "oferecimento",
+          "when": "Início",
+          "text": "Divino Jesus, nós vos oferecemos este terço que vamos rezar, meditando nos mistérios da nossa Redenção. Concedei-nos, por intercessão da Virgem Maria, Mãe de Deus e nossa Mãe, as virtudes que nos são necessárias para bem rezá-lo e a graça de ganharmos as indulgências desta santa devoção."
+        },
+        {
+          "id": "creed",
+          "title": "Creio",
+          "illustration": "creio",
+          "when": "Início · opcional",
+          "text": "Creio em Deus Pai todo-poderoso, criador do céu e da terra; e em Jesus Cristo, seu único Filho, nosso Senhor; que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus, está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos.\nCreio no Espírito Santo, na santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém."
+        }
+      ]
+    },
+    {
+      "id": "each-mystery",
+      "title": "Em cada mistério",
+      "description": "Repetidas nas cinco dezenas.",
+      "prayers": [
+        {
+          "id": "our-father",
+          "title": "Pai Nosso",
+          "illustration": "pai-nosso",
+          "when": "1 vez por mistério",
+          "text": "Pai Nosso, que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino; seja feita a vossa vontade, assim na terra como no céu.\nO pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém."
+        },
+        {
+          "id": "hail-mary",
+          "title": "Ave Maria",
+          "illustration": "ave-maria",
+          "when": "10 vezes por mistério",
+          "text": "Ave Maria, cheia de graça, o Senhor é convosco; bendita sois vós entre as mulheres, e bendito é o fruto do vosso ventre, Jesus.\nSanta Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora de nossa morte. Amém."
+        },
+        {
+          "id": "glory-be",
+          "title": "Glória ao Pai",
+          "illustration": "gloria",
+          "when": "Fim de cada dezena",
+          "text": "Glória ao Pai, ao Filho e ao Espírito Santo.\nComo era no princípio, agora e sempre. Amém."
+        },
+        {
+          "id": "fatima-prayer",
+          "title": "Ó meu Jesus",
+          "illustration": "dezenas",
+          "when": "Depois do Glória",
+          "text": "Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem."
+        }
+      ]
+    },
+    {
+      "id": "closing",
+      "title": "No final",
+      "description": "Encerram o terço, depois do 5º mistério.",
+      "prayers": [
+        {
+          "id": "thanksgiving",
+          "title": "Agradecimento",
+          "illustration": "terco",
+          "when": "Final",
+          "text": "Infinitas graças vos damos, soberana Rainha, pelos benefícios que todos os dias recebemos de vossas mãos liberais. Dignai-vos, agora e para sempre, tomar-nos debaixo do vosso poderoso amparo e, para mais vos obrigar, vos saudamos com uma Salve Rainha."
+        },
+        {
+          "id": "hail-holy-queen",
+          "title": "Salve Rainha",
+          "illustration": "salve-rainha",
+          "when": "Final",
+          "text": "Salve Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre, ó clemente, ó piedosa, ó doce sempre Virgem Maria.\nRogai por nós, Santa Mãe de Deus,\npara que sejamos dignos das promessas de Cristo. Amém."
+        }
+      ]
+    }
+  ],
+  "complementary": [
+    {
+      "id": "memorare",
+      "title": "Lembrai-vos",
+      "illustration": "m-coroacao",
+      "when": "Mariana",
+      "text": "Lembrai-vos, ó piíssima Virgem Maria, que nunca se ouviu dizer que algum daqueles que tenham recorrido à vossa proteção, implorado a vossa assistência e reclamado o vosso socorro fosse por vós desamparado.\nAnimado eu, pois, com igual confiança, a vós, ó Virgem entre todas singular, como a Mãe recorro, de vós me valho e, gemendo sob o peso dos meus pecados, me prostro a vossos pés.\nNão desprezeis as minhas súplicas, ó Mãe do Verbo de Deus humanado, mas dignai-vos de as ouvir propícia e de me alcançar o que vos rogo. Amém."
+    },
+    {
+      "id": "guardian-angel",
+      "title": "Santo Anjo",
+      "illustration": "gozosos",
+      "when": "Do dia a dia",
+      "text": "Santo Anjo do Senhor, meu zeloso guardador, se a ti me confiou a piedade divina, sempre me rege, me guarda, me governa e me ilumina. Amém."
+    },
+    {
+      "id": "act-of-contrition",
+      "title": "Ato de Contrição",
+      "illustration": "dolorosos-coracao",
+      "when": "Do dia a dia",
+      "text": "Meu Deus, eu me arrependo de todo o coração de vos ter ofendido, porque sois tão bom e amável. Prometo, com a vossa graça, esforçar-me para ser bom.\nMeu Jesus, misericórdia!"
+    }
+  ],
+  "litanies": [
+    {
+      "id": "litany-of-loreto",
+      "title": "Ladainha de Nossa Senhora",
+      "illustration": "ladainha-nossa-senhora",
+      "note": "Também chamada Lauretana",
+      "lines": [
+        {
+          "invocation": "Senhor, tende piedade de nós.",
+          "response": "Senhor, tende piedade de nós."
+        },
+        {
+          "invocation": "Jesus Cristo, tende piedade de nós.",
+          "response": "Jesus Cristo, tende piedade de nós."
+        },
+        {
+          "invocation": "Senhor, tende piedade de nós.",
+          "response": "Senhor, tende piedade de nós."
+        },
+        {
+          "invocation": "Jesus Cristo, ouvi-nos.",
+          "response": "Jesus Cristo, ouvi-nos."
+        },
+        {
+          "invocation": "Jesus Cristo, atendei-nos.",
+          "response": "Jesus Cristo, atendei-nos."
+        },
+        {
+          "invocation": "Deus Pai do Céu,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Deus Filho, Redentor do mundo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Deus Espírito Santo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Santíssima Trindade, que sois um só Deus,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Santa Maria,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Mãe de Deus,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Virgem das virgens,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe de Cristo,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe da Igreja,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe de misericórdia,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe da divina graça,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe da esperança,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe puríssima,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe castíssima,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe sempre virgem,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe imaculada,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe digna de amor,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe admirável,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe do bom conselho,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe do Criador,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Mãe do Salvador,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Virgem prudentíssima,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Virgem venerável,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Virgem louvável,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Virgem poderosa,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Virgem clemente,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Virgem fiel,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Espelho de justiça,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Sede da sabedoria,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Causa da nossa alegria,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Vaso espiritual,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Vaso digno de honra,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Vaso insigne de devoção,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rosa mística,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Torre de Davi,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Torre de marfim,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Casa de ouro,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Arca da aliança,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Porta do céu,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Estrela da manhã,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Saúde dos enfermos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Refúgio dos pecadores,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Conforto dos migrantes,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Consoladora dos aflitos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Auxílio dos cristãos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha dos anjos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha dos patriarcas,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha dos profetas,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha dos apóstolos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha dos mártires,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha dos confessores,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha das virgens,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha de todos os santos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha concebida sem pecado original,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha assunta ao céu,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha do sacratíssimo Rosário,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha da família,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Rainha da paz,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Cordeiro de Deus, que tirais os pecados do mundo,",
+          "response": "perdoai-nos, Senhor."
+        },
+        {
+          "invocation": "Cordeiro de Deus, que tirais os pecados do mundo,",
+          "response": "ouvi-nos, Senhor."
+        },
+        {
+          "invocation": "Cordeiro de Deus, que tirais os pecados do mundo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Rogai por nós, Santa Mãe de Deus,",
+          "response": "para que sejamos dignos das promessas de Cristo."
+        }
+      ],
+      "closingPrayer": "Senhor Deus, nós vos suplicamos que concedais aos vossos servos perpétua saúde de alma e de corpo; e que, pela gloriosa intercessão da bem-aventurada sempre Virgem Maria, sejamos livres da presente tristeza e gozemos da eterna alegria. Por Cristo, nosso Senhor. Amém."
+    },
+    {
+      "id": "litany-of-the-sacred-heart",
+      "title": "Ladainha do Sagrado Coração",
+      "illustration": "ladainha-sagrado-coracao",
+      "note": "Devoção ao Coração de Jesus",
+      "lines": [
+        {
+          "invocation": "Senhor, tende piedade de nós.",
+          "response": "Senhor, tende piedade de nós."
+        },
+        {
+          "invocation": "Jesus Cristo, tende piedade de nós.",
+          "response": "Jesus Cristo, tende piedade de nós."
+        },
+        {
+          "invocation": "Senhor, tende piedade de nós.",
+          "response": "Senhor, tende piedade de nós."
+        },
+        {
+          "invocation": "Jesus Cristo, ouvi-nos.",
+          "response": "Jesus Cristo, ouvi-nos."
+        },
+        {
+          "invocation": "Jesus Cristo, atendei-nos.",
+          "response": "Jesus Cristo, atendei-nos."
+        },
+        {
+          "invocation": "Deus Pai do Céu,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Deus Filho, Redentor do mundo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Deus Espírito Santo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Santíssima Trindade, que sois um só Deus,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, Filho do Pai Eterno,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, formado pelo Espírito Santo no seio da Virgem Mãe,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, unido substancialmente ao Verbo de Deus,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, de majestade infinita,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, templo santo de Deus,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, tabernáculo do Altíssimo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, casa de Deus e porta do céu,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, fornalha ardente de caridade,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, receptáculo de justiça e de amor,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, cheio de bondade e de amor,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, abismo de todas as virtudes,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, digníssimo de todo o louvor,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, rei e centro de todos os corações,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, no qual estão todos os tesouros da sabedoria e da ciência,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, no qual habita toda a plenitude da divindade,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, no qual o Pai pôs as suas complacências,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, de cuja plenitude todos nós participamos,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, desejo das colinas eternas,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, paciente e misericordioso,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, rico para todos que vos invocam,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, fonte de vida e santidade,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, propiciação pelos nossos pecados,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, saturado de opróbrios,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, esmagado de dor por causa dos nossos pecados,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, feito obediente até a morte,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, atravessado pela lança,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, fonte de toda a consolação,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, nossa vida e ressurreição,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, nossa paz e reconciliação,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, vítima dos pecadores,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, salvação dos que em vós esperam,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, esperança dos que morrem em vós,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Coração de Jesus, delícia de todos os santos,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Cordeiro de Deus, que tirais os pecados do mundo,",
+          "response": "perdoai-nos, Senhor."
+        },
+        {
+          "invocation": "Cordeiro de Deus, que tirais os pecados do mundo,",
+          "response": "ouvi-nos, Senhor."
+        },
+        {
+          "invocation": "Cordeiro de Deus, que tirais os pecados do mundo,",
+          "response": "tende piedade de nós."
+        },
+        {
+          "invocation": "Jesus, manso e humilde de coração,",
+          "response": "fazei o nosso coração semelhante ao vosso."
+        }
+      ],
+      "closingPrayer": "Deus eterno e todo-poderoso, olhai para o Coração do vosso amado Filho e para os louvores e satisfações que ele vos oferece em nome dos pecadores; e aos que imploram a vossa misericórdia concedei benigno o perdão, em nome do mesmo Jesus Cristo, vosso Filho, que convosco vive e reina por todos os séculos dos séculos. Amém."
+    },
+    {
+      "id": "litany-of-the-saints",
+      "title": "Ladainha de Todos os Santos",
+      "illustration": "ladainha-todos-santos",
+      "note": "Forma breve",
+      "lines": [
+        {
+          "invocation": "Senhor, tende piedade de nós.",
+          "response": "Senhor, tende piedade de nós."
+        },
+        {
+          "invocation": "Jesus Cristo, tende piedade de nós.",
+          "response": "Jesus Cristo, tende piedade de nós."
+        },
+        {
+          "invocation": "Senhor, tende piedade de nós.",
+          "response": "Senhor, tende piedade de nós."
+        },
+        {
+          "invocation": "Santa Maria, Mãe de Deus,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Miguel,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santos Anjos de Deus,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São José,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São João Batista,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Pedro e São Paulo,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santo André,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São João,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Maria Madalena,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santo Estêvão,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santo Inácio de Antioquia,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Lourenço,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Perpétua e Santa Felicidade,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Inês,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Gregório,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santo Agostinho,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santo Atanásio,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Basílio,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Martinho,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Bento,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Francisco e São Domingos,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São Francisco Xavier,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "São João Maria Vianney,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Catarina de Sena,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Santa Teresa de Jesus,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Todos os Santos e Santas de Deus,",
+          "response": "rogai por nós."
+        },
+        {
+          "invocation": "Sede-nos propício,",
+          "response": "ouvi-nos, Senhor."
+        },
+        {
+          "invocation": "De todo o mal,",
+          "response": "livrai-nos, Senhor."
+        },
+        {
+          "invocation": "De todo o pecado,",
+          "response": "livrai-nos, Senhor."
+        },
+        {
+          "invocation": "Da morte eterna,",
+          "response": "livrai-nos, Senhor."
+        },
+        {
+          "invocation": "Pela vossa encarnação,",
+          "response": "livrai-nos, Senhor."
+        },
+        {
+          "invocation": "Pela vossa morte e ressurreição,",
+          "response": "livrai-nos, Senhor."
+        },
+        {
+          "invocation": "Pela efusão do Espírito Santo,",
+          "response": "livrai-nos, Senhor."
+        },
+        {
+          "invocation": "Nós, que somos pecadores,",
+          "response": "ouvi-nos, Senhor."
+        },
+        {
+          "invocation": "Jesus, Filho do Deus vivo,",
+          "response": "ouvi-nos, Senhor."
+        },
+        {
+          "invocation": "Cristo, ouvi-nos.",
+          "response": "Cristo, ouvi-nos."
+        },
+        {
+          "invocation": "Cristo, atendei-nos.",
+          "response": "Cristo, atendei-nos."
+        }
+      ],
+      "closingPrayer": "Ó Deus, nosso refúgio e nossa força, ouvi as preces da vossa Igreja e concedei-nos, pela intercessão de todos os vossos Santos, alcançar o que pedimos com fé. Por Cristo, nosso Senhor. Amém."
+    }
+  ]
+}

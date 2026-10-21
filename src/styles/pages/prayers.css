@@ -1,0 +1,357 @@
+/* ==========================================================================
+   Prayers — rosary prayers in order, complementary prayers and litanies
+   Mobile: tabs switch between the two sections. Tablet and up: both sections,
+   with links to each one at the top.
+   ========================================================================== */
+
+.prayers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.prayers__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.prayers__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* Links to the two sections (tablet and up) */
+
+.prayers__sections {
+  display: none;
+}
+
+.section-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  color: var(--color-navy);
+  text-decoration: none;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.section-link:hover {
+  color: var(--color-navy);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.section-link__chip {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 4rem;
+  block-size: 4rem;
+  color: var(--color-gold-heading);
+  background-color: var(--color-cream);
+  border-radius: var(--radius-pill);
+}
+
+.section-link__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.section-link__title {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.section-link__description {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+.section-link__icon {
+  color: var(--color-gold-heading);
+  transition: transform var(--transition);
+}
+
+.section-link:hover .section-link__icon {
+  transform: translateY(3px);
+}
+
+.section-link--navy,
+.section-link--navy:hover {
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+}
+
+.section-link--navy {
+  border-color: var(--color-navy);
+}
+
+.section-link--navy .section-link__chip {
+  color: var(--color-navy);
+  background-color: var(--color-beige-light);
+}
+
+.section-link--navy .section-link__description {
+  color: var(--color-on-navy-muted);
+}
+
+.section-link--navy .section-link__icon {
+  color: var(--color-gold-light);
+}
+
+/* Sections */
+
+.prayers__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+.prayers__section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.prayers__section-header .illustration {
+  color: var(--color-gold-heading);
+}
+
+.prayers__section-title {
+  font-size: var(--text-h2);
+}
+
+.prayers__groups {
+  --skeleton-height: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.prayers__grid {
+  --skeleton-height: 24rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  align-items: start;
+  gap: var(--space-4);
+}
+
+.prayers__grid--compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.prayers__cta {
+  align-self: flex-start;
+}
+
+.prayers__litanies-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+}
+
+.prayers__subtitle {
+  font-size: var(--text-h3);
+}
+
+.prayers__litanies {
+  --skeleton-height: 36rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Group of rosary prayers: "1 No início" */
+
+.prayer-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.prayer-group__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+}
+
+.prayer-group__number {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  font-weight: 700;
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+  border-radius: var(--radius-pill);
+}
+
+.prayer-group__title {
+  font-size: var(--text-h3);
+}
+
+/* Prayer card */
+
+.prayer-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.prayer-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.prayer-card__chip {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  color: var(--color-gold-heading);
+  background-color: var(--color-cream);
+  border-radius: var(--radius-md);
+}
+
+.prayer-card__chip--large {
+  inline-size: 4.25rem;
+  block-size: 4.25rem;
+  border-radius: var(--radius-lg);
+}
+
+.prayer-card__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.prayer-card__title {
+  font-size: var(--text-h3);
+}
+
+.prayer-card__copy {
+  align-self: flex-start;
+}
+
+/* Litany: invocation, and everyone's response in gold.
+   No gap, so the hidden lines continue right after the visible ones. */
+
+.litany {
+  gap: 0;
+}
+
+.litany .prayer-card__header {
+  margin-bottom: var(--space-4);
+}
+
+.litany .disclosure__toggle {
+  margin-top: var(--space-4);
+}
+
+.litany__lines {
+  margin: 0;
+}
+
+.litany__line {
+  display: grid;
+  gap: 2px var(--space-6);
+  padding-block: var(--space-2);
+  font-size: var(--text-litany);
+  line-height: 1.5;
+  border-top: 1px solid var(--color-border);
+}
+
+.litany__invocation {
+  font-family: var(--font-heading);
+  color: var(--color-navy);
+}
+
+.litany__response {
+  margin: 0;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--color-gold-text);
+}
+
+.litany__closing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--color-beige-light);
+  border-left: 4px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.litany__closing-label {
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-text);
+}
+
+/* Mobile: the text size control fills the width */
+
+@media (max-width: 40em) {
+  .text-size {
+    flex: 1 1 100%;
+  }
+}
+
+/* Tablet (> 640px): no tabs; links to both sections; responses beside the invocations */
+
+@media (min-width: 40.0625em) {
+  .prayers__tabs {
+    display: none;
+  }
+
+  .prayers__sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-4);
+  }
+
+  .prayer-card {
+    padding: var(--space-6);
+  }
+
+  .prayer-card__chip {
+    inline-size: 3.75rem;
+    block-size: 3.75rem;
+  }
+
+  .litany__line {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+}

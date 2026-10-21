@@ -1,4 +1,5 @@
 import { initApp } from '../app.js';
+import { MOBILE_MEDIA_QUERY } from '../config.js';
 import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
 import { initTabs } from '../components/tabs.js';
@@ -6,9 +7,6 @@ import { getSetIdsPrayedOn } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
-
-/** Mobile range: one set at a time, chosen in the tabs. */
-const MOBILE_QUERY = '(max-width: 40em)';
 
 initApp();
 initMysteries(qs('[data-mysteries]'));
@@ -28,7 +26,7 @@ function initMysteries(root) {
 
     renderRing(root, sets, prayedIds);
     renderSets(root, sets, todaySet, prayedIds);
-    initTabs(qs('[data-mysteries-sets]', root), { media: MOBILE_QUERY });
+    initTabs(qs('[data-mysteries-sets]', root), { media: MOBILE_MEDIA_QUERY });
   });
 }
 

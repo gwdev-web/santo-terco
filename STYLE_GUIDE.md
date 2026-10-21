@@ -213,8 +213,10 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Notice:** icon, short bold title, one sentence and at most one action (under the text on mobile, at the right from tablet). `.notice--error` (soft red) for loading failures, with "Tentar de novo", never a technical message; `.notice--navy` for tips ("Dica").
 - **Tabs:** segmented control on a track background; the selected tab is white with a gold border. Used on mobile to show one item at a time (mystery sets, prayer groups); from tablet every panel is shown and the tabs are hidden. Arrow keys, Home and End move between tabs.
 - **Loading (skeleton):** soft shimmering bars where the text will appear, keeping the final layout. Static under reduced motion.
-- **Litany:** invocation (left, navy) and response (right or below, gold text), "Mostrar a ladainha inteira".
-- **Text size control:** three "A" buttons with `aria-pressed`.
+- **Prayer card:** illustration in a cream chip, title, a cream badge with when it is prayed ("10 vezes por mistério"), the full text (Playfair, `--text-prayer`, line breaks kept) and "Copiar texto", which changes to "Texto copiado" for 2.5s and is announced to screen readers.
+- **Litany:** invocation (navy, Playfair) and everyone's response (gold text, italic bold): side by side from tablet, response below on mobile. The first 12 lines are shown; "Mostrar a ladainha inteira (mais N invocações)" opens the rest and the "Oremos".
+- **Show more (disclosure):** a full-width outline button with a caret and `aria-expanded`; the panel opens with `grid-template-rows` (450ms). Closed content is hidden from keyboard and screen readers.
+- **Text size control:** three "A" buttons with `aria-pressed` (normal, grande, muito grande = ×1, ×1.15, ×1.3). The choice is saved in the browser and applies to prayer text on every page, without a flash on load.
 - **Inline confirmation:** destructive actions show "Apagar todo o histórico?" with Cancel / Confirm in place, no browser dialogs.
 
 ---

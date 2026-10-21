@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Prayer text — complete prayers in Playfair, scaled by the text size control
+   Line breaks in the data ("\n") are kept.
+   ========================================================================== */
+
+.prayer-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-prayer);
+  line-height: var(--leading-prayer);
+  color: var(--color-navy);
+  white-space: pre-line;
+}
