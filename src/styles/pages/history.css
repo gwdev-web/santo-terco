@@ -1,0 +1,534 @@
+/* ==========================================================================
+   History — this week (mobile), numbers, the last 12 weeks, terços per set,
+   recent days, medals and "Seus dados". Cards wrap side by side from tablet.
+   ========================================================================== */
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.history__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.history__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.history-card {
+  display: flex;
+  flex: 1 1 20rem;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.history-card--wide {
+  flex: 999 1 34rem;
+}
+
+.history-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.history-card__title {
+  font-size: 1.1875rem;
+}
+
+/* "Esta semana": navy card with one bar per day, mobile only */
+
+.history-week {
+  --skeleton-base: var(--color-navy-2);
+  --skeleton-shine: var(--color-navy-hover);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) var(--space-4);
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+  border-radius: var(--radius-lg);
+}
+
+.history-week__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.history-week__title {
+  font-size: 1.25rem;
+  color: var(--color-on-navy);
+}
+
+.history-week__total {
+  font-size: 0.8125rem;
+  color: var(--color-on-navy-muted);
+}
+
+.history-week__days {
+  --skeleton-height: 7.5rem;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-week__day {
+  display: grid;
+  grid-template-rows: auto 5.5rem auto;
+  justify-items: center;
+  gap: 6px;
+}
+
+.history-week__count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-gold-light);
+}
+
+.history-week__bar {
+  align-self: end;
+  inline-size: 100%;
+  block-size: max(4px, calc(var(--day-level, 0) * 100%));
+  background-color: var(--color-gold);
+  border-radius: 8px 8px 4px 4px;
+}
+
+.history-week__day--rosary .history-week__bar {
+  background-color: var(--color-gold-bright);
+}
+
+.history-week__day--future .history-week__bar {
+  background-color: var(--color-navy-2);
+}
+
+.history-week__label {
+  font-size: 0.75rem;
+  color: var(--color-on-navy-muted);
+}
+
+.history-week__day[aria-current="date"] .history-week__label {
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+/* Numbers */
+
+.history-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.history-stat__label {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.history-stat__value {
+  font-family: var(--font-heading);
+  font-size: clamp(2.125rem, 1.875rem + 1vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-navy);
+}
+
+.history-stat--navy {
+  --skeleton-base: var(--color-navy-2);
+  --skeleton-shine: var(--color-navy-hover);
+  background-color: var(--color-navy);
+  border-color: var(--color-navy);
+}
+
+.history-stat--navy .history-stat__label {
+  color: var(--color-on-navy-muted);
+}
+
+.history-stat--navy .history-stat__value {
+  color: var(--color-gold-light);
+}
+
+/* Heatmap: one column per week, Monday at the top; squares grow with the card */
+
+.heatmap {
+  --skeleton-height: 11rem;
+  display: grid;
+  grid-template-rows: repeat(7, auto);
+  grid-template-columns: 2rem;
+  grid-auto-columns: minmax(0, 1.375rem);
+  grid-auto-flow: column;
+  gap: 5px;
+}
+
+@media (min-width: 40.0625em) {
+  .heatmap {
+    grid-auto-columns: minmax(0, 2rem);
+    gap: 6px;
+  }
+}
+
+.heatmap__label {
+  align-self: center;
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+
+.heatmap__day {
+  display: block;
+  aspect-ratio: 1;
+  background-color: var(--color-track);
+  border-radius: 4px;
+}
+
+.heatmap__day--1 {
+  background-color: var(--color-heat-1);
+}
+
+.heatmap__day--2 {
+  background-color: var(--color-gold);
+}
+
+.heatmap__day--3 {
+  background-color: var(--color-gold-heading);
+}
+
+.heatmap__day--4 {
+  background-color: var(--color-navy);
+}
+
+.heatmap__day--future {
+  background-color: transparent;
+  border: 1px dashed var(--color-border);
+}
+
+.heatmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.heatmap-legend .heatmap__day {
+  inline-size: 14px;
+}
+
+/* Per set */
+
+.by-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.by-set__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.by-set__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.9375rem;
+}
+
+.by-set__illustration {
+  color: var(--color-gold-heading);
+}
+
+.by-set__name {
+  flex: 1;
+}
+
+.by-set__bar {
+  height: 10px;
+}
+
+/* Recent days */
+
+.recent {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recent__item {
+  display: grid;
+  grid-template-areas:
+    "date extra"
+    "title title";
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding-block: var(--space-3);
+  font-size: 0.9375rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.recent__date {
+  grid-area: date;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.recent__title {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.recent__illustration {
+  color: var(--color-gold-heading);
+}
+
+.recent__extra {
+  grid-area: extra;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-gold-text);
+}
+
+/* Medals: navy when earned, a dashed white circle until then */
+
+.medals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.medals__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.medals__medal {
+  --medal-size: 3rem;
+}
+
+.medals__medal:not(.medal--done) {
+  border-style: dashed;
+}
+
+.medals__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.medals__name {
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.medals__detail {
+  font-size: var(--text-caption);
+  color: var(--color-text-muted);
+}
+
+.medals__item--earned .medals__name {
+  color: var(--color-navy);
+}
+
+.medals__item--earned .medals__detail {
+  font-weight: 700;
+  color: var(--color-gold-text);
+}
+
+/* Empty: nothing prayed yet, or the data was cleared */
+
+.history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-12) var(--space-4);
+  text-align: center;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  outline: none;
+}
+
+.history-empty__illustration {
+  --illustration-size: 4.5rem;
+  color: var(--color-gold);
+}
+
+.history-empty__title {
+  font-size: var(--text-h3);
+}
+
+.history-empty__text {
+  max-width: 26rem;
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+/* "Seus dados": clearing asks for confirmation in place */
+
+.history-data {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-danger-border);
+  border-radius: var(--radius-lg);
+}
+
+.history-data__text {
+  display: flex;
+  flex: 1 1 24rem;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+.history-data__title {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.history-data__clear {
+  flex: 1 1 100%;
+}
+
+.history-data__confirm {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.history-data__question {
+  flex: 1 1 100%;
+  font-weight: 700;
+  color: var(--color-danger);
+}
+
+.history-data__actions {
+  display: flex;
+  flex: 1;
+  gap: var(--space-3);
+}
+
+.history-data__actions .button {
+  flex: 1;
+}
+
+/* Tablet (> 640px): the week is in the heatmap, more room in the cards */
+
+@media (min-width: 40.0625em) {
+  .history {
+    gap: var(--space-8);
+  }
+
+  .history__content,
+  .history__row {
+    gap: var(--space-6);
+  }
+
+  .history-week {
+    display: none;
+  }
+
+  .history-stats {
+    gap: var(--space-4);
+  }
+
+  .history-stat {
+    padding: var(--space-6);
+  }
+
+  .history-stat__label {
+    font-size: 0.875rem;
+  }
+
+  .history-card {
+    padding: var(--space-6);
+  }
+
+  .history-card__title {
+    font-size: 1.375rem;
+  }
+
+  .recent__item {
+    grid-template-areas: "date title extra";
+    grid-template-columns: 7rem minmax(0, 1fr) auto;
+    gap: var(--space-2) var(--space-4);
+  }
+
+  .recent__date {
+    font-size: inherit;
+  }
+
+  .history-empty {
+    padding: var(--space-16) var(--space-6);
+  }
+
+  .history-data {
+    padding: var(--space-6);
+  }
+
+  .history-data__clear,
+  .history-data__confirm {
+    flex: none;
+  }
+
+  .history-data__question {
+    flex: none;
+  }
+
+  .history-data__actions .button {
+    flex: none;
+  }
+}

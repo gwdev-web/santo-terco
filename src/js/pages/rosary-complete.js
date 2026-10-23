@@ -6,6 +6,7 @@ import { countRosariesOn, getSetIdsPrayedOn, getStreak } from '../services/histo
 import { getMysterySets } from '../services/mysteries.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
+import { joinNames } from '../utils/text.js';
 
 initApp();
 initRosaryComplete(qs('[data-rosary-complete]'));
@@ -95,9 +96,4 @@ function renderPending(root, sets, prayedIds) {
     : 'Reze os quatro terços no mesmo dia para completar um Rosário: os vinte mistérios da vida de Jesus e de Maria.';
   qs('[data-primary]', root).href = '/mysteries.html';
   qs('[data-primary-label]', root).textContent = 'Escolher um mistério';
-}
-
-/** "a", "a e b", "a, b e c". */
-function joinNames(names) {
-  return names.length > 1 ? `${names.slice(0, -1).join(', ')} e ${names.at(-1)}` : names.join('');
 }

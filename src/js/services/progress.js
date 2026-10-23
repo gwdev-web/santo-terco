@@ -1,4 +1,4 @@
-import { readJson, writeJson } from './storage.js';
+import { readJson, removeItem, writeJson } from './storage.js';
 
 const PROGRESS_KEY = 'progress';
 
@@ -46,4 +46,9 @@ export function clearProgress(setId, dateKey) {
 
   const { [setId]: _cleared, ...sets } = saved.sets;
   writeJson(PROGRESS_KEY, { date: dateKey, sets });
+}
+
+/** Forgets every mark saved today. */
+export function clearAllProgress() {
+  removeItem(PROGRESS_KEY);
 }

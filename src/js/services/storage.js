@@ -34,3 +34,12 @@ export function writeJson(key, value) {
     return false;
   }
 }
+
+/** @param {string} key - Key without the app prefix. */
+export function removeItem(key) {
+  try {
+    localStorage.removeItem(STORAGE_PREFIX + key);
+  } catch {
+    // Nothing to remove when storage is unavailable
+  }
+}

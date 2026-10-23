@@ -1,5 +1,5 @@
 import { toDateKey } from '../utils/date.js';
-import { readJson, writeJson } from './storage.js';
+import { readJson, removeItem, writeJson } from './storage.js';
 
 const HISTORY_KEY = 'history';
 
@@ -12,10 +12,18 @@ const HISTORY_KEY = 'history';
  * @property {string} completedAt - ISO timestamp.
  */
 
-/** @returns {HistoryEntry[]} */
+const isEntry = (entry) =>
+  typeof entry?.setId === 'string' && typeof entry.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(entry.date);
+
+/** @returns {HistoryEntry[]} Oldest first; entries that can't be read are skipped. */
 export function getHistory() {
   const entries = readJson(HISTORY_KEY, []);
-  return Array.isArray(entries) ? entries : [];
+  return Array.isArray(entries) ? entries.filter(isEntry) : [];
+}
+
+/** Deletes every finished terço. */
+export function clearHistory() {
+  removeItem(HISTORY_KEY);
 }
 
 /**
@@ -38,8 +46,19 @@ export function addHistoryEntry(setId, date) {
  * @returns {number}
  */
 export function countRosariesOn(setIds, dateKey) {
-  const entries = getHistory().filter((entry) => entry.date === dateKey);
-  return Math.min(...setIds.map((id) => entries.filter((entry) => entry.setId === id).length));
+  return countRosaries(
+    getHistory().filter((entry) => entry.date === dateKey),
+    setIds,
+  );
+}
+
+/**
+ * @param {HistoryEntry[]} dayEntries - The terços of one day.
+ * @param {string[]} setIds - Ids of the four sets.
+ * @returns {number} Full Rosaries among them.
+ */
+export function countRosaries(dayEntries, setIds) {
+  return Math.min(...setIds.map((id) => dayEntries.filter((entry) => entry.setId === id).length));
 }
 
 /**
@@ -70,4 +89,24 @@ export function getStreak(today) {
   }
 
   return streak;
+}
+
+/** @returns {number} The longest run of consecutive days with at least one terço. */
+export function getLongestStreak() {
+  const days = [...new Set(getHistory().map((entry) => entry.date))].sort();
+  let longest = 0;
+  let current = 0;
+  let previous = null;
+
+  for (const key of days) {
+    const [year, month, day] = key.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+
+    if (previous) previous.setDate(previous.getDate() + 1);
+    current = previous && toDateKey(previous) === key ? current + 1 : 1;
+    longest = Math.max(longest, current);
+    previous = date;
+  }
+
+  return longest;
 }

@@ -36,7 +36,7 @@ src/js/
   app.js               initApp(): shared behavior for every page
   config.js            data URL and constants
   services/            data access and persistence (api, mysteries, prayers, rosary, storage, progress, history)
-  utils/               small pure helpers (dom, date)
+  utils/               small pure helpers (dom, date, text)
   components/          reusable UI behavior: initTabs, initAccordion, initBeadCounter, ...
   pages/               one entry module per page
 src/styles/
