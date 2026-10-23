@@ -42,6 +42,10 @@
   --color-on-navy-muted: #d9d4c7;
   --color-gold-light: #e7cb86; /* highlights on navy */
   --color-navy-border: #3a4c72;
+  --color-on-navy-surface: rgba(250, 248, 245, 0.06); /* boxes inside celebrations */
+  --color-on-navy-faint: rgba(250, 248, 245, 0.45); /* sets not prayed yet, decoration only */
+  --color-gold-border-on-navy: rgba(212, 175, 55, 0.35);
+  --color-gold-glow: rgba(212, 175, 55, 0.14); /* ring around celebration medals */
 
   /* Typography */
   --font-heading: "Playfair Display", Georgia, serif;

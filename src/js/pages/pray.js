@@ -1,12 +1,13 @@
 import { initApp } from '../app.js';
+import { createCelebration } from '../components/celebration.js';
 import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
 import { createRosaryProgress } from '../components/rosary-progress.js';
 import { createStepCard } from '../components/step-card.js';
-import { getStreak } from '../services/history.js';
+import { addHistoryEntry, countRosariesOn, getSetIdsPrayedOn, getStreak } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { getPrayerBook, getPrayersById } from '../services/prayers.js';
-import { getProgress, saveProgress } from '../services/progress.js';
+import { clearProgress, getProgress, saveProgress } from '../services/progress.js';
 import { buildStages, countPrayers, getRosary, isStageDone, isStepDone } from '../services/rosary.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs, qsa } from '../utils/dom.js';
@@ -19,7 +20,7 @@ initPray(qs('[data-pray]'));
 /**
  * Guided terço: `pray.html?mystery=<set id>&step=<opening | 1…5 | closing>`.
  * Without `mystery`, today's set; without `step`, the first stage not finished yet,
- * so the user continues where they stopped.
+ * so the user continues where they stopped (the closing one when every prayer is marked).
  *
  * @param {HTMLElement} root - The page's <main>, marked with `data-pray`.
  */
@@ -38,9 +39,9 @@ function initPray(root) {
 
       const requested = stages.findIndex((stage) => stage.id === params.get('step'));
       const firstUnfinished = stages.findIndex((stage) => !isStageDone(stage, counts));
-      const stageIndex = requested >= 0 ? requested : Math.max(0, firstUnfinished);
+      const stageIndex = requested >= 0 ? requested : firstUnfinished >= 0 ? firstUnfinished : stages.length - 1;
 
-      renderStage(root, { set, stages, stageIndex, dateKey, counts, streak: getStreak(today) });
+      renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, streak: getStreak(today) });
     },
     { onError: () => (qs('[data-set-name]').textContent = 'Terço guiado') },
   );
@@ -52,15 +53,18 @@ function initPray(root) {
  * @param {HTMLElement} root
  * @param {object} context
  * @param {import('../services/mysteries.js').MysterySet} context.set
+ * @param {import('../services/mysteries.js').MysterySet[]} context.sets - The four sets, for today's Rosary.
  * @param {import('../services/rosary.js').Stage[]} context.stages
  * @param {number} context.stageIndex
  * @param {string} context.dateKey
  * @param {Record<string, number>} context.counts - Saved progress of today's terço for this set.
  * @param {number} context.streak
  */
-function renderStage(root, { set, stages, stageIndex, dateKey, counts, streak }) {
+function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, streak }) {
   const stage = stages[stageIndex];
+  const isClosing = stage.kind === 'closing';
   let progress = { ...counts };
+  let concluded = false;
 
   document.title = `${stage.title} · ${set.name} · Santo Terço`;
   renderHeader(set);
@@ -83,13 +87,20 @@ function renderStage(root, { set, stages, stageIndex, dateKey, counts, streak })
   });
   qs('[data-stage-list]', root).replaceChildren(...listItems);
 
+  qs('[data-finish]', root).hidden = !isClosing;
+  qs('[data-more]', root).hidden = !isClosing;
+  if (isClosing) {
+    renderMoreRosary(root, sets, getSetIdsPrayedOn(dateKey));
+    qs('[data-finish-button]', root).addEventListener('click', conclude);
+  }
+
   update();
 
   function mark(step, value) {
     const wasDone = isStepDone(step, progress);
 
     progress = { ...progress, [step.key]: value };
-    saveProgress(set.id, dateKey, progress);
+    if (!concluded) saveProgress(set.id, dateKey, progress); // after "Concluir", the next terço starts clean
     update();
 
     if (!wasDone && isStepDone(step, progress)) revealCurrentStep();
@@ -111,14 +122,50 @@ function renderStage(root, { set, stages, stageIndex, dateKey, counts, streak })
       qs('[data-list-state]', item).textContent = done[index] ? ', rezada' : index === current ? ', a próxima' : '';
     });
 
-    renderCompletion(root, stage, stageDone);
+    renderCompletion(root, stage, stageDone && !isClosing); // the closing stage ends with the celebration
     qs('[data-next-link]', root).classList.toggle('motion-breathe', stageDone);
+    qs('[data-finish-button]', root).classList.toggle('motion-breathe', stageDone);
+    qs('[data-finish-hint]', root).textContent = stageDone
+      ? 'Tudo pronto! Toque para registrar o seu terço.'
+      : 'Você pode concluir a qualquer momento.';
 
     trail.update({
       ...countPrayers(stages, progress),
       stagesDone: stages.map((item) => isStageDone(item, progress)),
       streak,
     });
+  }
+
+  /**
+   * "Concluir o terço": saves it in the history and clears today's marks for this set,
+   * so praying it again starts from the beginning. The fourth set of the day opens
+   * the full Rosary page; otherwise the celebration shows above the stage.
+   */
+  function conclude() {
+    const now = new Date();
+    const todayKey = toDateKey(now);
+    const setIds = sets.map((item) => item.id);
+    const rosariesBefore = countRosariesOn(setIds, todayKey);
+
+    addHistoryEntry(set.id, now);
+    clearProgress(set.id, dateKey);
+    concluded = true;
+
+    if (countRosariesOn(setIds, todayKey) > rosariesBefore) {
+      window.location.assign('/rosary-complete.html');
+      return;
+    }
+
+    // The closing prayers count as prayed, even the ones left unmarked
+    for (const step of stage.steps) progress = { ...progress, [step.key]: step.count };
+    streak = getStreak(now);
+    update();
+
+    const prayedIds = getSetIdsPrayedOn(todayKey);
+    qs('[data-finish]', root).hidden = true;
+    qs('[data-next]', root).hidden = true;
+    renderMoreRosary(root, sets, prayedIds);
+    showCelebration(root, { set, sets, prayedIds, streak });
   }
 
   /** After a step is done, brings the next one into view if it is off screen. */
@@ -131,6 +178,62 @@ function renderStage(root, { set, stages, stageIndex, dateKey, counts, streak })
       next.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     }
   }
+}
+
+/**
+ * "Terço concluído": the set's medal, the streak and today's Rosary (the four sets,
+ * the ones prayed today in light medals). Focus moves to it, at the top of the page.
+ */
+function showCelebration(root, { set, sets, prayedIds, streak }) {
+  const section = qs('[data-celebration]', root);
+  const text = qs('[data-celebration-text]', root);
+  const prayedCount = sets.filter((item) => prayedIds.has(item.id)).length;
+
+  setIllustration(qs('[data-celebration-illustration]', root), set.illustration);
+
+  text.replaceChildren(`Você rezou os 5 ${set.name}.`);
+  if (streak >= 2) {
+    const days = document.createElement('b');
+    days.textContent = `${streak} dias seguidos`;
+    text.append(' Sua sequência agora é de ', days, '.');
+  }
+
+  qs('[data-celebration-rosary-title]', root).textContent = `Rosário de hoje · ${prayedCount} de ${sets.length}`;
+  qs('[data-celebration-sets]', root).replaceChildren(
+    ...sets.map((item) => {
+      const fragment = cloneTemplate('celebration-set-template');
+      const entry = qs('[data-celebration-set]', fragment);
+      const prayed = prayedIds.has(item.id);
+
+      entry.classList.toggle('celebration__set--done', prayed);
+      if (item.id === set.id) {
+        const medal = qs('.medal', entry);
+        medal.classList.add('celebration__pop');
+        medal.style.setProperty('--pop-delay', '1.4s');
+      }
+      qs('[data-celebration-set-name]', entry).textContent = item.shortName;
+      qs('[data-celebration-set-state]', entry).textContent = prayed ? ', rezado hoje' : ', ainda não rezado';
+      setIllustration(qs('[data-celebration-set-illustration]', entry), item.illustration);
+      return fragment;
+    }),
+  );
+
+  section.hidden = false;
+  createCelebration(section).play();
+  window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  section.focus({ preventScroll: true });
+}
+
+/** "Completar o Rosário": how many of today's four terços are left. */
+function renderMoreRosary(root, sets, prayedIds) {
+  const left = sets.filter((item) => !prayedIds.has(item.id)).length;
+
+  qs('[data-more-rosary]', root).textContent =
+    left === 0
+      ? 'Você rezou os quatro terços hoje. Pode rezar outro mistério quando quiser.'
+      : left === 1
+        ? 'Falta 1 terço hoje para completar o Rosário.'
+        : `Faltam ${left} terços hoje para completar o Rosário.`;
 }
 
 /** Set name and illustration in the focus header. */

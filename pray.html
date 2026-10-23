@@ -57,6 +57,36 @@
         </button>
       </div>
 
+      <section class="celebration pray__celebration" tabindex="-1" hidden aria-labelledby="celebration-title" data-celebration>
+        <div class="celebration__art" aria-hidden="true">
+          <span class="celebration__confetti" data-celebration-confetti></span>
+          <span class="celebration__rays"></span>
+          <span class="celebration__ripple"></span>
+          <span class="celebration__ripple celebration__ripple--late"></span>
+          <span class="celebration__sparkles" data-celebration-sparkles></span>
+          <span class="celebration__medal celebration__pop">
+            <span class="illustration" data-celebration-illustration hidden></span>
+          </span>
+        </div>
+        <p class="celebration__eyebrow celebration__reveal">Terço concluído</p>
+        <h2 id="celebration-title" class="celebration__title celebration__reveal celebration__reveal--1">Que a paz de Cristo fique com você</h2>
+        <p class="celebration__text celebration__reveal celebration__reveal--2" data-celebration-text>Você rezou os cinco mistérios.</p>
+        <div class="celebration__rosary celebration__reveal celebration__reveal--3">
+          <p class="celebration__rosary-title" data-celebration-rosary-title>Rosário de hoje</p>
+          <ul class="celebration__sets" data-celebration-sets></ul>
+        </div>
+        <div class="celebration__actions celebration__reveal celebration__reveal--4">
+          <a class="button button--primary button--large" href="/mysteries.html">
+            <span>Rezar o próximo terço</span>
+            <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+          </a>
+          <button class="button button--on-navy button--large" type="button" data-celebration-replay>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            <span>Ver a animação de novo</span>
+          </button>
+        </div>
+      </section>
+
       <div class="pray__layout" data-load-content data-layout>
         <section class="meditation" hidden aria-labelledby="meditation-title" data-meditation>
           <div class="meditation__hero motion-fade-up">
@@ -89,6 +119,14 @@
 
           <div class="pray__complete" role="status" data-stage-complete></div>
 
+          <div class="pray-finish" hidden data-finish>
+            <button class="button button--primary button--large pray-finish__button" type="button" aria-describedby="finish-hint" data-finish-button>
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
+              <span>Concluir o terço</span>
+            </button>
+            <p id="finish-hint" class="pray-finish__hint" data-finish-hint>Você pode concluir a qualquer momento.</p>
+          </div>
+
           <div class="pray-next" hidden data-next>
             <a class="button button--on-navy pray-next__previous" href="/pray.html" hidden data-previous-link>
               <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-left"></use></svg>
@@ -115,6 +153,51 @@
           <p class="pray__aside-note">Marcar é opcional, mas ajuda a não se perder. Tudo fica salvo neste aparelho: se fechar a página, você continua de onde parou.</p>
         </aside>
       </div>
+
+      <section class="pray-more" hidden aria-labelledby="pray-more-title" data-more>
+        <h2 id="pray-more-title" class="pray-more__title">Quer continuar rezando?</h2>
+        <ul class="pray-more__list">
+          <li>
+            <a class="card card--link pray-more__card" href="/mysteries.html">
+              <span class="illustration illustration--md illustration--terco pray-more__illustration" aria-hidden="true"></span>
+              <span class="pray-more__text">
+                <span class="card__title">Completar o Rosário</span>
+                <span class="card__text" data-more-rosary>Reze os quatro terços hoje e complete o Rosário.</span>
+              </span>
+              <span class="card__action">
+                <span class="pray-more__action-label">Escolher mistério</span>
+                <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="card card--link pray-more__card" href="/prayers.html">
+              <span class="illustration illustration--md illustration--ladainha-nossa-senhora pray-more__illustration" aria-hidden="true"></span>
+              <span class="pray-more__text">
+                <span class="card__title">Orações complementares</span>
+                <span class="card__text">Ladainhas, Lembrai-vos, Santo Anjo e Ato de Contrição.</span>
+              </span>
+              <span class="card__action">
+                <span class="pray-more__action-label">Ver orações</span>
+                <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="card card--link pray-more__card" href="/history.html">
+              <svg class="icon pray-more__illustration pray-more__icon" aria-hidden="true"><use href="/icons.svg#calendar-check"></use></svg>
+              <span class="pray-more__text">
+                <span class="card__title">Meu histórico</span>
+                <span class="card__text">Veja seus dias de oração e suas medalhas.</span>
+              </span>
+              <span class="card__action">
+                <span class="pray-more__action-label">Abrir histórico</span>
+                <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
 
       <template id="trail-medal-template">
         <li class="trail__step" data-trail-step>
@@ -206,6 +289,15 @@
             <span data-complete-text></span>
           </p>
         </div>
+      </template>
+
+      <template id="celebration-set-template">
+        <li class="celebration__set" data-celebration-set>
+          <span class="medal" aria-hidden="true">
+            <span class="illustration" data-celebration-set-illustration hidden></span>
+          </span>
+          <span><span data-celebration-set-name></span><span class="visually-hidden" data-celebration-set-state></span></span>
+        </li>
       </template>
 
       <template id="stage-list-item-template">

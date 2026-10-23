@@ -22,8 +22,8 @@ import { fetchJson } from './api.js';
  * @property {string} trailLabel - Short label under the trail medal, e.g. "Início", "2º".
  * @property {string} illustration
  * @property {string} lead
- * @property {string} completedTitle
- * @property {string} completedText
+ * @property {string} [completedTitle] - Medal message; the closing stage ends with the celebration instead.
+ * @property {string} [completedText]
  * @property {Mystery} [mystery]
  * @property {Step[]} steps
  */
@@ -111,8 +111,6 @@ export function buildStages(rosary, set, prayersById) {
       trailLabel: closing.trailLabel,
       illustration: closing.illustration,
       lead: closing.lead,
-      completedTitle: 'Orações finais completas!',
-      completedText: 'Você rezou o terço inteiro. Que Deus abençoe a sua oração.',
       steps: buildSteps('closing', closing.steps),
     },
   ];

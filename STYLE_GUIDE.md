@@ -207,6 +207,9 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Medals:** round, with an illustration. *Done* = navy with a gold drawing · *current* = navy outline with a gold halo · *to do* = white. A medal earned during the visit pops in (800ms). Finishing a stage shows "Primeira medalha conquistada!" (or "Mais uma medalha!") with its medal.
 - **"A seguir":** navy card with "Voltar" (previous stage: "Orações iniciais", "Mistério anterior" or "5º mistério"), the next stage and the gold button ("Ir para o 1º mistério", "Próximo mistério", "Orações finais"), which breathes once the stage is done. On mobile it is a bar fixed at the bottom with "Voltar" and the next button.
 - **Stage list ("Nesta etapa"):** the step names with a green check when done; beside the stage on desktop, below it on tablet, hidden on mobile.
+- **Closing ("Orações finais"):** Agradecimento, Salve Rainha and Sinal da Cruz, then the gold "Concluir o terço" (full width on mobile), which breathes once the three are marked. Its hint says the user may conclude at any time ("Você pode concluir a qualquer momento." / "Tudo pronto! Toque para registrar o seu terço."). Below, "Quer continuar rezando?" with three link cards: Completar o Rosário (terços left today), Orações complementares and Meu histórico (rows on mobile, columns from tablet).
+- **Concluding a terço:** it is saved in the history and today's marks for that set are cleared, so praying it again starts from the beginning. The "Terço concluído" celebration appears at the top of the page and receives focus: the set's medal, "Que a paz de Cristo fique com você", the streak (from 2 days), "Rosário de hoje · N de 4" with the four sets, "Rezar o próximo terço" and "Ver a animação de novo". The fourth set of the day opens the full Rosary page instead.
+- **Full Rosary page:** a navy page of its own (no header, tab bar or footer): the ring draws, the four set medals pop in around it (top, right, bottom, left) and then the Rosary medal in the center; "Você completou um Rosário hoje" (or "2 Rosários"), the count of the day, the new medal and "Ver meu histórico", "Voltar ao início", "Ver de novo". Opened without a full Rosary today, it calmly shows which sets were prayed and which are left, with "Escolher um mistério".
 
 ### 6.4 Other components
 
@@ -281,7 +284,7 @@ Sizes: `--sm` 32px, `--md` 44px, `--lg` 56px, `--xl` 72px (or set `--illustratio
 - **Short and soft:** 150–450ms for taps and state changes, 700ms for progress bars.
 - **Curve:** `cubic-bezier(.3, .7, .4, 1)`.
 - **Patterns:** entrance fade-up with stagger; hover lift on cards; press scale(.95–.98); bead fill; next step breathing (1.8s, ease-in-out, infinite); progress fill; accordion open; loading shimmer (1.6s, linear).
-- **Celebration** (end of a terço and full Rosary): the ring draws, medals pop in one by one, a rotating ray halo, sparkles, ripples and falling gold beads/confetti. A "Ver de novo" button is always present.
+- **Celebration** (end of a terço and full Rosary): the ring draws, medals pop in one by one, a rotating ray halo, sparkles, ripples and falling gold beads/confetti (three falls, then they rest), then the text fades up. A "Ver de novo" button is always present.
 - **Reduced motion:** with `prefers-reduced-motion`, everything becomes an instant change without losing information (no entrance animations, no loops).
 
 ---

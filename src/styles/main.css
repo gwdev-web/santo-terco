@@ -25,9 +25,11 @@
 @import "./components/mark-toggle.css";
 @import "./components/bead.css";
 @import "./components/step-card.css";
+@import "./components/celebration.css";
 
 /* Pages */
 @import "./pages/home.css";
 @import "./pages/mysteries.css";
 @import "./pages/prayers.css";
 @import "./pages/pray.css";
+@import "./pages/rosary-complete.css";

@@ -38,3 +38,12 @@ export function saveProgress(setId, dateKey, counts) {
 export function hasProgress(setId, dateKey) {
   return Object.values(getProgress(setId, dateKey)).some((value) => value > 0);
 }
+
+/** Forgets today's marks for a set, so its next terço starts from the beginning. */
+export function clearProgress(setId, dateKey) {
+  const saved = readJson(PROGRESS_KEY, null);
+  if (saved?.date !== dateKey || !isRecord(saved.sets)) return;
+
+  const { [setId]: _cleared, ...sets } = saved.sets;
+  writeJson(PROGRESS_KEY, { date: dateKey, sets });
+}

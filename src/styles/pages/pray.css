@@ -203,6 +203,92 @@
   color: var(--color-navy);
 }
 
+/* "Concluir o terço": closing stage only; it breathes once every prayer is marked */
+
+.pray-finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+  text-align: center;
+}
+
+.pray-finish__button {
+  inline-size: 100%;
+}
+
+.pray-finish__hint {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* "Terço concluído": the celebration above the stage, at the top of the page */
+
+.pray__celebration {
+  padding: 0 var(--space-4) var(--space-6);
+  border-radius: var(--radius-xl);
+  outline: none;
+}
+
+/* "Quer continuar rezando?": three link cards, in rows on mobile */
+
+.pray-more {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pray-more__title {
+  font-size: var(--text-h3);
+}
+
+.pray-more__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pray-more__card {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-4);
+}
+
+.pray-more__illustration {
+  --illustration-size: 2.5rem;
+  --icon-size: 2.5rem;
+  color: var(--color-gold-heading);
+}
+
+.pray-more__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pray-more__card .card__title {
+  font-size: 1.1875rem;
+}
+
+.pray-more__card .card__text {
+  font-size: 0.9375rem;
+}
+
+.pray-more__card .card__action {
+  margin-top: 0;
+}
+
+.pray-more__action-label {
+  display: none;
+}
+
 /* "A seguir": sticky bar at the bottom on mobile, navy card from tablet */
 
 .pray-next {
@@ -610,6 +696,52 @@
 
   .pray-next__button {
     flex: none;
+  }
+
+  .pray-finish__button {
+    inline-size: auto;
+  }
+
+  .pray__celebration {
+    padding: var(--space-2) var(--space-8) var(--space-12);
+  }
+
+  .pray-more {
+    gap: var(--space-4);
+  }
+
+  .pray-more__title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .pray-more__list {
+    gap: var(--space-4);
+  }
+
+  .pray-more__card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    padding: var(--space-6);
+  }
+
+  .pray-more__illustration {
+    --illustration-size: 3rem;
+    --icon-size: 3rem;
+  }
+
+  .pray-more__card .card__title {
+    font-size: 1.375rem;
+  }
+
+  .pray-more__card .card__action {
+    margin-top: auto;
+    padding-top: var(--space-1);
+  }
+
+  .pray-more__action-label {
+    display: inline;
   }
 
   .pray__aside {
