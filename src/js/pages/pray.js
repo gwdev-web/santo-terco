@@ -9,7 +9,7 @@ import { getPrayerBook, getPrayersById } from '../services/prayers.js';
 import { getProgress, saveProgress } from '../services/progress.js';
 import { buildStages, countPrayers, getRosary, isStageDone, isStepDone } from '../services/rosary.js';
 import { toDateKey } from '../utils/date.js';
-import { cloneTemplate, qs } from '../utils/dom.js';
+import { cloneTemplate, qs, qsa } from '../utils/dom.js';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -65,7 +65,8 @@ function renderStage(root, { set, stages, stageIndex, dateKey, counts, streak })
   document.title = `${stage.title} · ${set.name} · Santo Terço`;
   renderHeader(set);
   renderIntro(root, stage, stageIndex, stages.length);
-  renderNext(root, set, stages[stageIndex + 1]);
+  renderMeditation(root, set, stage);
+  renderNavigation(root, set, stages, stageIndex);
 
   qs('[data-trail]', root).replaceChildren();
   const trail = createRosaryProgress(qs('[data-rosary-progress]', root), stages, stageIndex);
@@ -144,10 +145,55 @@ function renderIntro(root, stage, stageIndex, stageCount) {
   qs('[data-stage-lead]', root).textContent = stage.lead;
 }
 
-/** "A seguir": link to the next stage (none after the closing prayers). */
-function renderNext(root, set, nextStage) {
-  const next = qs('[data-next]', root);
-  next.hidden = !nextStage;
+/**
+ * Mysteries replace the common intro with the meditation (illustration, quote,
+ * reflections and fruit) beside the prayers; the stage list is not shown.
+ */
+function renderMeditation(root, set, stage) {
+  const isMystery = stage.kind === 'mystery';
+
+  qs('[data-meditation]', root).hidden = !isMystery;
+  qs('[data-stage-intro]', root).hidden = isMystery;
+  qs('[data-stage-aside]', root).hidden = isMystery;
+  qs('[data-layout]', root).classList.toggle('pray__layout--mystery', isMystery);
+  if (!isMystery) return;
+
+  const { mystery } = stage;
+
+  qs('[data-meditation-eyebrow]', root).textContent = `${stage.trailLabel} Mistério ${set.singular}`;
+  qs('[data-meditation-title]', root).textContent = mystery.title;
+  qs('[data-meditation-quote]', root).textContent = `“${mystery.quote}”`;
+  qs('[data-meditation-reference]', root).textContent = mystery.reference;
+  qs('[data-meditation-fruit]', root).textContent = `${mystery.fruit}.`;
+  setIllustration(qs('[data-meditation-illustration]', root), mystery.illustration);
+
+  qs('[data-meditation-reflections]', root).replaceChildren(
+    ...mystery.reflections.map((reflection) => {
+      const item = cloneTemplate('reflection-template');
+      qs('[data-reflection-text]', item).textContent = reflection;
+      return item;
+    }),
+  );
+}
+
+/** "Voltar" to the previous stage and "A seguir" with the link to the next one. */
+function renderNavigation(root, set, stages, stageIndex) {
+  const previousStage = stages[stageIndex - 1];
+  const nextStage = stages[stageIndex + 1];
+  const stage = stages[stageIndex];
+  const previous = qs('[data-previous-link]', root);
+  const stageUrl = (target) =>
+    `/pray.html?mystery=${encodeURIComponent(set.id)}&step=${encodeURIComponent(target.id)}`;
+
+  qs('[data-next]', root).hidden = !previousStage && !nextStage;
+
+  previous.hidden = !previousStage;
+  if (previousStage) {
+    previous.href = stageUrl(previousStage);
+    qs('[data-previous-label]', root).textContent = previousLabel(stage, previousStage);
+  }
+
+  for (const part of qsa('[data-next-part]', root)) part.hidden = !nextStage;
   if (!nextStage) return;
 
   const isMystery = nextStage.kind === 'mystery';
@@ -155,12 +201,17 @@ function renderNext(root, set, nextStage) {
   qs('[data-next-title]', root).textContent = isMystery
     ? `${nextStage.trailLabel} Mistério · ${nextStage.title}`
     : nextStage.title;
-  qs('[data-next-label]', root).textContent = isMystery
-    ? `Ir para o ${nextStage.name}`
-    : `Ir para as ${nextStage.name.toLowerCase()}`;
-  qs('[data-next-link]', root).href =
-    `/pray.html?mystery=${encodeURIComponent(set.id)}&step=${encodeURIComponent(nextStage.id)}`;
+  qs('[data-next-label]', root).textContent =
+    stage.kind === 'opening' ? `Ir para o ${nextStage.name}` : isMystery ? 'Próximo mistério' : nextStage.title;
+  qs('[data-next-link]', root).href = stageUrl(nextStage);
   setIllustration(qs('[data-next-illustration]', root), nextStage.illustration);
+}
+
+/** "Orações iniciais", "Mistério anterior" or "5º mistério". */
+function previousLabel(stage, previousStage) {
+  if (previousStage.kind === 'opening') return 'Orações iniciais';
+  if (stage.kind === 'mystery') return 'Mistério anterior';
+  return previousStage.name;
 }
 
 /** The medal message when every prayer of the stage is marked. */

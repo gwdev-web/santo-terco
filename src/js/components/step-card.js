@@ -8,6 +8,9 @@ import { setIllustration } from './illustration.js';
  * title, the full text and either a "Rezei" toggle (one prayer) or a bead counter
  * (several Hail Marys). Marking is always optional.
  *
+ * A decade (more than 5 beads) also gets a hint, a "Rezei a Nª Ave Maria" button
+ * (the center of the bead ring on mobile) and a "Dezena completa!" status.
+ *
  * States set by `update()`:
  * - current: gold border and halo, `aria-current="step"`;
  * - done: green border, the text folds away with "Mostrar o texto da oração";
@@ -24,7 +27,10 @@ export function createStepCard(step, { number, onChange }) {
   const show = qs('[data-step-show]', item);
   const counter = qs('[data-step-counter]', item);
   const body = qs('[data-step-body]', item);
+  const add = qs('[data-step-add]', item);
+  const status = qs('[data-step-status]', item);
   const bodyId = `step-${step.key.replace(/[^a-z0-9]+/gi, '-')}-text`;
+  const isDecade = step.count > 5;
   let value = 0;
   let beads = null;
 
@@ -55,6 +61,14 @@ export function createStepCard(step, { number, onChange }) {
     qs('[data-counter-total]', item).textContent = String(step.count);
     toggle.remove();
 
+    if (isDecade) {
+      qs('[data-step-hint]', item).hidden = false;
+      qs('[data-add-total]', item).textContent = String(step.count);
+      add.hidden = false;
+      status.hidden = false;
+      add.addEventListener('click', () => onChange(Math.min(value + 1, step.count)));
+    }
+
     beads = createBeadCounter(group, {
       labels: Array.from({ length: step.count }, (_, index) => {
         const intention = step.intentions[index];
@@ -63,9 +77,16 @@ export function createStepCard(step, { number, onChange }) {
       intentions: step.intentions,
       onChange,
     });
+
+    if (isDecade) group.append(add, status); // after the beads, in reading and focus order
   } else {
     qs('[data-toggle-context]', item).textContent = `: ${step.title}`;
     toggle.addEventListener('click', () => onChange(value >= 1 ? 0 : 1));
+  }
+
+  if (!isDecade) {
+    add.remove();
+    status.remove();
   }
 
   return {
@@ -82,9 +103,22 @@ export function createStepCard(step, { number, onChange }) {
       if (beads) {
         qs('[data-counter-value]', card).textContent = String(value);
         beads.update(value, state === 'current');
+        if (isDecade) updateDecade();
       } else {
         toggle.setAttribute('aria-pressed', String(value >= 1));
       }
     },
   };
+
+  /** "Rezei a Nª Ave Maria" while beads are left; "Dezena completa!" once all are prayed. */
+  function updateDecade() {
+    const complete = value >= step.count;
+
+    add.hidden = complete;
+    qs('[data-add-count]', card).textContent = String(value);
+    qs('[data-add-next]', card).textContent = `${Math.min(value + 1, step.count)}ª`;
+
+    if (!complete) status.replaceChildren();
+    else if (!status.childElementCount) status.replaceChildren(cloneTemplate('decade-complete-template'));
+  }
 }

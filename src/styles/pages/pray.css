@@ -209,7 +209,8 @@
   position: sticky;
   bottom: 0;
   z-index: 10;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
   margin-inline: calc(-1 * var(--gutter));
   padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
@@ -223,6 +224,8 @@
 }
 
 .pray-next__text {
+  flex: 1 1 100%;
+  order: -1;
   overflow: hidden;
   font-size: 0.875rem;
   color: var(--color-text);
@@ -232,7 +235,142 @@
 }
 
 .pray-next__button {
-  width: 100%;
+  flex: 1;
+}
+
+/* "Voltar": an outline button on the light bar (mobile), on navy from tablet */
+.pray-next__previous {
+  min-height: var(--tap-primary-mobile);
+  padding-inline: var(--space-4);
+  color: var(--color-navy);
+  background-color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.pray-next__previous:hover {
+  color: var(--color-navy);
+  background-color: var(--color-cream);
+  border-color: var(--color-gold);
+}
+
+.pray-next__previous-long {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Mystery meditation: illustration, quote, reflections and fruit */
+
+.meditation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.meditation__hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-6) var(--space-4);
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+  border-radius: var(--radius-lg);
+}
+
+.meditation__hero > :not(.meditation__medal, .meditation__eyebrow) {
+  grid-column: 1 / -1;
+}
+
+.meditation__medal {
+  display: grid;
+  place-items: center;
+  inline-size: 5.75rem;
+  block-size: 5.75rem;
+  color: var(--color-navy);
+  background-color: var(--color-beige-light);
+  border: 3px solid var(--color-gold);
+  border-radius: var(--radius-pill);
+}
+
+.meditation__medal .illustration {
+  --illustration-size: 76%;
+}
+
+.meditation__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+
+.meditation__title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--color-on-navy);
+}
+
+.meditation__quote blockquote {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--color-beige);
+}
+
+.meditation__reference {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-gold-light);
+}
+
+.meditation__reflect {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.meditation__subtitle {
+  font-size: var(--text-h3);
+}
+
+.meditation__reflections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.meditation__reflection {
+  display: flex;
+  gap: var(--space-3);
+  color: var(--color-text);
+}
+
+.meditation__star {
+  --icon-size: 0.875rem;
+  margin-top: 0.4em;
+  color: var(--color-gold);
+}
+
+.meditation__fruit {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.meditation__fruit b {
+  color: var(--color-gold-text);
 }
 
 /* Stage list ("Nesta etapa"): hidden on mobile, where the cards are the list */
@@ -384,7 +522,7 @@
 
   .pray-next {
     position: static;
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    flex-wrap: nowrap;
     align-items: center;
     gap: var(--space-4);
     margin: var(--space-2) 0 0;
@@ -406,10 +544,53 @@
 
   .pray-next__text {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 2px;
+    order: 0;
     text-align: left;
     white-space: normal;
+  }
+
+  .pray-next__previous,
+  .pray-next__previous:hover {
+    color: var(--color-on-navy);
+    background-color: transparent;
+    border-color: var(--color-navy-border);
+  }
+
+  .pray-next__previous:hover {
+    background-color: var(--color-navy-2);
+    border-color: var(--color-gold-light);
+  }
+
+  .pray-next__previous {
+    min-height: 48px;
+  }
+
+  .pray-next__previous-short {
+    display: none;
+  }
+
+  .pray-next__previous-long {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .meditation__hero {
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .meditation__reflect {
+    padding: var(--space-6);
+  }
+
+  .meditation__reflection {
+    font-size: var(--text-body-lg);
   }
 
   .pray-next__eyebrow {
@@ -428,7 +609,7 @@
   }
 
   .pray-next__button {
-    width: auto;
+    flex: none;
   }
 
   .pray__aside {
@@ -453,5 +634,32 @@
   .pray__aside {
     position: sticky;
     top: var(--space-6);
+  }
+
+  /* Mystery: the meditation stays beside the prayers */
+  .pray__layout--mystery {
+    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
+  }
+
+  .meditation {
+    position: sticky;
+    top: var(--space-6);
+  }
+
+  .meditation__hero {
+    grid-template-columns: 1fr;
+    padding: var(--space-8);
+  }
+
+  .meditation__medal {
+    inline-size: 8rem;
+    block-size: 8rem;
+    border-width: 4px;
+  }
+
+  .meditation__eyebrow {
+    margin-top: var(--space-2);
+    font-size: 0.875rem;
+    letter-spacing: 0.16em;
   }
 }

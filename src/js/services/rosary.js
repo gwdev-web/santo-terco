@@ -97,8 +97,8 @@ export function buildStages(rosary, set, prayersById) {
         trailLabel: ordinal,
         illustration: item.illustration,
         lead: `${set.name} · ${ordinal} mistério · ${item.reference}`,
-        completedTitle: 'Mais uma medalha!',
-        completedText: `O ${ordinal} mistério está completo.`,
+        completedTitle: `${ordinal} mistério concluído`,
+        completedText: 'Mais uma medalha dourada na sua caminhada. Siga quando estiver pronto.',
         mystery: item,
         steps: buildSteps(`mystery-${index + 1}`, mystery.steps),
       };

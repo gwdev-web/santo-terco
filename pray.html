@@ -57,9 +57,29 @@
         </button>
       </div>
 
-      <div class="pray__layout" data-load-content>
+      <div class="pray__layout" data-load-content data-layout>
+        <section class="meditation" hidden aria-labelledby="meditation-title" data-meditation>
+          <div class="meditation__hero motion-fade-up">
+            <span class="meditation__medal" aria-hidden="true">
+              <span class="illustration" data-meditation-illustration hidden></span>
+            </span>
+            <p class="meditation__eyebrow" data-meditation-eyebrow></p>
+            <h1 id="meditation-title" class="meditation__title" data-meditation-title>Mistério</h1>
+            <figure class="meditation__quote">
+              <blockquote><p data-meditation-quote></p></blockquote>
+              <figcaption class="meditation__reference" data-meditation-reference></figcaption>
+            </figure>
+          </div>
+
+          <div class="meditation__reflect">
+            <h2 class="meditation__subtitle">Para refletir</h2>
+            <ul class="meditation__reflections" data-meditation-reflections></ul>
+            <p class="meditation__fruit"><b>Fruto do mistério:</b> <span data-meditation-fruit></span></p>
+          </div>
+        </section>
+
         <div class="pray__stage">
-          <header class="pray__intro motion-fade-up">
+          <header class="pray__intro motion-fade-up" data-stage-intro>
             <p class="eyebrow" data-stage-eyebrow><span class="skeleton">Etapa 1 de 7</span></p>
             <h1 class="pray__title" data-stage-title><span class="skeleton skeleton--block">Orações iniciais</span></h1>
             <p class="pray__lead" data-stage-lead><span class="skeleton">Reze com calma, uma de cada vez, e marque cada oração.</span></p>
@@ -70,21 +90,26 @@
           <div class="pray__complete" role="status" data-stage-complete></div>
 
           <div class="pray-next" hidden data-next>
-            <span class="pray-next__chip" aria-hidden="true">
+            <a class="button button--on-navy pray-next__previous" href="/pray.html" hidden data-previous-link>
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-left"></use></svg>
+              <span class="pray-next__previous-short" aria-hidden="true">Voltar</span>
+              <span class="pray-next__previous-long" data-previous-label>Etapa anterior</span>
+            </a>
+            <span class="pray-next__chip" aria-hidden="true" data-next-part>
               <span class="illustration illustration--md" data-next-illustration hidden></span>
             </span>
-            <p class="pray-next__text">
+            <p class="pray-next__text" data-next-part>
               <span class="pray-next__eyebrow">A seguir</span>
               <span class="pray-next__title" data-next-title></span>
             </p>
-            <a class="button button--primary button--large pray-next__button" href="/pray.html" data-next-link>
+            <a class="button button--primary button--large pray-next__button" href="/pray.html" data-next-link data-next-part>
               <span data-next-label>Continuar</span>
               <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
             </a>
           </div>
         </div>
 
-        <aside class="pray__aside" aria-labelledby="stage-list-title">
+        <aside class="pray__aside" aria-labelledby="stage-list-title" data-stage-aside>
           <h2 id="stage-list-title" class="pray__aside-title">Nesta etapa</h2>
           <ul class="stage-list" data-stage-list></ul>
           <p class="pray__aside-note">Marcar é opcional, mas ajuda a não se perder. Tudo fica salvo neste aparelho: se fechar a página, você continua de onde parou.</p>
@@ -115,7 +140,19 @@
             </p>
           </div>
 
+          <p class="step-card__hint" hidden data-step-hint>Toque na <b>conta que pisca</b> ao terminar cada Ave Maria. Tocou errado? Toque de novo na última conta dourada para desmarcar.</p>
+
           <div class="step-card__beads" role="group" hidden data-step-beads></div>
+
+          <button class="step-card__add" type="button" hidden data-step-add>
+            <span class="step-card__add-count" aria-hidden="true"><span data-add-count>0</span><span class="step-card__add-total"> de <span data-add-total>10</span></span></span>
+            <span class="step-card__add-label">
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#plus"></use></svg>
+              <span>Rezei a <span data-add-next>1ª</span> Ave Maria</span>
+            </span>
+          </button>
+
+          <div class="step-card__decade-status" role="status" hidden data-step-status></div>
 
           <div class="step-card__body" data-step-body>
             <div class="step-card__texts" data-step-texts></div>
@@ -132,6 +169,23 @@
             <span class="disclosure__closed">Mostrar o texto da oração</span>
             <span class="disclosure__open">Esconder o texto</span>
           </button>
+        </li>
+      </template>
+
+      <template id="decade-complete-template">
+        <span class="medal medal--done medal--unlock step-card__decade-medal" aria-hidden="true">
+          <span class="illustration illustration--dezenas"></span>
+        </span>
+        <span class="step-card__decade-text">
+          <span class="step-card__decade-title">Dezena completa!</span>
+          <span class="step-card__decade-detail">As dez Ave-Marias estão rezadas. Agora, o Glória fecha este mistério.</span>
+        </span>
+      </template>
+
+      <template id="reflection-template">
+        <li class="meditation__reflection">
+          <svg class="icon meditation__star" aria-hidden="true"><use href="/icons.svg#star"></use></svg>
+          <span data-reflection-text></span>
         </li>
       </template>
 

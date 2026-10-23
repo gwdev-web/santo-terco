@@ -16,11 +16,14 @@ import { cloneTemplate, qs } from '../utils/dom.js';
 export function createBeadCounter(group, { labels, intentions = [], onChange }) {
   let current = 0;
 
+  group.style.setProperty('--bead-count', String(labels.length)); // used by the bead ring
+
   const beads = labels.map((label, index) => {
     const item = cloneTemplate('bead-template');
     const bead = qs('[data-bead]', item);
     const intention = qs('[data-bead-intention]', item);
 
+    qs('.bead-slot', item).style.setProperty('--bead-index', String(index));
     bead.textContent = String(index + 1);
     bead.setAttribute('aria-label', label);
     bead.addEventListener('click', () => onChange(index + 1 === current ? index : index + 1));
