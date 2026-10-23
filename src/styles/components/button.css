@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Button — always filled or gold-bordered, with a clear verb
+   One primary (gold) button per screen. Shape: 16px radius on mobile, pill from tablet.
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-button);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  color: var(--color-navy);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.button:hover {
+  color: var(--color-navy);
+  background-color: var(--color-cream);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button__icon-end {
+  transition: transform var(--transition);
+}
+
+.button:hover .button__icon-end {
+  transform: translateX(3px);
+}
+
+/* Variants */
+
+.button--primary {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.button--primary:hover {
+  background-color: var(--color-gold-bright);
+  border-color: var(--color-gold-bright);
+}
+
+.button--secondary {
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+  border-color: var(--color-navy);
+}
+
+.button--secondary:hover {
+  color: var(--color-white);
+  background-color: var(--color-navy-hover);
+  border-color: var(--color-navy-hover);
+}
+
+.button--outline {
+  background-color: transparent;
+}
+
+.button--on-navy {
+  color: var(--color-on-navy);
+  background-color: transparent;
+  border-color: var(--color-navy-border);
+}
+
+.button--on-navy:hover {
+  color: var(--color-white);
+  background-color: var(--color-navy-2);
+  border-color: var(--color-gold-light);
+}
+
+.button--danger {
+  color: var(--color-danger);
+  background-color: var(--color-white);
+  border-color: var(--color-danger-border);
+}
+
+.button--danger:hover {
+  color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+}
+
+.button--danger-solid {
+  color: var(--color-white);
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.button--danger-solid:hover {
+  color: var(--color-white);
+  background-color: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
+}
+
+/* Sizes */
+
+.button--small {
+  min-height: var(--tap-min);
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.9375rem;
+}
+
+.button--large {
+  min-height: var(--tap-primary-mobile);
+  padding: var(--space-4) var(--space-8);
+  font-size: 1.0625rem;
+}
+
+.button--full {
+  width: 100%;
+}
+
+/* Text link styled as an action (always underlined in gold) */
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap-min);
+  font-weight: 700;
+}
+
+.link--on-navy {
+  color: var(--color-gold-light);
+}
+
+.link--on-navy:hover {
+  color: var(--color-gold-bright);
+}
+
+/* A <button> that looks like a text link (e.g. "Mostrar o texto da oração") */
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap-min);
+  padding: 0;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+  background: none;
+  border: 0;
+  transition:
+    color var(--transition),
+    text-decoration-color var(--transition);
+}
+
+.link-button:hover {
+  color: var(--color-gold-text);
+  text-decoration-color: currentColor;
+}
+
+/* Mobile: primary actions are 52px tall */
+
+@media (max-width: 40em) {
+  .button--primary,
+  .button--secondary {
+    min-height: var(--tap-primary-mobile);
+  }
+}
+
+/* Tablet and up: pill shape */
+
+@media (min-width: 40.0625em) {
+  .button {
+    border-radius: var(--radius-pill);
+  }
+}

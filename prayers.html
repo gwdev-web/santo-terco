@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <!-- @include head -->
+    <script type="module" src="/src/js/pages/prayers.js"></script>
+  </head>
+  <body class="page">
+    <!-- @include header -->
+
+    <main id="main" class="site-main" tabindex="-1" aria-busy="true" data-prayers>
+      <div class="prayers container">
+        <div class="prayers__top">
+          <header class="page-intro motion-fade-up">
+            <p class="eyebrow">Orações</p>
+            <h1 class="page-intro__title">Para rezar a qualquer hora</h1>
+            <p class="page-intro__lead">Todas com o texto completo. Primeiro, as orações do terço na ordem em que são rezadas; depois, orações complementares.</p>
+          </header>
+
+          <div class="text-size" role="group" aria-labelledby="text-size-label" data-text-size-control>
+            <span id="text-size-label" class="text-size__label">Tamanho do texto</span>
+            <span class="text-size__options">
+              <button class="text-size__button text-size__button--normal" type="button" aria-pressed="true" aria-label="Texto normal" data-size-option="normal">A</button>
+              <button class="text-size__button text-size__button--large" type="button" aria-pressed="false" aria-label="Texto grande" data-size-option="large">A</button>
+              <button class="text-size__button text-size__button--x-large" type="button" aria-pressed="false" aria-label="Texto muito grande" data-size-option="x-large">A</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="notice notice--error" role="alert" hidden data-load-error>
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Não conseguimos carregar as orações agora.</p>
+            <p>Confira a sua conexão com a internet e tente de novo.</p>
+          </div>
+          <button class="button button--outline button--small notice__action" type="button" data-load-retry>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            Tentar de novo
+          </button>
+        </div>
+
+        <div class="prayers__content" data-load-content data-prayer-tabs>
+          <nav class="prayers__sections" aria-label="Seções">
+            <a class="section-link section-link--navy" href="#rosary-prayers">
+              <span class="section-link__chip" aria-hidden="true"><span class="illustration illustration--md illustration--terco"></span></span>
+              <span class="section-link__text">
+                <span class="section-link__title">Orações do terço</span>
+                <span class="section-link__description">Na ordem em que são rezadas</span>
+              </span>
+              <svg class="icon section-link__icon" aria-hidden="true"><use href="/icons.svg#arrow-down"></use></svg>
+            </a>
+            <a class="section-link" href="#complementary-prayers">
+              <span class="section-link__chip" aria-hidden="true"><span class="illustration illustration--md illustration--ladainha-nossa-senhora"></span></span>
+              <span class="section-link__text">
+                <span class="section-link__title">Orações complementares</span>
+                <span class="section-link__description">Ladainhas e orações do dia a dia</span>
+              </span>
+              <svg class="icon section-link__icon" aria-hidden="true"><use href="/icons.svg#arrow-down"></use></svg>
+            </a>
+          </nav>
+
+          <div class="tabs__list prayers__tabs" role="tablist" aria-label="Tipo de oração">
+            <button class="tabs__tab" type="button" role="tab" id="tab-rosary-prayers" aria-controls="rosary-prayers" aria-selected="true">
+              <span class="illustration illustration--terco" aria-hidden="true"></span>
+              Orações do terço
+            </button>
+            <button class="tabs__tab" type="button" role="tab" id="tab-complementary-prayers" aria-controls="complementary-prayers" aria-selected="false">
+              <span class="illustration illustration--ladainha-nossa-senhora" aria-hidden="true"></span>
+              Complementares
+            </button>
+          </div>
+
+          <section id="rosary-prayers" class="prayers__section" aria-labelledby="rosary-prayers-title">
+            <div class="prayers__section-header">
+              <span class="illustration illustration--lg illustration--terco" aria-hidden="true"></span>
+              <div>
+                <h2 id="rosary-prayers-title" class="prayers__section-title">Orações do terço</h2>
+                <p>As mesmas que aparecem no terço guiado, em ordem.</p>
+              </div>
+            </div>
+
+            <div class="prayers__groups" data-rosary-groups data-skeleton></div>
+
+            <a class="button button--secondary button--large prayers__cta" href="/pray.html">
+              Rezar o terço guiado agora
+              <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+            </a>
+          </section>
+
+          <section id="complementary-prayers" class="prayers__section" aria-labelledby="complementary-prayers-title">
+            <div class="prayers__section-header">
+              <span class="illustration illustration--lg illustration--ladainha-nossa-senhora" aria-hidden="true"></span>
+              <div>
+                <h2 id="complementary-prayers-title" class="prayers__section-title">Orações complementares</h2>
+                <p>Para rezar depois do terço ou em outros momentos do dia.</p>
+              </div>
+            </div>
+
+            <div class="prayers__grid prayers__grid--compact" data-complementary data-skeleton></div>
+
+            <div class="prayers__litanies-intro">
+              <h3 class="prayers__subtitle">Ladainhas</h3>
+              <p>Quem conduz diz a invocação; todos respondem a parte em dourado.</p>
+            </div>
+            <div class="prayers__litanies" data-litanies data-skeleton></div>
+          </section>
+        </div>
+      </div>
+
+      <p class="visually-hidden" aria-live="polite" data-copy-status></p>
+
+      <template id="prayer-group-template">
+        <div class="prayer-group">
+          <div class="prayer-group__header">
+            <span class="prayer-group__number" aria-hidden="true" data-group-number></span>
+            <h3 class="prayer-group__title" data-group-title>Grupo de orações</h3>
+            <p class="caption" data-group-description></p>
+          </div>
+          <div class="prayers__grid" data-group-prayers></div>
+        </div>
+      </template>
+
+      <template id="prayer-card-template">
+        <article class="prayer-card" data-prayer>
+          <div class="prayer-card__header">
+            <span class="prayer-card__chip" aria-hidden="true">
+              <span class="illustration illustration--md" data-prayer-illustration hidden></span>
+            </span>
+            <div class="prayer-card__heading">
+              <h3 class="prayer-card__title" data-prayer-title>Oração</h3>
+              <span class="badge badge--cream" data-prayer-when></span>
+            </div>
+          </div>
+          <p class="prayer-text" data-prayer-text></p>
+          <button class="button button--outline button--small prayer-card__copy" type="button" data-copy>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#copy" data-copy-icon></use></svg>
+            <span data-copy-label>Copiar texto</span>
+          </button>
+        </article>
+      </template>
+
+      <template id="litany-template">
+        <article class="prayer-card litany disclosure" data-litany>
+          <div class="prayer-card__header">
+            <span class="prayer-card__chip prayer-card__chip--large" aria-hidden="true">
+              <span class="illustration illustration--lg" data-litany-illustration hidden></span>
+            </span>
+            <div class="prayer-card__heading">
+              <h4 class="prayer-card__title" data-litany-title>Ladainha</h4>
+              <span class="badge badge--cream" data-litany-note></span>
+            </div>
+          </div>
+
+          <dl class="litany__lines" data-litany-preview></dl>
+
+          <div class="disclosure__panel" data-litany-panel>
+            <div class="disclosure__inner">
+              <dl class="litany__lines" data-litany-rest></dl>
+              <div class="litany__closing">
+                <p class="litany__closing-label">Oremos</p>
+                <p class="prayer-text" data-litany-closing></p>
+              </div>
+            </div>
+          </div>
+
+          <button class="button button--outline button--full disclosure__toggle" type="button" aria-expanded="false" data-litany-toggle>
+            <svg class="icon icon--sm disclosure__icon" aria-hidden="true"><use href="/icons.svg#caret-down"></use></svg>
+            <span class="disclosure__closed" data-litany-more>Mostrar a ladainha inteira</span>
+            <span class="disclosure__open">Mostrar menos</span>
+          </button>
+        </article>
+      </template>
+
+      <template id="litany-line-template">
+        <div class="litany__line">
+          <dt class="litany__invocation" data-line-invocation>Invocação</dt>
+          <dd class="litany__response" data-line-response>Resposta</dd>
+        </div>
+      </template>
+    </main>
+
+    <!-- @include footer -->
+    <!-- @include tab-bar -->
+  </body>
+</html>

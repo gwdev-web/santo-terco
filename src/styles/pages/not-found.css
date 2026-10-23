@@ -1,0 +1,38 @@
+/* ==========================================================================
+   404 — a calm way back to the start
+   ========================================================================== */
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: var(--space-8);
+  text-align: center;
+}
+
+.not-found__illustration {
+  --illustration-size: clamp(4.5rem, 3.5rem + 4vw, 6.5rem);
+  color: var(--color-gold);
+}
+
+.not-found__intro {
+  align-items: center;
+}
+
+.not-found__button {
+  width: 100%;
+}
+
+.not-found__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+}
+
+@media (min-width: 40.0625em) {
+  .not-found__button {
+    width: auto;
+  }
+}

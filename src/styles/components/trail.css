@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Trail — the seven stages of the terço as medals joined by a line
+   The gold line grows with --trail-progress (0–1). The current stage has
+   aria-current="step"; medal states use the medal modifiers (see medal.css).
+   Mobile: small medals, labels for screen readers only.
+   ========================================================================== */
+
+.trail {
+  --medal-size: 2.25rem;
+  --trail-item: var(--medal-size);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trail::before,
+.trail::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--medal-size) / 2 - 1.5px);
+  left: calc(var(--trail-item) / 2);
+  height: 3px;
+  border-radius: var(--radius-pill);
+}
+
+.trail::before {
+  right: calc(var(--trail-item) / 2);
+  background-color: var(--color-track);
+}
+
+.trail::after {
+  width: calc((100% - var(--trail-item)) * var(--trail-progress, 0));
+  background-color: var(--color-gold);
+  transition: width var(--duration-bar) var(--ease-standard);
+}
+
+.trail__step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  inline-size: var(--trail-item);
+}
+
+.trail__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Tablet and up: larger medals with visible labels */
+
+@media (min-width: 40.0625em) {
+  .trail {
+    --medal-size: 3.5rem;
+    --trail-item: 6rem;
+  }
+
+  .trail__label {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .trail__step[aria-current="step"] .trail__label,
+  .trail__step--done .trail__label {
+    color: var(--color-navy);
+  }
+}

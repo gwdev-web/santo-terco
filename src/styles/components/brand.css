@@ -1,0 +1,67 @@
+/* ==========================================================================
+   Brand — emblem + "Santo ✦ Terço" small-caps wordmark
+   ========================================================================== */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  color: var(--color-navy);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--color-navy);
+}
+
+.brand__emblem {
+  flex: none;
+  inline-size: auto;
+  block-size: 42px;
+}
+
+.brand__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.26em;
+  font-family: var(--font-heading);
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand__star {
+  flex: none;
+  inline-size: 0.42em;
+  block-size: 0.42em;
+  color: var(--color-gold);
+}
+
+/* On navy: light lines, bright gold star */
+
+.brand--on-navy,
+.brand--on-navy:hover {
+  color: var(--color-on-navy);
+}
+
+.brand--on-navy .brand__star {
+  color: var(--color-gold-bright);
+}
+
+@media (min-width: 64.0625em) {
+  .brand {
+    gap: var(--space-3);
+  }
+
+  .brand__emblem {
+    block-size: 55px;
+  }
+
+  .brand__name {
+    font-size: 1.8125rem; /* 29px */
+  }
+}

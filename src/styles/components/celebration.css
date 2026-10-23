@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Celebration — end of a terço and of a full Rosary, on navy
+   Rays turning slowly, ripples, sparkles and falling gold beads around medals
+   that pop in (.celebration__pop), then the text fades up (.celebration__reveal).
+   JS adds .celebration--playing to start it (again). Timings can be shifted with
+   --pop-delay, --ripple-start and --reveal-start; the text order with .celebration__reveal--1…4.
+   Under reduced motion everything is shown still, without the loops.
+   ========================================================================== */
+
+.celebration {
+  --celebration-medal: 8.75rem;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  overflow: hidden;
+  color: var(--color-on-navy);
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 28%, var(--color-navy-hover) 0%, var(--color-navy) 60%);
+}
+
+/* Art: everything is centered on the medal */
+
+.celebration__art {
+  position: relative;
+  inline-size: 100%;
+  block-size: calc(var(--celebration-medal) * 1.95);
+}
+
+.celebration__art > * {
+  position: absolute;
+}
+
+.celebration__rays,
+.celebration__ripple,
+.celebration__medal {
+  inset: 0;
+  margin: auto;
+  border-radius: var(--radius-pill);
+}
+
+.celebration__rays {
+  --rays-size: calc(var(--celebration-medal) * 2.6);
+  inline-size: var(--rays-size);
+  block-size: var(--rays-size);
+  opacity: 0.35;
+  background: repeating-conic-gradient(
+    var(--color-gold-bright) 0 1.2deg,
+    transparent 1.2deg 15deg,
+    var(--color-gold-border-on-navy) 15deg 15.8deg,
+    transparent 15.8deg 30deg
+  );
+  -webkit-mask: radial-gradient(closest-side, transparent 30%, #000 42%, #000 80%, transparent 100%);
+  mask: radial-gradient(closest-side, transparent 30%, #000 42%, #000 80%, transparent 100%);
+}
+
+.celebration__ripple {
+  inline-size: var(--celebration-medal);
+  block-size: var(--celebration-medal);
+  border: 2px solid var(--color-gold-bright);
+  opacity: 0;
+}
+
+.celebration__sparkles,
+.celebration__confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.celebration__sparkle {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  inline-size: var(--size);
+  block-size: var(--size);
+  color: var(--color-gold-light);
+  fill: currentColor;
+  opacity: 0.8;
+}
+
+/* Falling gold beads; the box is a size container so they fall its full height */
+.celebration__confetti {
+  container-type: size;
+  overflow: hidden;
+}
+
+.celebration__piece {
+  position: absolute;
+  top: -16px;
+  left: var(--x);
+  inline-size: var(--size);
+  block-size: var(--size);
+  background-color: var(--color-gold-bright);
+  border-radius: var(--radius-pill);
+  opacity: 0;
+}
+
+.celebration__piece:nth-child(4n + 2) {
+  background-color: var(--color-gold);
+}
+
+.celebration__piece:nth-child(4n + 3) {
+  background-color: var(--color-gold-soft);
+}
+
+.celebration__piece:nth-child(4n + 4) {
+  background-color: var(--color-beige-light);
+}
+
+/* The medal of what was just completed: light, with a gold ring */
+.celebration__medal {
+  display: grid;
+  place-items: center;
+  inline-size: var(--celebration-medal);
+  block-size: var(--celebration-medal);
+  color: var(--color-navy);
+  background-color: var(--color-beige-light);
+  border: 5px solid var(--color-gold-bright);
+  box-shadow: 0 0 0 8px var(--color-gold-glow);
+}
+
+.celebration__medal .illustration {
+  --illustration-size: 72%;
+}
+
+/* Text */
+
+.celebration__eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+
+.celebration__title {
+  max-width: 18ch;
+  font-size: clamp(1.875rem, 1.25rem + 2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-on-navy);
+}
+
+.celebration__title em {
+  font-weight: 500;
+  color: var(--color-gold-light);
+}
+
+.celebration__text {
+  max-width: 35rem;
+  font-size: clamp(1rem, 0.9375rem + 0.25vw, 1.125rem);
+  color: var(--color-on-navy-muted);
+}
+
+.celebration__text b {
+  color: var(--color-gold-light);
+}
+
+.celebration__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  inline-size: 100%;
+}
+
+.celebration__actions .button {
+  inline-size: 100%;
+}
+
+/* Today's Rosary: the four sets, the ones prayed today in light medals */
+
+.celebration__rosary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  inline-size: 100%;
+  max-inline-size: 26rem;
+  padding: var(--space-4) var(--space-3);
+  background-color: var(--color-on-navy-surface);
+  border: 1px solid var(--color-gold-border-on-navy);
+  border-radius: var(--radius-lg);
+}
+
+.celebration__rosary-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-gold-light);
+}
+
+.celebration__sets {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.celebration__set {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.75rem;
+  color: var(--color-on-navy-muted);
+}
+
+.celebration__set .medal {
+  --medal-size: 3.25rem;
+  color: var(--color-on-navy-faint);
+  background-color: transparent;
+  border: 2px dashed var(--color-on-navy-faint);
+}
+
+.celebration__set--done {
+  font-weight: 700;
+  color: var(--color-gold-light);
+}
+
+.celebration__set--done .medal {
+  color: var(--color-navy);
+  background-color: var(--color-beige-light);
+  border: 3px solid var(--color-gold-bright);
+}
+
+/* Playing */
+
+.celebration--playing .celebration__rays {
+  animation: celebration-spin 40s linear infinite;
+}
+
+.celebration--playing .celebration__ripple {
+  animation: celebration-ripple 2.6s var(--ripple-start, 0s) ease-out infinite;
+}
+
+.celebration--playing .celebration__ripple--late {
+  animation-delay: calc(var(--ripple-start, 0s) + 1.3s);
+}
+
+.celebration--playing .celebration__sparkle {
+  animation: celebration-twinkle 2.4s var(--delay) var(--ease-in-out) infinite;
+}
+
+/* Three falls, then the beads rest: joyful, not endless */
+.celebration--playing .celebration__piece {
+  animation: celebration-fall var(--duration) var(--delay) ease-in 3;
+}
+
+.celebration--playing .celebration__pop {
+  animation: celebration-pop 700ms var(--pop-delay, 150ms) var(--ease-standard) both;
+}
+
+.celebration--playing .celebration__reveal {
+  animation: fade-up var(--duration-slow) var(--ease-standard) both;
+  animation-delay: calc(var(--reveal-start, 700ms) + var(--reveal-index, 0) * 150ms);
+}
+
+/* Reveal order */
+.celebration__reveal--1 {
+  --reveal-index: 1;
+}
+
+.celebration__reveal--2 {
+  --reveal-index: 2;
+}
+
+.celebration__reveal--3 {
+  --reveal-index: 3;
+}
+
+.celebration__reveal--4 {
+  --reveal-index: 4;
+}
+
+@keyframes celebration-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes celebration-ripple {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+@keyframes celebration-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes celebration-fall {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(calc(100cqh + 32px)) rotate(200deg);
+  }
+}
+
+@keyframes celebration-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Tablet and up: bigger art, actions side by side */
+
+@media (min-width: 40.0625em) {
+  .celebration {
+    --celebration-medal: 10.625rem;
+    gap: var(--space-4) var(--space-6);
+  }
+
+  .celebration__eyebrow {
+    font-size: 0.9375rem;
+  }
+
+  .celebration__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    inline-size: auto;
+    margin-top: var(--space-2);
+  }
+
+  .celebration__actions .button {
+    inline-size: auto;
+  }
+
+  .celebration__rosary {
+    inline-size: auto;
+    max-inline-size: none;
+    padding: var(--space-6);
+  }
+
+  .celebration__sets {
+    gap: var(--space-4);
+  }
+
+  .celebration__set {
+    font-size: 0.8125rem;
+  }
+
+  .celebration__set .medal {
+    --medal-size: 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .celebration--playing :is(
+    .celebration__rays,
+    .celebration__ripple,
+    .celebration__sparkle,
+    .celebration__piece,
+    .celebration__pop,
+    .celebration__reveal
+  ) {
+    animation: none;
+  }
+
+  .celebration__ripple,
+  .celebration__confetti {
+    display: none;
+  }
+}

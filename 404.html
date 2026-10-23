@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <!-- @include head -->
+    <meta name="robots" content="noindex">
+    <script type="module" src="/src/js/pages/not-found.js"></script>
+  </head>
+  <body class="page">
+    <!-- @include header -->
+
+    <main id="main" class="site-main" tabindex="-1">
+      <div class="not-found container">
+        <span class="illustration illustration--terco not-found__illustration" aria-hidden="true"></span>
+        <header class="page-intro not-found__intro motion-fade-up">
+          <p class="eyebrow">Página não encontrada</p>
+          <h1 class="page-intro__title">Esta página não existe</h1>
+          <p class="page-intro__lead">O endereço pode ter mudado ou ter sido digitado errado. Que tal voltar ao início e rezar o terço do dia?</p>
+        </header>
+
+        <a class="button button--primary button--large not-found__button" href="/">
+          <span>Voltar ao início</span>
+          <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+        </a>
+
+        <nav class="not-found__links" aria-label="Outras páginas">
+          <a class="link" href="/mysteries.html">Mistérios</a>
+          <a class="link" href="/prayers.html">Orações</a>
+          <a class="link" href="/history.html">Histórico</a>
+        </nav>
+      </div>
+    </main>
+
+    <!-- @include footer -->
+    <!-- @include tab-bar -->
+  </body>
+</html>

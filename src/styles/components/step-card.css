@@ -1,0 +1,419 @@
+/* ==========================================================================
+   Step card — one prayer of the guided terço
+   Mobile: one column in markup order (title, beads, text, "Rezei", show text).
+   Tablet and up: "Rezei" sits at the right of the title.
+   Current: gold border and halo. Done: green border, the text folds away (450ms)
+   until "Mostrar o texto da oração" opens it again.
+   ========================================================================== */
+
+.step-card {
+  container-type: inline-size; /* the bead ring and row follow the card's width */
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  scroll-margin-block: var(--step-scroll-margin, var(--space-6));
+  transition:
+    border-color var(--duration-slow) var(--ease-standard),
+    box-shadow var(--duration-slow) var(--ease-standard);
+}
+
+.step-card--current {
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-halo);
+}
+
+.step-card--done {
+  border-color: var(--color-success-border);
+}
+
+.step-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.step-card__number {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2.125rem;
+  block-size: 2.125rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background-color: var(--color-beige);
+  border-radius: var(--radius-pill);
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.step-card--current .step-card__number {
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+}
+
+.step-card--done .step-card__number {
+  color: var(--color-white);
+  background-color: var(--color-success);
+}
+
+.step-card__illustration {
+  --illustration-size: 2.375rem;
+  color: var(--color-gold-heading);
+}
+
+.step-card__heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.step-card__title {
+  font-size: 1.3125rem;
+}
+
+.step-card__subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.step-card__counter {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-navy);
+}
+
+.step-card__counter-total {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+.step-card__beads {
+  --bead-size: 4rem;
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: var(--space-2);
+}
+
+/* Decade (10 Hail Marys). Mobile: a ring of beads around the "Rezei" button,
+   placed with cos()/sin() from each bead's --bead-index. */
+
+.step-card__hint {
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.9375rem;
+  color: var(--color-navy);
+  background-color: var(--color-cream);
+  border-radius: var(--radius-sm);
+}
+
+.step-card__beads--decade {
+  --bead-size: 3.25rem;
+  --ring-size: min(20.375rem, 100cqi);
+  --ring-radius: calc(var(--ring-size) / 2 - var(--bead-size) / 2 - 2px);
+  position: relative;
+  display: block;
+  justify-self: center;
+  inline-size: var(--ring-size);
+  block-size: var(--ring-size);
+}
+
+.step-card__beads--decade::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--bead-size) / 2 + 2px);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.step-card__beads--decade .bead-slot {
+  --angle: calc(-90deg + 360deg * var(--bead-index) / var(--bead-count));
+  position: absolute;
+  top: calc(50% + sin(var(--angle)) * var(--ring-radius) - var(--bead-size) / 2);
+  left: calc(50% + cos(var(--angle)) * var(--ring-radius) - var(--bead-size) / 2);
+  padding: 0;
+  background: none;
+}
+
+/* "Rezei a Nª Ave Maria": the navy center of the ring on mobile */
+.step-card__add,
+.step-card__decade-status:not(:empty) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  inline-size: calc(var(--ring-size) * 0.48);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--space-2);
+  color: var(--color-on-navy);
+  text-align: center;
+  background-color: var(--color-navy);
+  border: 4px solid var(--color-gold);
+  border-radius: var(--radius-pill);
+}
+
+.step-card__add {
+  transition:
+    background-color var(--transition),
+    scale var(--duration-fast) var(--ease-standard);
+}
+
+.step-card__add:hover {
+  background-color: var(--color-navy-hover);
+}
+
+.step-card__add:active {
+  scale: 0.95;
+}
+
+.step-card__add-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.step-card__add-total {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--color-on-navy-muted);
+}
+
+.step-card__add-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+
+.step-card__add-label .icon {
+  display: none;
+}
+
+/* "Dezena completa!": takes the place of the button when the ten are prayed */
+.step-card__decade-status:not(:empty) {
+  border-color: var(--color-gold-bright);
+  animation: pop var(--duration-slow) var(--ease-standard);
+}
+
+.step-card__decade-medal {
+  --medal-size: 3.5rem;
+  border-color: var(--color-gold-bright);
+}
+
+.step-card__decade-medal .illustration {
+  --illustration-size: 72%;
+}
+
+.step-card__decade-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.step-card__decade-title {
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.step-card__decade-detail {
+  display: none;
+}
+
+/* Text: open, and folded once the step is done (unless opened again) */
+
+.step-card__body {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows var(--duration-slow) var(--ease-standard),
+    margin-top var(--duration-slow) var(--ease-standard),
+    visibility 0s;
+}
+
+.step-card__texts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.step-card--done:not(:has(.step-card__show[aria-expanded="true"])) .step-card__body {
+  grid-template-rows: 0fr;
+  margin-top: calc(-1 * var(--space-4)); /* the folded text takes no gap either */
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--duration-slow) var(--ease-standard),
+    margin-top var(--duration-slow) var(--ease-standard),
+    visibility 0s linear var(--duration-slow);
+}
+
+.step-card__show {
+  justify-self: center;
+}
+
+/* Mobile: with a counter, the title needs the illustration's room; in a decade
+   the count shows in the ring, so the header counter is for screen readers only */
+@media (max-width: 40em) {
+  .step-card__head:has(.step-card__counter:not([hidden])) .step-card__illustration {
+    display: none;
+  }
+
+  .step-card:has(.step-card__beads--decade) .step-card__counter {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+}
+
+/* Tablet and up: "Rezei" beside the title */
+
+@media (min-width: 40.0625em) {
+  .step-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    padding: var(--space-6);
+  }
+
+  .step-card > * {
+    grid-column: 1 / -1;
+  }
+
+  .step-card > .step-card__head {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .step-card > .step-card__toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .step-card__title {
+    font-size: var(--text-h3);
+  }
+
+  .step-card__number {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+  }
+
+  .step-card__illustration {
+    --illustration-size: 2.75rem;
+  }
+
+  .step-card__show {
+    justify-self: start;
+  }
+
+  .step-card__beads {
+    --bead-size: 4.25rem;
+    gap: var(--space-3);
+  }
+
+  /* Decade: beads in a grid (two rows of five, or one row of ten when it fits),
+     with the navy "Rezei" button and "Dezena completa!" below */
+  .step-card__beads--decade {
+    --bead-size: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-flow: row;
+    gap: var(--space-3) var(--space-2);
+    justify-items: center;
+    justify-self: stretch;
+    inline-size: auto;
+    block-size: auto;
+  }
+
+  .step-card__beads--decade::before {
+    display: none;
+  }
+
+  .step-card__beads--decade .bead-slot {
+    position: static;
+  }
+
+  .step-card__add,
+  .step-card__decade-status:not(:empty) {
+    position: static;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    translate: none;
+    inline-size: auto;
+    aspect-ratio: auto;
+    flex-direction: row;
+    margin-top: var(--space-2);
+  }
+
+  .step-card__add {
+    min-height: var(--tap-primary-mobile);
+    padding: var(--space-3) var(--space-6);
+    border: 0;
+  }
+
+  .step-card__add-count {
+    display: none;
+  }
+
+  .step-card__add-label .icon {
+    display: inline-block;
+  }
+
+  .step-card__add-label {
+    gap: var(--space-2);
+    margin: 0;
+    font-size: var(--text-button);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--color-on-navy);
+  }
+
+  .step-card__decade-status:not(:empty) {
+    justify-content: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-6);
+    text-align: left;
+    border: 0;
+    border-radius: var(--radius-md);
+  }
+
+  .step-card__decade-title {
+    font-size: 1.125rem;
+    color: var(--color-gold-light);
+  }
+
+  .step-card__decade-detail {
+    display: block;
+    font-size: 0.9375rem;
+    color: var(--color-on-navy-muted);
+  }
+}
+
+@container (min-width: 40rem) {
+  .step-card__beads--decade {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+}

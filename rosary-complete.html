@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <!-- @include head -->
+    <script type="module" src="/src/js/pages/rosary-complete.js"></script>
+  </head>
+  <body class="page page--focus page--celebration">
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+    <main id="main" class="celebration rosary-complete damask damask--on-navy" tabindex="-1" aria-busy="true" data-rosary-complete>
+      <span class="celebration__confetti" aria-hidden="true" data-celebration-confetti></span>
+
+      <div class="rosary-complete__inner container">
+        <div class="celebration__art rosary-complete__art" aria-hidden="true" data-load-content>
+          <span class="celebration__rays"></span>
+          <svg class="rosary-complete__ring" viewBox="0 0 100 100">
+            <circle class="rosary-complete__ring-track" cx="50" cy="50" r="36.5" pathLength="100"></circle>
+            <circle class="rosary-complete__ring-fill" cx="50" cy="50" r="36.5" pathLength="100" data-ring></circle>
+          </svg>
+          <span class="celebration__ripple"></span>
+          <span class="celebration__ripple celebration__ripple--late"></span>
+          <span class="celebration__sparkles" data-celebration-sparkles></span>
+          <span class="rosary-complete__sets" data-sets></span>
+          <span class="rosary-complete__center celebration__pop">
+            <span class="illustration illustration--terco"></span>
+          </span>
+        </div>
+
+        <div class="rosary-complete__text" data-load-content>
+          <p class="celebration__eyebrow celebration__reveal" data-eyebrow><span class="skeleton">Parabéns!</span></p>
+          <h1 class="celebration__title rosary-complete__title celebration__reveal celebration__reveal--1" data-title><span class="skeleton skeleton--block">Você completou um Rosário hoje</span></h1>
+          <p class="celebration__text rosary-complete__lead celebration__reveal celebration__reveal--2" data-lead><span class="skeleton">Os vinte mistérios da vida de Jesus e de Maria, meditados num só dia.</span></p>
+
+          <div class="rosary-complete__facts celebration__reveal celebration__reveal--3" hidden data-facts>
+            <p class="rosary-complete__count">
+              <span class="rosary-complete__number" data-count>1</span>
+              <span><b data-count-label>Rosário completo hoje</b><br><span class="rosary-complete__muted">A contagem recomeça amanhã</span></span>
+            </p>
+            <p class="rosary-complete__medal">
+              <span class="medal medal--done" aria-hidden="true">
+                <span class="illustration illustration--gloriosos-coroa"></span>
+              </span>
+              <span><b class="rosary-complete__highlight">Nova medalha</b><br>Rosário completo<span data-streak></span></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="notice notice--error rosary-complete__notice" role="alert" hidden data-load-error>
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Não conseguimos carregar o Rosário de hoje.</p>
+            <p>Confira a sua conexão com a internet e tente de novo. Os terços que você rezou continuam salvos.</p>
+          </div>
+          <button class="button button--outline button--small notice__action" type="button" data-load-retry>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            Tentar de novo
+          </button>
+        </div>
+
+        <div class="celebration__actions celebration__reveal celebration__reveal--4">
+          <a class="button button--primary button--large" href="/history.html" data-primary>
+            <span data-primary-label>Ver meu histórico</span>
+            <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+          </a>
+          <a class="button button--on-navy button--large" href="/">Voltar ao início</a>
+          <button class="button button--on-navy button--large" type="button" hidden data-celebration-replay>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            <span>Ver de novo</span>
+          </button>
+        </div>
+      </div>
+
+      <template id="ring-set-template">
+        <span class="rosary-complete__set celebration__pop" data-set>
+          <span class="rosary-complete__set-medal">
+            <span class="illustration" data-set-illustration hidden></span>
+          </span>
+          <span class="rosary-complete__set-label">
+            <span data-set-name></span>
+            <svg class="icon rosary-complete__check" hidden data-set-check><use href="/icons.svg#check"></use></svg>
+          </span>
+        </span>
+      </template>
+    </main>
+  </body>
+</html>

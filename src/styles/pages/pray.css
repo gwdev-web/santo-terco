@@ -1,0 +1,801 @@
+/* ==========================================================================
+   Guided terço — focus page: its own header, the day's trail and one stage
+   Mobile: header and trail stay at the top, "Ir para…" stays at the bottom.
+   Tablet: the stage list goes below. Desktop: stage beside a sticky list.
+   ========================================================================== */
+
+.pray {
+  --pray-header-height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-block: 0 var(--space-12);
+  outline: none;
+}
+
+/* Focus header */
+
+.pray-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 11;
+  background-color: var(--color-beige-light);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pray-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--pray-header-height, 60px);
+  padding-block: var(--space-2);
+}
+
+.pray-header__set {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.pray-header__chip {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  color: var(--color-gold-heading);
+  background-color: var(--color-cream);
+  border-radius: var(--radius-pill);
+}
+
+.pray-header__chip .illustration {
+  --illustration-size: 1.625rem;
+}
+
+.pray-header__long,
+.pray-header__change {
+  display: none;
+}
+
+/* Today's trail: sticky under the header on mobile */
+
+.rosary-progress {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + var(--pray-header-height));
+  z-index: 10;
+  display: grid;
+  grid-template-areas:
+    "trail"
+    "bar"
+    "summary";
+  gap: var(--space-2);
+  margin-inline: calc(-1 * var(--gutter));
+  padding: var(--space-3) var(--gutter);
+  background-color: var(--color-beige-light);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rosary-progress__summary {
+  grid-area: summary;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.rosary-progress__title,
+.rosary-progress__duration {
+  display: none;
+}
+
+.rosary-progress__count {
+  font-size: 0.8125rem;
+  color: var(--color-text);
+}
+
+.rosary-progress__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.rosary-progress__star {
+  --icon-size: 0.875rem;
+  color: var(--color-gold);
+}
+
+.rosary-progress__percent {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-gold-heading);
+}
+
+.rosary-progress__bar {
+  grid-area: bar;
+  height: 10px;
+}
+
+.rosary-progress__trail {
+  grid-area: trail;
+}
+
+/* Loading error: the trail is hidden, so the notice needs room under the header */
+
+.pray__notice {
+  margin-top: var(--space-6);
+}
+
+/* Stage */
+
+.pray__layout {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.pray__stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.pray__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.pray__title {
+  font-size: var(--text-h1);
+}
+
+.pray__lead {
+  font-size: var(--text-body-lg);
+}
+
+.pray__steps {
+  --skeleton-height: 24rem;
+  /* Leaves room for the sticky header, trail and bottom bar when a step scrolls into view */
+  --step-scroll-margin: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Medal message when the stage is complete */
+
+.stage-complete {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-lg);
+  animation: fade-up var(--duration-slow) var(--ease-standard) both;
+}
+
+.stage-complete__medal {
+  --medal-size: 4rem;
+}
+
+.stage-complete__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stage-complete__title {
+  font-family: var(--font-heading);
+  font-size: 1.3125rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+/* "Concluir o terço": closing stage only; it breathes once every prayer is marked */
+
+.pray-finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+  text-align: center;
+}
+
+.pray-finish__button {
+  inline-size: 100%;
+}
+
+.pray-finish__hint {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* "Terço concluído": the celebration above the stage, at the top of the page */
+
+.pray__celebration {
+  padding: 0 var(--space-4) var(--space-6);
+  border-radius: var(--radius-xl);
+  outline: none;
+}
+
+/* "Quer continuar rezando?": three link cards, in rows on mobile */
+
+.pray-more {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pray-more__title {
+  font-size: var(--text-h3);
+}
+
+.pray-more__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pray-more__card {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-4);
+}
+
+.pray-more__illustration {
+  --illustration-size: 2.5rem;
+  --icon-size: 2.5rem;
+  color: var(--color-gold-heading);
+}
+
+.pray-more__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pray-more__card .card__title {
+  font-size: 1.1875rem;
+}
+
+.pray-more__card .card__text {
+  font-size: 0.9375rem;
+}
+
+.pray-more__card .card__action {
+  margin-top: 0;
+}
+
+.pray-more__action-label {
+  display: none;
+}
+
+/* "A seguir": sticky bar at the bottom on mobile, navy card from tablet */
+
+.pray-next {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-inline: calc(-1 * var(--gutter));
+  padding: var(--space-3) var(--gutter) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--color-beige-light);
+  border-top: 1px solid var(--color-border);
+}
+
+.pray-next__chip,
+.pray-next__eyebrow {
+  display: none;
+}
+
+.pray-next__text {
+  flex: 1 1 100%;
+  order: -1;
+  overflow: hidden;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pray-next__button {
+  flex: 1;
+}
+
+/* "Voltar": an outline button on the light bar (mobile), on navy from tablet */
+.pray-next__previous {
+  min-height: var(--tap-primary-mobile);
+  padding-inline: var(--space-4);
+  color: var(--color-navy);
+  background-color: var(--color-white);
+  border-color: var(--color-gold);
+}
+
+.pray-next__previous:hover {
+  color: var(--color-navy);
+  background-color: var(--color-cream);
+  border-color: var(--color-gold);
+}
+
+.pray-next__previous-long {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Mystery meditation: illustration, quote, reflections and fruit */
+
+.meditation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.meditation__hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-6) var(--space-4);
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+  border-radius: var(--radius-lg);
+}
+
+.meditation__hero > :not(.meditation__medal, .meditation__eyebrow) {
+  grid-column: 1 / -1;
+}
+
+.meditation__medal {
+  display: grid;
+  place-items: center;
+  inline-size: 5.75rem;
+  block-size: 5.75rem;
+  color: var(--color-navy);
+  background-color: var(--color-beige-light);
+  border: 3px solid var(--color-gold);
+  border-radius: var(--radius-pill);
+}
+
+.meditation__medal .illustration {
+  --illustration-size: 76%;
+}
+
+.meditation__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--color-gold-light);
+}
+
+.meditation__title {
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--color-on-navy);
+}
+
+.meditation__quote blockquote {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--color-beige);
+}
+
+.meditation__reference {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-gold-light);
+}
+
+.meditation__reflect {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.meditation__subtitle {
+  font-size: var(--text-h3);
+}
+
+.meditation__reflections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.meditation__reflection {
+  display: flex;
+  gap: var(--space-3);
+  color: var(--color-text);
+}
+
+.meditation__star {
+  --icon-size: 0.875rem;
+  margin-top: 0.4em;
+  color: var(--color-gold);
+}
+
+.meditation__fruit {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.meditation__fruit b {
+  color: var(--color-gold-text);
+}
+
+/* Stage list ("Nesta etapa"): hidden on mobile, where the cards are the list */
+
+.pray__aside {
+  display: none;
+}
+
+.pray__aside-title {
+  font-size: 1.3125rem;
+}
+
+.stage-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stage-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.stage-list__item--done {
+  color: var(--color-navy);
+}
+
+.stage-list__item--current {
+  font-weight: 700;
+  color: var(--color-navy);
+  background-color: var(--color-cream);
+}
+
+.stage-list__dot {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 1.625rem;
+  block-size: 1.625rem;
+  color: transparent;
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+}
+
+.stage-list__item--current .stage-list__dot {
+  border-color: var(--color-navy);
+}
+
+.stage-list__item--done .stage-list__dot {
+  color: var(--color-white);
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.stage-list__check {
+  --icon-size: 0.875rem;
+}
+
+.pray__aside-note {
+  padding-top: var(--space-4);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Tablet (> 640px): trail as a card, header with every label, navy "A seguir" card */
+
+@media (min-width: 40.0625em) {
+  .pray {
+    --pray-header-height: 72px;
+    gap: var(--space-8);
+    padding-block: var(--space-6) var(--space-16);
+  }
+
+  .pray-header {
+    position: static;
+  }
+
+  .pray-header__long {
+    display: inline;
+  }
+
+  .pray-header__change {
+    display: inline-flex;
+  }
+
+  .pray-header__chip {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+  }
+
+  .pray-header__chip .illustration {
+    --illustration-size: 2rem;
+  }
+
+  .pray-header__set {
+    font-size: 1rem;
+  }
+
+  .rosary-progress {
+    position: static;
+    grid-template-areas:
+      "summary"
+      "bar"
+      "trail";
+    gap: var(--space-6);
+    margin-inline: 0;
+    padding: var(--space-6) var(--space-8);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+  }
+
+  .rosary-progress__title {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+
+  .rosary-progress__duration {
+    display: inline;
+  }
+
+  .rosary-progress__count {
+    font-size: 0.9375rem;
+  }
+
+  .rosary-progress__percent {
+    font-size: 2.125rem;
+  }
+
+  .rosary-progress__bar {
+    height: 12px;
+  }
+
+  .pray__steps {
+    --step-scroll-margin: var(--space-6);
+  }
+
+  .pray-next {
+    position: static;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: var(--space-4);
+    margin: var(--space-2) 0 0;
+    padding: var(--space-6);
+    background-color: var(--color-navy);
+    border: 0;
+    border-radius: var(--radius-lg);
+  }
+
+  .pray-next__chip {
+    display: grid;
+    place-items: center;
+    inline-size: 3.75rem;
+    block-size: 3.75rem;
+    color: var(--color-navy);
+    background-color: var(--color-beige-light);
+    border-radius: var(--radius-pill);
+  }
+
+  .pray-next__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    order: 0;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .pray-next :focus-visible {
+    outline-color: var(--color-gold-light);
+  }
+
+  .pray-next__previous,
+  .pray-next__previous:hover {
+    color: var(--color-on-navy);
+    background-color: transparent;
+    border-color: var(--color-navy-border);
+  }
+
+  .pray-next__previous:hover {
+    background-color: var(--color-navy-2);
+    border-color: var(--color-gold-light);
+  }
+
+  .pray-next__previous {
+    min-height: 48px;
+  }
+
+  .pray-next__previous-short {
+    display: none;
+  }
+
+  .pray-next__previous-long {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .meditation__hero {
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .meditation__reflect {
+    padding: var(--space-6);
+  }
+
+  .meditation__reflection {
+    font-size: var(--text-body-lg);
+  }
+
+  .pray-next__eyebrow {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+  }
+
+  .pray-next__title {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    color: var(--color-on-navy);
+  }
+
+  .pray-next__button {
+    flex: none;
+  }
+
+  .pray-finish__button {
+    inline-size: auto;
+  }
+
+  .pray__celebration {
+    padding: var(--space-2) var(--space-8) var(--space-12);
+  }
+
+  .pray-more {
+    gap: var(--space-4);
+  }
+
+  .pray-more__title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .pray-more__list {
+    gap: var(--space-4);
+  }
+
+  .pray-more__card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    padding: var(--space-6);
+  }
+
+  .pray-more__illustration {
+    --illustration-size: 3rem;
+    --icon-size: 3rem;
+  }
+
+  .pray-more__card .card__title {
+    font-size: 1.375rem;
+  }
+
+  .pray-more__card .card__action {
+    margin-top: auto;
+    padding-top: var(--space-1);
+  }
+
+  .pray-more__action-label {
+    display: inline;
+  }
+
+  .pray__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* Desktop (> 1024px): the stage list beside the stage */
+
+@media (min-width: 64.0625em) {
+  .pray__layout {
+    grid-template-columns: minmax(0, 1fr) 18.5rem;
+    align-items: start;
+  }
+
+  .pray__aside {
+    position: sticky;
+    top: var(--space-6);
+  }
+
+  /* Mystery: the meditation stays beside the prayers */
+  .pray__layout--mystery {
+    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
+  }
+
+  .meditation {
+    position: sticky;
+    top: var(--space-6);
+  }
+
+  .meditation__hero {
+    grid-template-columns: 1fr;
+    padding: var(--space-8);
+  }
+
+  .meditation__medal {
+    inline-size: 8rem;
+    block-size: 8rem;
+    border-width: 4px;
+  }
+
+  .meditation__eyebrow {
+    margin-top: var(--space-2);
+    font-size: 0.875rem;
+    letter-spacing: 0.16em;
+  }
+}

@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <!-- @include head -->
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="/src/styles/pages/components.css">
+    <script type="module" src="/src/js/pages/components.js"></script>
+  </head>
+  <body class="page">
+    <!-- @include header -->
+
+    <main id="main" class="site-main" tabindex="-1">
+      <div class="container stack showcase">
+        <header class="page-intro">
+          <p class="eyebrow">Revisão · só em desenvolvimento</p>
+          <h1 class="page-intro__title">Componentes</h1>
+          <p class="page-intro__lead">Todos os componentes base, ícones e ilustrações em um só lugar. Esta página não entra no build.</p>
+        </header>
+
+        <section class="showcase__section" aria-labelledby="brand-title">
+          <h2 id="brand-title">Marca</h2>
+          <div class="grid">
+            <div class="card showcase__brand">
+              <a class="brand" href="/">
+                <img class="brand__emblem" src="/src/assets/brand/emblem-small.png" alt="" width="45" height="55">
+                <span class="brand__name">Santo <svg class="brand__star" aria-hidden="true"><use href="/icons.svg#star"></use></svg> Terço</span>
+                <span class="visually-hidden">, página inicial</span>
+              </a>
+              <p class="card__text">Horizontal · fundos claros</p>
+            </div>
+            <div class="card card--navy showcase__brand">
+              <a class="brand brand--on-navy" href="/">
+                <img class="brand__emblem" src="/src/assets/brand/emblem-light-small.png" alt="" width="45" height="55">
+                <span class="brand__name">Santo <svg class="brand__star" aria-hidden="true"><use href="/icons.svg#star"></use></svg> Terço</span>
+                <span class="visually-hidden">, página inicial</span>
+              </a>
+              <p class="card__text">Sobre azul</p>
+            </div>
+            <div class="card showcase__brand">
+              <img src="/favicon.svg" alt="" width="32" height="32">
+              <p class="card__text">Favicon · "M" dourado sobre azul</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="showcase__section" aria-labelledby="buttons-title">
+          <h2 id="buttons-title">Botões e links</h2>
+          <div class="showcase__row">
+            <a class="button button--primary button--large" href="#buttons-title">
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
+              Começar o terço
+            </a>
+            <button class="button button--secondary" type="button">Começar agora</button>
+            <button class="button button--outline" type="button">Rezar novamente</button>
+            <button class="button button--danger" type="button">Limpar meus dados</button>
+            <button class="button button--small" type="button">
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#caret-left"></use></svg>
+              Voltar
+            </button>
+            <a class="link" href="#buttons-title">Ou escolha outro mistério</a>
+          </div>
+          <div class="card card--navy showcase__row">
+            <button class="button button--primary" type="button">
+              Ver meu histórico
+              <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+            </button>
+            <button class="button button--on-navy" type="button">Voltar ao início</button>
+            <a class="link link--on-navy" href="#buttons-title">Como funciona o passo a passo</a>
+          </div>
+          <div class="showcase__row">
+            <button class="button button--primary motion-breathe" type="button">
+              Próximo mistério
+              <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+            </button>
+            <span class="caption">Próximo passo "respirando" devagar</span>
+          </div>
+          <button class="button button--primary button--full" type="button">Botão de largura total (celular)</button>
+        </section>
+
+        <section class="showcase__section" aria-labelledby="badges-title">
+          <h2 id="badges-title">Selos</h2>
+          <div class="showcase__row">
+            <span class="badge badge--day">Do dia</span>
+            <span class="badge badge--success">
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
+              Rezado hoje
+            </span>
+            <span class="badge badge--example">Exemplo</span>
+            <span class="badge"><b>1º</b> Batismo no Jordão</span>
+          </div>
+        </section>
+
+        <section class="showcase__section" aria-labelledby="cards-title">
+          <h2 id="cards-title">Cartões</h2>
+          <div class="grid">
+            <article class="card">
+              <h3 class="card__title">Cartão simples</h3>
+              <p class="card__text">Superfície branca sobre o bege, com borda suave.</p>
+            </article>
+            <a class="card card--link" href="#cards-title">
+              <span class="illustration illustration--lg illustration--gozosos" aria-hidden="true"></span>
+              <span class="card__title">Cartão clicável</span>
+              <span class="card__text">Borda, seta e "levanta" no hover.</span>
+              <span class="card__action">
+                Rezar
+                <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+              </span>
+            </a>
+            <article class="card card--navy">
+              <svg class="icon icon--lg" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+              <h3 class="card__title">Cartão azul</h3>
+              <p class="card__text">Para destaques e dicas.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="showcase__section" aria-labelledby="notices-title">
+          <h2 id="notices-title">Avisos e carregamento</h2>
+          <div class="notice notice--error">
+            <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+            <div class="notice__body">
+              <p class="notice__title">Não conseguimos carregar os mistérios agora.</p>
+              <p>Confira a sua conexão com a internet e tente de novo.</p>
+            </div>
+            <button class="button button--outline button--small notice__action" type="button">
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+              Tentar de novo
+            </button>
+          </div>
+          <div class="notice">
+            <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+            <div class="notice__body">
+              <p class="notice__title">Dica</p>
+              <p>Os mistérios do dia são uma sugestão: você pode rezar qualquer um, a qualquer momento.</p>
+            </div>
+          </div>
+          <p><span class="skeleton">Texto que ainda está carregando, em duas linhas para ver como as barras acompanham a quebra.</span></p>
+        </section>
+
+        <section class="showcase__section damask card card--muted" aria-labelledby="damask-title">
+          <h2 id="damask-title">Damasco</h2>
+          <p>Padrão sutil só no topo do hero, sumindo para baixo.</p>
+        </section>
+
+        <section class="showcase__section" aria-labelledby="icons-title">
+          <h2 id="icons-title">Ícones de interface (Phosphor)</h2>
+          <ul class="showcase__list">
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#church"></use></svg>
+              <span><code>church</code><br>light · Início (menu)</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#cross"></use></svg>
+              <span><code>cross</code><br>light · Mistérios (menu)</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#hands-praying"></use></svg>
+              <span><code>hands-praying</code><br>light · Orações (menu)</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#calendar-check"></use></svg>
+              <span><code>calendar-check</code><br>light · Histórico (menu)</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
+              <span><code>play</code><br>fill · Começar o terço</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+              <span><code>arrow-right</code><br>regular · Avançar / próximo</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#arrow-left"></use></svg>
+              <span><code>arrow-left</code><br>regular · Voltar ao anterior</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#caret-left"></use></svg>
+              <span><code>caret-left</code><br>regular · Voltar (mobile)</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#caret-right"></use></svg>
+              <span><code>caret-right</code><br>regular · Abrir item da lista</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#caret-down"></use></svg>
+              <span><code>caret-down</code><br>regular · Expandir</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#arrow-down"></use></svg>
+              <span><code>arrow-down</code><br>regular · Ir para a seção</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#x"></use></svg>
+              <span><code>x</code><br>regular · Sair do terço</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
+              <span><code>check</code><br>regular · Rezado / marcado</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#plus"></use></svg>
+              <span><code>plus</code><br>regular · Rezei uma Ave Maria</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+              <span><code>arrows-clockwise</code><br>regular · Ver a animação de novo</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#hand-pointing"></use></svg>
+              <span><code>hand-pointing</code><br>regular · Dica: toque aqui</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#calendar-blank"></use></svg>
+              <span><code>calendar-blank</code><br>regular · Data de hoje</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#copy"></use></svg>
+              <span><code>copy</code><br>regular · Copiar texto</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+              <span><code>info</code><br>light · Dica / informação</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#lock-simple"></use></svg>
+              <span><code>lock-simple</code><br>light · Privacidade dos dados</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#code"></use></svg>
+              <span><code>code</code><br>light · Código do projeto</span>
+            </li>
+            <li class="showcase__item">
+              <svg class="icon icon--menu" aria-hidden="true"><use href="/icons.svg#trash"></use></svg>
+              <span><code>trash</code><br>regular · Limpar dados</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="showcase__section" aria-labelledby="illustrations-title">
+          <h2 id="illustrations-title">Ilustrações do terço (38)</h2>
+          <ul class="showcase__list showcase__list--illustrations">
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--ave-maria" aria-hidden="true"></span>
+              <code>ave-maria</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--creio" aria-hidden="true"></span>
+              <code>creio</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--dezenas" aria-hidden="true"></span>
+              <code>dezenas</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--dolorosos" aria-hidden="true"></span>
+              <code>dolorosos</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--dolorosos-coracao" aria-hidden="true"></span>
+              <code>dolorosos-coracao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--gloria" aria-hidden="true"></span>
+              <code>gloria</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--gloriosos" aria-hidden="true"></span>
+              <code>gloriosos</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--gloriosos-coroa" aria-hidden="true"></span>
+              <code>gloriosos-coroa</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--gozosos" aria-hidden="true"></span>
+              <code>gozosos</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--ladainha-nossa-senhora" aria-hidden="true"></span>
+              <code>ladainha-nossa-senhora</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--ladainha-sagrado-coracao" aria-hidden="true"></span>
+              <code>ladainha-sagrado-coracao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--ladainha-todos-santos" aria-hidden="true"></span>
+              <code>ladainha-todos-santos</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--luminosos" aria-hidden="true"></span>
+              <code>luminosos</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-agonia" aria-hidden="true"></span>
+              <code>m-agonia</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-anunciacao" aria-hidden="true"></span>
+              <code>m-anunciacao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-anuncio-reino" aria-hidden="true"></span>
+              <code>m-anuncio-reino</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-apresentacao" aria-hidden="true"></span>
+              <code>m-apresentacao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-ascensao" aria-hidden="true"></span>
+              <code>m-ascensao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-assuncao" aria-hidden="true"></span>
+              <code>m-assuncao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-batismo" aria-hidden="true"></span>
+              <code>m-batismo</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-bodas-cana" aria-hidden="true"></span>
+              <code>m-bodas-cana</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-carregamento-cruz" aria-hidden="true"></span>
+              <code>m-carregamento-cruz</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-coroacao" aria-hidden="true"></span>
+              <code>m-coroacao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-coroacao-espinhos" aria-hidden="true"></span>
+              <code>m-coroacao-espinhos</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-crucifixao" aria-hidden="true"></span>
+              <code>m-crucifixao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-eucaristia" aria-hidden="true"></span>
+              <code>m-eucaristia</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-flagelacao" aria-hidden="true"></span>
+              <code>m-flagelacao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-nascimento" aria-hidden="true"></span>
+              <code>m-nascimento</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-pentecostes" aria-hidden="true"></span>
+              <code>m-pentecostes</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-perda-encontro" aria-hidden="true"></span>
+              <code>m-perda-encontro</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-ressurreicao" aria-hidden="true"></span>
+              <code>m-ressurreicao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-transfiguracao" aria-hidden="true"></span>
+              <code>m-transfiguracao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--m-visitacao" aria-hidden="true"></span>
+              <code>m-visitacao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--oferecimento" aria-hidden="true"></span>
+              <code>oferecimento</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--oracao" aria-hidden="true"></span>
+              <code>oracao</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--pai-nosso" aria-hidden="true"></span>
+              <code>pai-nosso</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--salve-rainha" aria-hidden="true"></span>
+              <code>salve-rainha</code>
+            </li>
+            <li class="showcase__item">
+              <span class="illustration illustration--lg illustration--terco" aria-hidden="true"></span>
+              <code>terco</code>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include footer -->
+    <!-- @include tab-bar -->
+  </body>
+</html>

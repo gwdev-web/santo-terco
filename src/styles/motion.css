@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Motion — shared, subtle patterns (see STYLE_GUIDE.md, Motion)
+   Everything here is switched off under prefers-reduced-motion.
+   ========================================================================== */
+
+/* Cross-document page transitions (browsers without support simply navigate) */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-base);
+  animation-timing-function: var(--ease-standard);
+}
+
+/* Entrance: fade up, optionally staggered with --stagger-index */
+
+.motion-fade-up {
+  animation: fade-up var(--duration-slow) var(--ease-standard) both;
+  animation-delay: calc(var(--stagger-index, 0) * 60ms);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Next step: breathes slowly so the user always knows where to go */
+
+.motion-breathe {
+  animation: breathe 1.8s var(--ease-in-out) infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(194, 155, 98, 0.45);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(194, 155, 98, 0);
+  }
+}
+
+/* Pop: a marked bead or check settles in */
+
+@keyframes pop {
+  0% {
+    transform: scale(0.85);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  .motion-fade-up,
+  .motion-breathe {
+    animation: none;
+  }
+}

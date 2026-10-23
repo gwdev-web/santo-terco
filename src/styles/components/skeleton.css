@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Skeleton — placeholder while data loads
+   - `.skeleton` on an inline span hides its sample text and draws one bar per line
+     (`.skeleton--block` for headings);
+   - `[data-skeleton]` on a list draws one block while the list is empty.
+   Colors can be changed with --skeleton-base and --skeleton-shine (e.g. on navy).
+   ========================================================================== */
+
+.skeleton,
+[data-skeleton]:empty {
+  color: transparent;
+  background: linear-gradient(
+      90deg,
+      var(--skeleton-base, var(--color-track)) 40%,
+      var(--skeleton-shine, var(--color-beige-light)) 50%,
+      var(--skeleton-base, var(--color-track)) 60%
+    )
+    0 0 / 300% 100%;
+  animation: skeleton-shine 1.6s linear infinite;
+  user-select: none;
+}
+
+.skeleton {
+  border-radius: var(--radius-sm);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* For tight line heights (headings): one bar the size of the line box */
+.skeleton--block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+[data-skeleton]:empty {
+  min-height: var(--skeleton-height, 6rem);
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-shine {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton,
+  [data-skeleton]:empty {
+    animation: none;
+  }
+}

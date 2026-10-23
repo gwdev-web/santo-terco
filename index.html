@@ -2,40 +2,123 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="Reze o terço do dia com calma, guiado oração por oração.">
-    <meta name="theme-color" content="#1C2B4B">
-    <title>Santo Terço</title>
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&amp;display=swap">
-
-    <script type="module" src="/src/main.js"></script>
+    <!-- @include head -->
+    <script type="module" src="/src/js/pages/home.js"></script>
   </head>
-  <body>
-    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <body class="page">
+    <!-- @include header -->
 
-    <header class="site-header">
-      <div class="container site-header__inner">
-        <a class="site-header__brand" href="/" aria-label="Santo Terço — início">
-          <svg width="32" height="44" aria-hidden="true"><use href="/icons.svg#icon-logo"></use></svg>
-        </a>
-      </div>
-    </header>
+    <main id="main" class="site-main site-main--flush-top" tabindex="-1" aria-busy="true" data-home>
+      <section class="today" aria-labelledby="today-title">
+        <div class="today__inner container">
+          <div class="today__content motion-fade-up">
+            <div class="today__meta">
+              <span class="today__badge" aria-hidden="true" data-today-badge>
+                <span class="illustration illustration--md" data-today-illustration hidden></span>
+              </span>
+              <p class="today__date">
+                <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#calendar-blank"></use></svg>
+                <span data-today-date></span>
+              </p>
+            </div>
 
-    <main id="main" class="site-main" tabindex="-1">
-      <div class="container">
-        <!-- Screens are added here incrementally -->
+            <h1 id="today-title" class="today__title" data-today-title>Hoje rezamos os <span class="today__set"><span class="skeleton skeleton--block">Mistérios do dia</span></span></h1>
+
+            <p class="today__lead" data-today-lead><span class="skeleton">Contemplamos os mistérios de hoje com calma, um de cada vez, oração por oração.</span></p>
+
+            <div class="today__actions">
+              <a class="button button--primary button--large" href="/mysteries.html" data-today-start>
+                <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
+                <span data-today-start-label>Começar o terço de hoje</span>
+              </a>
+              <a class="button button--outline button--large today__secondary" href="/mysteries.html">Escolher outro mistério</a>
+            </div>
+          </div>
+
+          <div class="today__art" aria-hidden="true">
+            <svg class="today__ring" viewBox="0 0 220 220">
+              <circle cx="110" cy="110" r="96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 10.053"></circle>
+              <circle cx="110" cy="110" r="76" fill="none" stroke="currentColor" stroke-width="1"></circle>
+            </svg>
+          </div>
+
+          <img class="today__mary" src="/src/assets/brand/mary.png" alt="" width="584" height="572" loading="lazy">
+        </div>
+      </section>
+
+      <div class="home__sections container">
+        <div class="notice notice--error" role="alert" hidden data-load-error>
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Não conseguimos carregar os mistérios agora.</p>
+            <p>Confira a sua conexão com a internet e tente de novo.</p>
+          </div>
+          <button class="button button--outline button--small notice__action" type="button" data-load-retry>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            Tentar de novo
+          </button>
+        </div>
+
+        <section class="week" aria-labelledby="week-title" data-load-content>
+          <div class="home__heading">
+            <h2 id="week-title" class="home__title">Os mistérios da semana</h2>
+            <p class="caption">A Igreja propõe um conjunto para cada dia</p>
+          </div>
+          <ol class="week__list" data-week data-skeleton></ol>
+        </section>
+
+        <section class="rosary-today card" aria-labelledby="rosary-title" data-load-content>
+          <div class="rosary-today__header">
+            <div class="rosary-today__intro">
+              <h2 id="rosary-title" class="rosary-today__title">Rosário de hoje</h2>
+              <p class="rosary-today__status" data-rosary-status>Reze os quatro terços no mesmo dia para completar um Rosário.</p>
+            </div>
+            <a class="link" href="/history.html">Ver meu histórico</a>
+          </div>
+
+          <div class="rosary-today__progress" aria-hidden="true" data-rosary-progress>
+            <span class="rosary-today__segment"></span>
+            <span class="rosary-today__segment"></span>
+            <span class="rosary-today__segment"></span>
+            <span class="rosary-today__segment"></span>
+          </div>
+
+          <ul class="rosary-today__sets" data-rosary-sets data-skeleton></ul>
+        </section>
       </div>
+
+      <template id="week-day-template">
+        <li class="week__day">
+          <span class="week__label" aria-hidden="true" data-day-short></span>
+          <span class="week__date" aria-hidden="true" data-day-date></span>
+          <span class="visually-hidden" data-day-full></span>
+          <span class="illustration week__illustration" aria-hidden="true" data-day-illustration hidden></span>
+          <span class="week__set" data-day-set></span>
+          <span class="week__today" data-day-today hidden>Hoje</span>
+        </li>
+      </template>
+
+      <template id="rosary-set-template">
+        <li>
+          <a class="card card--link rosary-set" data-set-link>
+            <span class="illustration illustration--md rosary-set__illustration" aria-hidden="true" data-set-illustration hidden></span>
+            <span class="rosary-set__name" data-set-name></span>
+            <span class="caption" data-set-days></span>
+            <span class="badge badge--day rosary-set__badge" data-set-today hidden>Do dia</span>
+            <span class="card__action" data-set-action>
+              Rezar
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+            </span>
+            <span class="badge badge--success rosary-set__done" data-set-done hidden>
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
+              Rezado
+            </span>
+          </a>
+        </li>
+      </template>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p><small>© <span data-current-year></span> Santo Terço</small></p>
-      </div>
-    </footer>
+    <!-- @include footer -->
+    <!-- @include tab-bar -->
   </body>
 </html>

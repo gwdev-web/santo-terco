@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <!-- @include head -->
+    <script type="module" src="/src/js/pages/history.js"></script>
+  </head>
+  <body class="page">
+    <!-- @include header -->
+
+    <main id="main" class="site-main" tabindex="-1" aria-busy="true" data-history>
+      <div class="history container">
+        <header class="page-intro motion-fade-up">
+          <p class="eyebrow">Sua caminhada</p>
+          <h1 class="page-intro__title">Histórico de orações</h1>
+        </header>
+
+        <div class="notice notice--error" role="alert" hidden data-load-error>
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Não conseguimos carregar o histórico agora.</p>
+            <p>Confira a sua conexão com a internet e tente de novo. Os terços que você rezou continuam salvos.</p>
+          </div>
+          <button class="button button--outline button--small notice__action" type="button" data-load-retry>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
+            Tentar de novo
+          </button>
+        </div>
+
+        <div class="history__body" data-load-content>
+          <section class="history-empty" tabindex="-1" hidden aria-labelledby="history-empty-title" data-empty>
+            <span class="illustration illustration--terco history-empty__illustration" aria-hidden="true"></span>
+            <h2 id="history-empty-title" class="history-empty__title" data-empty-title>Nenhum registro ainda</h2>
+            <p class="history-empty__text" data-empty-text>Cada terço concluído aparecerá aqui, com os seus dias de oração e as suas medalhas.</p>
+            <a class="button button--primary button--large" href="/pray.html">
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
+              <span>Rezar o terço do dia</span>
+            </a>
+          </section>
+
+          <div class="history__content" data-content>
+            <section class="history-week" aria-labelledby="history-week-title">
+              <div class="history-week__head">
+                <h2 id="history-week-title" class="history-week__title">Esta semana</h2>
+                <p class="history-week__total" data-week-total><span class="skeleton">0 terços</span></p>
+              </div>
+              <ol class="history-week__days" data-week data-skeleton></ol>
+            </section>
+
+            <h2 class="visually-hidden">Seus números</h2>
+            <ul class="history-stats">
+              <li class="history-stat">
+                <span class="history-stat__label">Terços nas últimas 12 semanas</span>
+                <span class="history-stat__value" data-stat-total><span class="skeleton skeleton--block">00</span></span>
+              </li>
+              <li class="history-stat history-stat--navy">
+                <span class="history-stat__label">Rosários completos</span>
+                <span class="history-stat__value" data-stat-rosaries><span class="skeleton skeleton--block">00</span></span>
+              </li>
+              <li class="history-stat">
+                <span class="history-stat__label">Dias seguidos</span>
+                <span class="history-stat__value" data-stat-streak><span class="skeleton skeleton--block">00</span></span>
+              </li>
+              <li class="history-stat">
+                <span class="history-stat__label">Dias com oração</span>
+                <span class="history-stat__value" data-stat-days><span class="skeleton skeleton--block">00</span></span>
+              </li>
+            </ul>
+
+            <div class="history__row">
+              <section class="history-card history-card--wide" aria-labelledby="heatmap-title">
+                <div class="history-card__head">
+                  <h2 id="heatmap-title" class="history-card__title">Últimas 12 semanas</h2>
+                  <div class="heatmap-legend" aria-hidden="true">
+                    <span>0</span>
+                    <span class="heatmap__day heatmap__day--0"></span>
+                    <span class="heatmap__day heatmap__day--1"></span>
+                    <span class="heatmap__day heatmap__day--2"></span>
+                    <span class="heatmap__day heatmap__day--3"></span>
+                    <span class="heatmap__day heatmap__day--4"></span>
+                    <span>4 terços (Rosário)</span>
+                  </div>
+                </div>
+                <div class="heatmap" role="img" aria-label="Terços por dia nas últimas 12 semanas" data-heatmap data-skeleton></div>
+              </section>
+
+              <section class="history-card" aria-labelledby="by-set-title">
+                <h2 id="by-set-title" class="history-card__title">Por mistério</h2>
+                <ul class="by-set" data-by-set data-skeleton></ul>
+              </section>
+            </div>
+
+            <div class="history__row">
+              <section class="history-card history-card--wide" aria-labelledby="recent-title">
+                <h2 id="recent-title" class="history-card__title">Registros recentes</h2>
+                <ul class="recent" data-recent data-skeleton></ul>
+              </section>
+
+              <section class="history-card" aria-labelledby="medals-title">
+                <h2 id="medals-title" class="history-card__title">Medalhas</h2>
+                <ul class="medals" data-medals data-skeleton></ul>
+              </section>
+            </div>
+          </div>
+        </div>
+        <script>
+          /* Without records the empty state shows from the first paint, with no layout shift (see src/js/pages/history.js) */
+          (() => {
+            let empty = true;
+            try {
+              const entries = JSON.parse(localStorage.getItem('santo-terco:history'));
+              empty = !Array.isArray(entries) || entries.length === 0;
+            } catch {}
+            document.querySelector('[data-empty]').hidden = !empty;
+            document.querySelector('[data-content]').hidden = empty;
+          })();
+        </script>
+
+        <section class="history-data" aria-labelledby="history-data-title">
+          <div class="history-data__text">
+            <h2 id="history-data-title" class="history-data__title">Seus dados</h2>
+            <p>Tudo fica salvo só neste aparelho, sem cadastro. Apagar remove o histórico e o terço em andamento hoje; não dá para desfazer.</p>
+          </div>
+          <button class="button button--danger history-data__clear" type="button" hidden data-clear>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#trash"></use></svg>
+            <span>Limpar meus dados</span>
+          </button>
+          <div class="history-data__confirm" role="group" aria-labelledby="clear-question" hidden data-confirm>
+            <p id="clear-question" class="history-data__question">Apagar todo o histórico?</p>
+            <div class="history-data__actions">
+              <button class="button button--outline" type="button" data-confirm-cancel>Cancelar</button>
+              <button class="button button--danger-solid" type="button" data-confirm-clear>Sim, apagar</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <template id="week-bar-template">
+        <li class="history-week__day" data-day>
+          <span class="history-week__count" aria-hidden="true" data-day-count></span>
+          <span class="history-week__bar" aria-hidden="true"></span>
+          <span class="history-week__label" aria-hidden="true" data-day-label></span>
+          <span class="visually-hidden" data-day-text></span>
+        </li>
+      </template>
+
+      <template id="by-set-template">
+        <li class="by-set__item">
+          <span class="by-set__head">
+            <span class="illustration illustration--sm by-set__illustration" aria-hidden="true" data-set-illustration hidden></span>
+            <span class="by-set__name" data-set-name></span>
+            <b class="by-set__count" data-set-count></b>
+          </span>
+          <span class="progress-bar by-set__bar" aria-hidden="true" data-set-bar>
+            <span class="progress-bar__fill"></span>
+          </span>
+        </li>
+      </template>
+
+      <template id="recent-template">
+        <li class="recent__item">
+          <span class="recent__date" data-recent-date></span>
+          <span class="recent__title">
+            <span class="illustration illustration--sm recent__illustration" aria-hidden="true" data-recent-illustration hidden></span>
+            <span data-recent-title></span>
+          </span>
+          <span class="recent__extra" data-recent-extra></span>
+        </li>
+      </template>
+
+      <template id="medal-template">
+        <li class="medals__item" data-medal>
+          <span class="medal medals__medal" aria-hidden="true" data-medal-icon>
+            <span class="illustration" data-medal-illustration hidden></span>
+          </span>
+          <span class="medals__text">
+            <span class="medals__name" data-medal-name></span>
+            <span class="medals__detail" data-medal-detail></span>
+          </span>
+        </li>
+      </template>
+    </main>
+
+    <!-- @include footer -->
+    <!-- @include tab-bar -->
+  </body>
+</html>

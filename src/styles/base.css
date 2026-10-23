@@ -2,6 +2,37 @@
    Base — reset and element defaults
    ========================================================================== */
 
+/* Fallback fonts sized like the web fonts, so the text doesn't reflow when they arrive
+   (widths measured against Playfair Display and Lato; bold has its own local face) */
+
+@font-face {
+  font-family: "Playfair Display Fallback";
+  font-weight: 400 500;
+  src: local("Georgia");
+  size-adjust: 101.6%;
+}
+
+@font-face {
+  font-family: "Playfair Display Fallback";
+  font-weight: 600 700;
+  src: local("Georgia Bold"), local("Georgia-Bold");
+  size-adjust: 88.8%;
+}
+
+@font-face {
+  font-family: "Lato Fallback";
+  font-weight: 400;
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 95%;
+}
+
+@font-face {
+  font-family: "Lato Fallback";
+  font-weight: 700;
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  size-adjust: 91.1%;
+}
+
 *,
 *::before,
 *::after {
@@ -52,11 +83,17 @@ button {
   cursor: pointer;
 }
 
+/* `hidden` always wins over component display rules */
+[hidden] {
+  display: none !important;
+}
+
 /* Headings */
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--font-heading);
   color: var(--color-navy);
   overflow-wrap: break-word;
@@ -75,7 +112,8 @@ h2 {
   line-height: var(--leading-h2);
 }
 
-h3 {
+h3,
+h4 {
   font-size: var(--text-h3);
   font-weight: 600;
   line-height: var(--leading-h3);
@@ -100,15 +138,21 @@ small {
 
 /* Links */
 
+/* Text links are always underlined in gold: nothing clickable is loose text */
 a {
   color: var(--color-navy);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  transition: color var(--transition);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-gold);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+  transition:
+    color var(--transition),
+    text-decoration-color var(--transition);
 }
 
 a:hover {
-  color: var(--color-navy-hover);
+  color: var(--color-gold-text);
+  text-decoration-color: currentColor;
 }
 
 /* Focus */
@@ -116,6 +160,11 @@ a:hover {
 :focus-visible {
   outline: 3px solid var(--color-navy);
   outline-offset: 3px;
+}
+
+/* On navy surfaces the focus ring is light gold, so it stays visible */
+:is(.celebration, .card--navy, .meditation__hero) :focus-visible {
+  outline-color: var(--color-gold-light);
 }
 
 /* Reduced motion: no entrance animations or transitions */

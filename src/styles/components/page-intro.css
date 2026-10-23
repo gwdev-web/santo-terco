@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Page intro — eyebrow, title and lead at the top of each page
+   ========================================================================== */
+
+.page-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 680px;
+}
+
+.page-intro__title {
+  font-size: var(--text-h1);
+}
+
+.page-intro__lead {
+  font-size: var(--text-body-lg);
+  color: var(--color-text);
+}
