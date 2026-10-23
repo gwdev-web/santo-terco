@@ -638,6 +638,10 @@
     white-space: normal;
   }
 
+  .pray-next :focus-visible {
+    outline-color: var(--color-gold-light);
+  }
+
   .pray-next__previous,
   .pray-next__previous:hover {
     color: var(--color-on-navy);

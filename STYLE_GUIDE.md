@@ -80,7 +80,7 @@ Approved pairs: 4.5:1 for normal text, 3:1 for text 24px and up.
 | **Playfair Display** | Headings, prayer text, quotes. Classic and liturgical; invites slow reading. | 500, 600, 700; italic 500 for quotes and highlights |
 | **Lato** | Interface: buttons, labels, navigation, explanations, UI numbers. Humanist and legible on small screens. | 400, 700 |
 
-Tokens: `--font-heading`, `--font-body`.
+Tokens: `--font-heading`, `--font-body`. Each has a local fallback (Georgia, Arial) resized with `size-adjust` to the web font's width, per weight, so the text doesn't reflow when the fonts arrive.
 
 ### 3.1 Scale
 
@@ -225,6 +225,9 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Show more (disclosure):** a full-width outline button with a caret and `aria-expanded`; the panel opens with `grid-template-rows` (450ms). Closed content is hidden from keyboard and screen readers.
 - **Text size control:** three "A" buttons with `aria-pressed` (normal, grande, muito grande = ×1, ×1.15, ×1.3). The choice is saved in the browser and applies to prayer text on every page, without a flash on load.
 - **History page:** "Esta semana" (navy, one bar per day Monday to Sunday, a full Rosary in bright gold; mobile only), four numbers (terços in the last 12 weeks, full Rosaries in navy, days in a row, days with prayer), "Últimas 12 semanas" (one square per day, one column per week, Monday at the top: track → light gold → gold → dark gold → navy for 4 terços), "Por mistério" bars with the set illustrations, "Registros recentes" (the last six days with prayer) and "Medalhas" (Primeiro terço, Rosário completo, 3/7/30 dias seguidos: navy when earned, a dashed circle with the goal until then). Medals are worked out from the history; nothing else is stored. Without records: "Nenhum registro ainda" and "Rezar o terço do dia".
+- **About page:** the intro beside a navy quote, the four steps of the terço as numbered cards, "Seus dados ficam com você" (cream) and "Feito à mão" (code and the Symbols page), then "Pronto para começar?" with the gold button.
+- **Symbols page:** a light hero with the emblem, then numbered sections (01 · O logotipo … 07 · As letras): text cards, color swatches, the four set icons with their days, the twenty mystery illustrations and the prayer illustrations (both from the data), the menu icons, the two fonts and the navy credits.
+- **404:** the rosary illustration, "Esta página não existe", "Voltar ao início" and links to Mistérios, Orações and Histórico. Not indexed.
 - **Inline confirmation:** destructive actions show "Apagar todo o histórico?" with Cancel / Confirm in place, no browser dialogs.
 
 ---
@@ -321,3 +324,6 @@ Speak like someone praying beside the user: close, simple, unhurried and never d
 - The Hail Mary counter is announced with `aria-live="polite"`.
 - Decorative icons and illustrations have `aria-hidden="true"`.
 - Respect `prefers-reduced-motion`: no entrance animations.
+- Visible focus ring on everything interactive: navy on light surfaces, light gold on navy (celebrations, navy cards, the meditation, "A seguir").
+- Links in a sentence (credits) may be smaller than 44px; standalone links and buttons may not.
+- The accessible name starts with the visible text (e.g. the logo: "Santo Terço, página inicial").

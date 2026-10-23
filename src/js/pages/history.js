@@ -47,14 +47,21 @@ initHistory(qs('[data-history]'));
 function initHistory(root) {
   let sets = [];
 
-  initDataLoader(root, async () => {
-    sets = await getMysterySets();
-    render(root, sets);
-  });
-
   initClearData(root, () => {
     render(root, sets, { cleared: true });
     qs('[data-empty]', root).focus();
+  });
+
+  // The history is in this browser: without records there is nothing to load
+  if (getHistory().length === 0) {
+    render(root, sets);
+    root.setAttribute('aria-busy', 'false');
+    return;
+  }
+
+  initDataLoader(root, async () => {
+    sets = await getMysterySets();
+    render(root, sets);
   });
 }
 

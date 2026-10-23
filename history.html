@@ -103,6 +103,18 @@
             </div>
           </div>
         </div>
+        <script>
+          /* Without records the empty state shows from the first paint, with no layout shift (see src/js/pages/history.js) */
+          (() => {
+            let empty = true;
+            try {
+              const entries = JSON.parse(localStorage.getItem('santo-terco:history'));
+              empty = !Array.isArray(entries) || entries.length === 0;
+            } catch {}
+            document.querySelector('[data-empty]').hidden = !empty;
+            document.querySelector('[data-content]').hidden = empty;
+          })();
+        </script>
 
         <section class="history-data" aria-labelledby="history-data-title">
           <div class="history-data__text">

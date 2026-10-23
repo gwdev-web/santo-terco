@@ -49,8 +49,8 @@
   --color-gold-glow: rgba(212, 175, 55, 0.14); /* ring around celebration medals */
 
   /* Typography */
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-body: "Lato", system-ui, sans-serif;
+  --font-heading: "Playfair Display", "Playfair Display Fallback", Georgia, serif;
+  --font-body: "Lato", "Lato Fallback", system-ui, sans-serif;
 
   /* Fluid type scale: mobile (≈ -35%) → desktop */
   --text-display: clamp(2.5rem, 1.75rem + 3vw, 4rem); /* 40 → 64 */

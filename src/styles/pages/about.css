@@ -1,0 +1,162 @@
+/* ==========================================================================
+   About — what the site is, the four steps, privacy and code, and a start link
+   ========================================================================== */
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+}
+
+.about__intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8) var(--space-12);
+}
+
+.about__text {
+  flex: 999 1 30rem;
+  min-width: 0;
+}
+
+.about__highlight {
+  font-weight: 500;
+  color: var(--color-gold-heading);
+}
+
+.about__quote {
+  display: flex;
+  flex: 1 1 18rem;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--space-6);
+  color: var(--color-on-navy);
+  background-color: var(--color-navy);
+  border-radius: var(--radius-xl);
+}
+
+.about__quote-mark {
+  inline-size: 2.5rem;
+  block-size: 2rem;
+  fill: var(--color-gold-bright);
+}
+
+.about__quote blockquote {
+  color: var(--color-on-navy);
+  font-family: var(--font-heading);
+  font-size: var(--text-quote);
+  font-style: italic;
+  line-height: var(--leading-quote);
+}
+
+.about__quote figcaption {
+  font-size: 0.875rem;
+  color: var(--color-on-navy-muted);
+}
+
+.about__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.about__title {
+  font-size: var(--text-h2);
+}
+
+/* The four steps */
+
+.about-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.75rem), 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-steps__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.about-steps__number {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-gold-heading);
+}
+
+.about-steps__title {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* Privacy and code */
+
+.about__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.about-card {
+  flex: 1 1 20rem;
+  align-items: flex-start;
+  padding: var(--space-6);
+}
+
+.about-card--cream {
+  background-color: var(--color-cream);
+  border-color: var(--color-cream);
+}
+
+.about-card__icon {
+  color: var(--color-gold-heading);
+}
+
+.about-card__title {
+  font-size: 1.3125rem;
+}
+
+/* Start */
+
+.about__start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.about__start .button {
+  width: 100%;
+}
+
+/* Tablet (> 640px) */
+
+@media (min-width: 40.0625em) {
+  .about__quote,
+  .about-card {
+    padding: var(--space-8);
+  }
+
+  .about-card__title {
+    font-size: 1.625rem;
+  }
+
+  .about__start .button {
+    width: auto;
+  }
+}

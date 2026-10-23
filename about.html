@@ -9,12 +9,72 @@
     <!-- @include header -->
 
     <main id="main" class="site-main" tabindex="-1">
-      <div class="container">
-        <header class="page-intro motion-fade-up">
-          <p class="eyebrow">Sobre o projeto</p>
-          <h1 class="page-intro__title">Algo simples, mas útil, para quem está começando</h1>
-          <p class="page-intro__lead">Esta página está sendo preparada.</p>
-        </header>
+      <div class="about container">
+        <section class="about__intro">
+          <header class="page-intro about__text motion-fade-up">
+            <p class="eyebrow">Sobre o projeto</p>
+            <h1 class="page-intro__title">Algo simples, mas <em class="about__highlight">útil</em>, para quem está começando</h1>
+            <p class="page-intro__lead">O Santo Terço nasceu de uma ideia direta: ajudar quem nunca rezou o terço, ou não lembra a ordem das orações, a rezar do começo ao fim sem precisar de um livrinho ao lado.</p>
+            <p class="page-intro__lead">O site mostra o mistério do dia, apresenta cada oração no momento certo e deixa você marcar o que já rezou. Sem cadastro, sem anúncios, sem distrações.</p>
+          </header>
+
+          <figure class="about__quote">
+            <svg class="about__quote-mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M2 30V18C2 8 8 3 16 2v6c-4 1-7 4-7 9h7v13zM24 30V18c0-10 6-15 14-16v6c-4 1-7 4-7 9h7v13z"></path></svg>
+            <blockquote><p>Rezar o terço é contemplar com Maria o rosto de Cristo.</p></blockquote>
+            <figcaption>Inspirado na carta <cite>Rosarium Virginis Mariae</cite>, de São João Paulo II</figcaption>
+          </figure>
+        </section>
+
+        <section class="about__section" aria-labelledby="steps-title">
+          <h2 id="steps-title" class="about__title">Como funciona o passo a passo</h2>
+          <ol class="about-steps">
+            <li class="about-steps__item">
+              <span class="about-steps__number" aria-hidden="true">1</span>
+              <h3 class="about-steps__title">Mistério do dia</h3>
+              <p>O site identifica o dia da semana e sugere o terço correspondente. Você também pode escolher outro.</p>
+            </li>
+            <li class="about-steps__item">
+              <span class="about-steps__number" aria-hidden="true">2</span>
+              <h3 class="about-steps__title">Orações iniciais</h3>
+              <p>Sinal da Cruz, Oferecimento, Creio, Pai Nosso, três Ave-Marias com suas intenções e o Glória, numa só página.</p>
+            </li>
+            <li class="about-steps__item">
+              <span class="about-steps__number" aria-hidden="true">3</span>
+              <h3 class="about-steps__title">Os cinco mistérios</h3>
+              <p>Para cada um: a passagem bíblica, ideias para reflexão, o Pai Nosso e um contador para as dez Ave-Marias.</p>
+            </li>
+            <li class="about-steps__item">
+              <span class="about-steps__number" aria-hidden="true">4</span>
+              <h3 class="about-steps__title">Orações finais</h3>
+              <p>Agradecimento, Salve Rainha e Sinal da Cruz. Depois, siga para outro mistério e complete o Rosário.</p>
+            </li>
+          </ol>
+        </section>
+
+        <div class="about__cards">
+          <section class="card about-card about-card--cream" aria-labelledby="privacy-title">
+            <svg class="icon icon--lg about-card__icon" aria-hidden="true"><use href="/icons.svg#lock-simple"></use></svg>
+            <h2 id="privacy-title" class="about-card__title">Seus dados ficam com você</h2>
+            <p class="card__text">O progresso e o histórico são salvos apenas neste aparelho. Nada é enviado para servidores, e você pode apagar tudo quando quiser na página de Histórico.</p>
+            <a class="link" href="/history.html">Ir para o Histórico</a>
+          </section>
+
+          <section class="card about-card" aria-labelledby="code-title">
+            <svg class="icon icon--lg about-card__icon" aria-hidden="true"><use href="/icons.svg#code"></use></svg>
+            <h2 id="code-title" class="about-card__title">Feito à mão</h2>
+            <p class="card__text">JavaScript puro com Vite, sem frameworks. Leve, rápido e fácil de manter.</p>
+            <a class="link" href="https://github.com/gwdev-web/santo-terco">Código no GitHub</a>
+            <a class="link" href="/symbols.html">Conheça os símbolos e o design do site</a>
+          </section>
+        </div>
+
+        <section class="about__start" aria-labelledby="start-title">
+          <h2 id="start-title" class="about__title">Pronto para começar?</h2>
+          <a class="button button--primary button--large" href="/pray.html">
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
+            <span>Rezar o terço do dia</span>
+          </a>
+        </section>
       </div>
     </main>
 

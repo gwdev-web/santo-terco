@@ -1,0 +1,310 @@
+/* ==========================================================================
+   Symbols and design — the logo, colors, illustrations, menu icons and fonts
+   ========================================================================== */
+
+.symbols-hero {
+  background-color: var(--color-beige-light);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.symbols-hero__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8) var(--space-12);
+  padding-block: var(--space-8);
+}
+
+.symbols-hero__text {
+  flex: 999 1 28rem;
+  min-width: 0;
+}
+
+.symbols-hero__highlight {
+  color: var(--color-gold-heading);
+}
+
+.symbols-hero__emblem {
+  flex: none;
+  inline-size: clamp(7.5rem, 5rem + 10vw, 12.5rem);
+  block-size: auto;
+  margin-inline: auto;
+}
+
+.symbols {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  padding-block: var(--space-section);
+}
+
+.symbols__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.symbols__title {
+  font-size: var(--text-h2);
+}
+
+.symbols__lead {
+  max-width: var(--width-reading);
+  font-size: var(--text-body-lg);
+  color: var(--color-text);
+}
+
+.symbols__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-4);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.symbols__grid--wide {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
+}
+
+/* Text cards */
+
+.symbols-card {
+  gap: var(--space-2);
+}
+
+.symbols-card__title {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.symbols-card__meta {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-gold-text);
+}
+
+.symbols-card__chip {
+  display: grid;
+  place-items: center;
+  inline-size: 5.25rem;
+  block-size: 5.25rem;
+  margin-bottom: var(--space-2);
+  color: var(--color-gold-heading);
+  background-color: var(--color-cream);
+  border-radius: var(--radius-lg);
+}
+
+.symbols-card__chip .illustration {
+  --illustration-size: 4rem;
+}
+
+/* Colors */
+
+.symbols-color {
+  gap: var(--space-2);
+  overflow: hidden;
+  padding: 0 var(--space-6) var(--space-6);
+}
+
+.symbols-color__swatch {
+  block-size: 5.5rem;
+  margin: 0 calc(-1 * var(--space-6)) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.symbols-color__swatch--beige {
+  background-color: var(--color-beige);
+}
+
+.symbols-color__swatch--navy {
+  background-color: var(--color-navy);
+}
+
+.symbols-color__swatch--gold {
+  background-color: var(--color-gold);
+}
+
+.symbols-color__swatch--white {
+  background-color: var(--color-white);
+}
+
+/* The twenty mysteries and the prayers */
+
+.symbols-sets {
+  --skeleton-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.symbols-set {
+  padding: var(--space-4);
+}
+
+.symbols-set__name {
+  font-size: 1.3125rem;
+}
+
+.symbols-set__list,
+.symbols-prayers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  gap: var(--space-4) var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.symbols-prayers {
+  --skeleton-height: 20rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr));
+}
+
+.symbols-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--color-navy);
+}
+
+.symbols-item__chip {
+  display: grid;
+  place-items: center;
+  inline-size: 4.5rem;
+  block-size: 4.5rem;
+  background-color: var(--color-beige-light);
+  border-radius: var(--radius-md);
+}
+
+.symbols-item__chip .illustration {
+  --illustration-size: 3.5rem;
+}
+
+.symbols-prayers .symbols-item {
+  padding: var(--space-4) var(--space-3);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.symbols-prayers .symbols-item__chip {
+  color: var(--color-gold-heading);
+  background-color: transparent;
+}
+
+/* Menu icons */
+
+.symbols-menu {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
+.symbols-menu__icon {
+  color: var(--color-navy);
+}
+
+.symbols-menu__name {
+  display: block;
+  color: var(--color-navy);
+}
+
+/* Fonts */
+
+.symbols-font {
+  font-size: clamp(1.875rem, 1.5rem + 1.5vw, 2.75rem);
+  line-height: 1.2;
+  color: var(--color-navy);
+}
+
+.symbols-font--heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.symbols-font--body {
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+/* Credits */
+
+.symbols-credits {
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+}
+
+.symbols-credits__title {
+  font-size: 1.5rem;
+  color: var(--color-on-navy);
+}
+
+.symbols-credits__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-6);
+  font-size: 0.9375rem;
+  color: var(--color-on-navy-muted);
+}
+
+.symbols-credits__link {
+  color: var(--color-gold-light);
+}
+
+.symbols-credits__link:hover {
+  color: var(--color-gold-bright);
+}
+
+/* Tablet (> 640px) */
+
+@media (min-width: 40.0625em) {
+  .symbols-hero__inner {
+    padding-block: var(--space-16);
+  }
+
+  .symbols__section {
+    gap: var(--space-4) var(--space-6);
+  }
+
+  .symbols-set {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-6);
+  }
+
+  .symbols-set__list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .symbols-item__chip {
+    inline-size: 5.25rem;
+    block-size: 5.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .symbols-item__chip .illustration {
+    --illustration-size: 4.25rem;
+  }
+
+  .symbols-item {
+    font-size: 0.875rem;
+  }
+
+  .symbols-credits {
+    padding: var(--space-8);
+  }
+}

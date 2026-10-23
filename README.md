@@ -9,9 +9,10 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 - **Mystery of the day**: suggested from the day of the week (Joyful, Sorrowful, Glorious, Luminous), with the option to choose any other.
 - **Guided rosary**: opening prayers, the five mysteries (Bible reference, quote, reflections, fruit) with an Our Father, a 10 Hail Mary counter and the Glory Be, then the closing prayers.
 - **Optional marking**: mark each prayer as you go; progress is saved so you can continue where you stopped.
+- **Celebrations**: finishing a terço shows a calm celebration and today's Rosary; the fourth set of the day opens the full Rosary page.
 - **Full Rosary**: pray the four sets of mysteries on the same day to complete a Rosary.
 - **Prayers**: the rosary prayers in the order they are prayed, complementary prayers and three litanies, with an adjustable text size and a copy button.
-- **History**: days of prayer, streaks, a 12-week heatmap and totals per mystery.
+- **History**: this week, days in a row, a 12-week heatmap, totals per mystery, recent days and medals, with an option to clear everything.
 - **Privacy**: no sign-up, no ads. Data stays in your browser and can be cleared at any time.
 
 ## Tech stack
@@ -19,8 +20,29 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 - [Vite](https://vite.dev/) (multi-page app)
 - Semantic HTML5 (W3C valid)
 - CSS3 with BEM and design tokens (custom properties)
-- Vanilla JavaScript (ES modules), no runtime dependencies so far
+- Vanilla JavaScript (ES modules), no runtime dependencies
 - [sharp](https://sharp.pixelplumbing.com/) (dev only) to generate icons
+
+## Pages
+
+| Page | File |
+|---|---|
+| Home: today's terço, the week and today's Rosary | `index.html` |
+| Mysteries: the four sets and their twenty mysteries | `mysteries.html` |
+| Prayers: rosary and complementary prayers, litanies | `prayers.html` |
+| Guided terço, one stage per URL | `pray.html?mystery=<set>&step=<opening \| 1–5 \| closing>` |
+| Full Rosary celebration | `rosary-complete.html` |
+| History | `history.html` |
+| About and Symbols and design | `about.html`, `symbols.html` |
+| Not found | `404.html` |
+
+## Accessibility
+
+- Semantic HTML, a skip link on every page and a visible focus ring (light gold on navy).
+- Prayer marks use `aria-pressed`, the current step `aria-current="step"`, and counters and celebrations are announced to screen readers.
+- Touch targets of at least 44px (52px for main buttons on mobile) and text contrast of at least 4.5:1.
+- Every animation is turned off with `prefers-reduced-motion`.
+- Checked with the W3C validator rules (html-validate), axe-core and Lighthouse.
 
 ## Getting started
 
