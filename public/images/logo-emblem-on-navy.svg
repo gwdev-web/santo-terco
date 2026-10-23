@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86 110">
-  <!-- PROVISIONAL emblem: replace with the official "Our Lady in prayer" emblem (same file name). -->
-  <circle cx="43" cy="43" r="34" fill="none" stroke="#FAF8F5" stroke-width="2.4"/>
-  <circle cx="43" cy="43" r="39.5" fill="none" stroke="#D4AF37" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 7.75"/>
-  <path d="M43 83v9" stroke="#D4AF37" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 4.5"/>
-  <path d="M43 94v14M37.5 99h11" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
-  <path fill="#FAF8F5" transform="translate(16.6 16.6) scale(1.65)" d="M8.8 8.2h3L17.2 20.2l-1 2.4zM22.4 8.2h1.2L16.9 22.6H16zM9.2 8.6h1.1v14.6H9.2zM21.8 8.2h2.6v15h-2.6zM7.4 8.2h3v.7h-3zM21.8 8.2H26v.7h-4.2zM7.4 22.5H12v.9H7.4zM19.6 22.5h6.8v.9h-6.8z"/>
-</svg>

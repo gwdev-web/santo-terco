@@ -1,5 +1,7 @@
 # Santo Terço
 
+<img src="src/assets/brand/logo-horizontal.png" alt="Santo Terço" width="460">
+
 A simple website to pray the rosary every day. It recommends the mystery of the day and guides you prayer by prayer, from the Sign of the Cross to the Hail Holy Queen.
 
 > The interface is in Brazilian Portuguese.
@@ -21,7 +23,6 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 - Semantic HTML5 (W3C valid)
 - CSS3 with BEM and design tokens (custom properties)
 - Vanilla JavaScript (ES modules), no runtime dependencies
-- [sharp](https://sharp.pixelplumbing.com/) (dev only) to generate icons
 
 ## Pages
 
@@ -53,7 +54,6 @@ npm install
 npm run dev       # start the dev server
 npm run build     # build to dist/
 npm run preview   # preview the build
-npm run icons     # regenerate favicon, app icons and og-image from the brand sources
 ```
 
 During development, `/components.html` shows every base component, interface icon and illustration for review (it is not part of the build).
@@ -64,11 +64,9 @@ During development, `/components.html` shows every base component, interface ico
 ├── *.html              one file per page
 ├── partials/           shared HTML included at build time
 ├── data/               JSON content (mysteries, prayers, rosary sequence)
-├── assets-src/brand/   brand sources for generated icons (favicon)
-├── public/             favicon, app icons, manifest, Open Graph image, icon sprite, logo images
-├── scripts/            build helpers (icon generation)
+├── public/             favicon, app icons, manifest, Open Graph image, robots.txt, icon sprite
 └── src/
-    ├── assets/         custom rosary illustrations (SVG)
+    ├── assets/         brand images (emblem, logos, banner) and the custom rosary illustrations (SVG)
     ├── js/             app code: services, utils, components, pages
     └── styles/         tokens, base, layout, utilities, motion, components, pages
 ```

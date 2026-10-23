@@ -152,11 +152,13 @@ Prayer pages offer a **text size control** (three steps, "A A A") so readers can
 
 | Version | Where |
 |---|---|
-| Horizontal (emblem + wordmark) | Site header and light backgrounds. Desktop: emblem 43×55, name 29px. Mobile: 33×42, name 24px. |
+| Horizontal (emblem + wordmark) | Site header and light backgrounds. Desktop: emblem 55px tall, name 29px. Mobile: 42px tall, name 24px. |
 | On navy | Lines in light beige, beads and star in bright gold. |
 | Full logo (emblem + name + "Terço diário guiado") | Splash, Open Graph image, print. |
 | Emblem only | App icon, large illustrations, print. |
 | Favicon (16–32px) | Only a gold "M" (`#E7CB86`) on navy, rounded square. |
+
+Files: `src/assets/brand/` holds the emblem, the full and horizontal logos (each also `-light`, for navy) and the Our Lady banner art, as transparent PNGs; the favicon, app icons and Open Graph image are in `public/` with fixed names.
 
 ### 5.3 Rules
 

@@ -17,7 +17,7 @@
 
 .brand__emblem {
   flex: none;
-  inline-size: 33px;
+  inline-size: auto;
   block-size: 42px;
 }
 
@@ -58,7 +58,6 @@
   }
 
   .brand__emblem {
-    inline-size: 43px;
     block-size: 55px;
   }
 

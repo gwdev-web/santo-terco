@@ -28,9 +28,8 @@ npm run preview   # serve the build
 components.html        dev-only review page for components, icons and illustrations (not built)
 partials/              shared HTML (head, header, tab bar, footer) included at build time (see vite.config.js)
 data/                  JSON content, consumed from GitHub raw (see Data)
-assets-src/brand/      brand sources for generated icons; run `npm run icons` after changing them
-public/                static files: favicon, app icons, manifest, og-image, icons.svg sprite, images/ (logo)
-scripts/               build helpers (generate-icons.js)
+public/                files served with a fixed name: favicon, app icons, manifest, og-image, robots.txt, icons.svg sprite
+src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
 src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
 src/js/
   app.js               initApp(): shared behavior for every page

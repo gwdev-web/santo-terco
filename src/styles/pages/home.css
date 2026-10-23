@@ -122,7 +122,7 @@
   inline-size: 100%;
 }
 
-.today__art-illustration {
+.today__mary {
   display: none;
 }
 
@@ -417,17 +417,17 @@
   }
 }
 
-/* Desktop (> 1024px): large illustration beside the text; week as cards */
+/* Desktop (> 1024px): Our Lady beside the text, resting on the bottom edge; week as cards */
 
 @media (min-width: 64.0625em) {
-  .today {
-    overflow: visible; /* keeps the illustration's shadow */
-  }
-
   .today__inner {
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: var(--space-12);
-    padding-block: var(--space-12);
+    gap: var(--space-8);
+    padding-block: var(--space-12) 0;
+  }
+
+  .today__content {
+    padding-bottom: var(--space-12);
   }
 
   .today__badge {
@@ -439,30 +439,11 @@
     line-height: var(--leading-display);
   }
 
-  .today__art {
-    position: relative;
-    inset: auto;
-    display: grid;
-    place-items: center;
-    inline-size: clamp(320px, 30vw, 440px);
-    aspect-ratio: 1;
-    color: var(--color-gold);
-    background-color: var(--color-white);
-    border-radius: var(--radius-pill);
-    box-shadow: var(--shadow-lg);
-    opacity: 1;
-  }
-
-  .today__ring {
-    position: absolute;
-    inset: 4%;
-    inline-size: 92%;
-  }
-
-  .today__art-illustration {
-    --illustration-size: 46%;
+  .today__mary {
     display: block;
-    color: var(--color-gold-heading);
+    align-self: end;
+    inline-size: clamp(22.5rem, 36vw, 35rem);
+    block-size: auto;
   }
 
   .week__day {

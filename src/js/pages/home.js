@@ -48,7 +48,6 @@ function renderToday(root, set, started) {
   qs('[data-today-start-label]', root).textContent = started ? 'Continuar o terço de hoje' : 'Começar o terço de hoje';
   qs('[data-today-badge]', root).hidden = false;
   setIllustration(qs('[data-today-illustration]', root), set.illustration);
-  setIllustration(qs('[data-today-art]', root), set.illustration);
 }
 
 /** Hero without data: a neutral title, and the start link keeps pointing to the Mysteries page. */
