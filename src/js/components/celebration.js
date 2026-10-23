@@ -1,4 +1,5 @@
 import { qs } from '../utils/dom.js';
+import { appUrl } from '../utils/url.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const CONFETTI_COUNT = 22;
@@ -44,7 +45,7 @@ export function createCelebration(root) {
     const sparkle = document.createElementNS(SVG_NS, 'svg');
     const use = document.createElementNS(SVG_NS, 'use');
 
-    use.setAttribute('href', '/icons.svg#star');
+    use.setAttribute('href', appUrl('icons.svg#star'));
     sparkle.append(use);
     sparkle.setAttribute('class', 'celebration__sparkle');
     sparkle.style.setProperty('--x', `${left}%`);

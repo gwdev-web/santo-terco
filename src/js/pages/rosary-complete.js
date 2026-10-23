@@ -7,6 +7,7 @@ import { getMysterySets } from '../services/mysteries.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
 import { joinNames } from '../utils/text.js';
+import { appUrl } from '../utils/url.js';
 
 initApp();
 initRosaryComplete(qs('[data-rosary-complete]'));
@@ -94,6 +95,6 @@ function renderPending(root, sets, prayedIds) {
   qs('[data-lead]', root).textContent = prayed.length
     ? `Você já rezou ${names(prayed)}. Para completar o Rosário, faltam ${names(left)}.`
     : 'Reze os quatro terços no mesmo dia para completar um Rosário: os vinte mistérios da vida de Jesus e de Maria.';
-  qs('[data-primary]', root).href = '/mysteries.html';
+  qs('[data-primary]', root).href = appUrl('mysteries.html');
   qs('[data-primary-label]', root).textContent = 'Escolher um mistério';
 }

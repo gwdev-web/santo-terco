@@ -6,6 +6,7 @@ import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { hasProgress } from '../services/progress.js';
 import { formatShortDate, getWeek, toDateKey, weekdayName, weekdayShortName } from '../utils/date.js';
 import { cloneTemplate, qs, qsa } from '../utils/dom.js';
+import { appUrl } from '../utils/url.js';
 
 const DURATION_NOTE = 'Cerca de 20 minutos, com cada oração na tela e marcação opcional.';
 
@@ -118,5 +119,5 @@ function renderRosary(root, sets, todaySet, prayedIds) {
 
 /** @returns {string} Link to the guided terço of a set. */
 function prayUrl(set) {
-  return `/pray.html?mystery=${encodeURIComponent(set.id)}`;
+  return appUrl(`pray.html?mystery=${encodeURIComponent(set.id)}`);
 }

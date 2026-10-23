@@ -7,6 +7,7 @@ import { getSetIdsPrayedOn } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
+import { appUrl } from '../utils/url.js';
 
 initApp();
 initMysteries(qs('[data-mysteries]'));
@@ -78,7 +79,7 @@ function renderCard(set, index, isToday, prayed) {
 
   qs('[data-card-list]', item).replaceChildren(...set.mysteries.map(renderMystery));
 
-  action.href = `/pray.html?mystery=${encodeURIComponent(set.id)}`;
+  action.href = appUrl(`pray.html?mystery=${encodeURIComponent(set.id)}`);
   action.classList.toggle('button--secondary', !prayed);
   action.classList.toggle('button--outline', prayed);
   qs('[data-card-action-label]', item).textContent = prayed ? 'Rezar novamente' : 'Rezar este terço';

@@ -47,13 +47,14 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 
 ## Getting started
 
-Requirements: Node.js 20+.
+Requirements: Node.js 20.19+ or 22.12+.
 
 ```bash
 npm install
 npm run dev       # start the dev server
 npm run build     # build to dist/
-npm run preview   # preview the build
+npm run preview   # preview the build at /santo-terco/, as on GitHub Pages
+npm run validate  # check the built HTML (html-validate)
 ```
 
 During development, `/components.html` shows every base component, interface icon and illustration for review (it is not part of the build).
@@ -84,6 +85,21 @@ https://raw.githubusercontent.com/gwdev-web/santo-terco/main/data/<file>.json
 Updating a JSON file on `main` updates the site without a new build. During development (`npm run dev`) the local files in `/data` are used, so changes can be tested before they are pushed.
 
 User progress and history are stored only in the browser (`localStorage`).
+
+## Deployment
+
+The site is published on GitHub Pages at <https://gwdev-web.github.io/santo-terco/> by GitHub Actions:
+
+| Workflow | When | What |
+|---|---|---|
+| [CI](.github/workflows/ci.yml) | every pull request and every push to `develop` | `npm ci`, build and HTML validation |
+| [Deploy](.github/workflows/deploy.yml) | every push to `main` (or by hand in the Actions tab) | the same checks, then publishes `dist/` |
+
+Work happens on `develop`; merging into `main` publishes the site and, at the same time, the data it reads from GitHub raw.
+
+One-time setup: in the repository, **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+The build is published under `/santo-terco/`, taken from `SITE_URL` in [vite.config.js](vite.config.js). For a custom domain, change `SITE_URL` to the domain (the base becomes `/`) and add the domain in the Pages settings.
 
 ## Design
 

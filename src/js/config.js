@@ -12,7 +12,7 @@ const DATA_DIR = 'data';
 
 const RAW_DATA_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${DATA_DIR}`;
 
-export const DATA_BASE_URL = import.meta.env.DEV ? `/${DATA_DIR}` : RAW_DATA_URL;
+export const DATA_BASE_URL = import.meta.env.DEV ? `${import.meta.env.BASE_URL}${DATA_DIR}` : RAW_DATA_URL;
 
 export const FETCH_TIMEOUT_MS = 10000;
 

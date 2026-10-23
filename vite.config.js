@@ -8,6 +8,9 @@ const root = fileURLToPath(new URL('.', import.meta.url));
 /** Public URL of the site, used in canonical and Open Graph tags. */
 const SITE_URL = 'https://gwdev-web.github.io/santo-terco/';
 
+/** Path the build (and `npm run preview`) is published under: the GitHub Pages project site. Development stays at "/". */
+const BUILD_BASE = new URL(SITE_URL).pathname;
+
 /**
  * Pages built for production, with their SEO metadata.
  * `components.html` is a dev-only review page and is intentionally not listed.
@@ -58,11 +61,18 @@ const escapeAttribute = (value) => value.replaceAll('&', '&amp;').replaceAll('"'
  * Tiny HTML partials plugin:
  * - `<!-- @include name -->` is replaced by `partials/name.html`;
  * - `{{title}}`, `{{description}}`, `{{url}}` and `{{siteUrl}}` are filled from PAGES;
- * - links marked `data-nav="<page>"` get `aria-current="page"` on their own page.
+ * - links marked `data-nav="<page>"` get `aria-current="page"` on their own page;
+ * - site links (`<a href="/…">`) get the base the site is published under. Vite already does
+ *   this for assets (scripts, styles, images, icons), but not for links between pages.
  */
 function htmlPartials() {
+  let base = '/';
+
   return {
     name: 'html-partials',
+    configResolved(config) {
+      base = config.base;
+    },
     transformIndexHtml: {
       order: 'pre',
       handler(html, { filename }) {
@@ -78,7 +88,8 @@ function htmlPartials() {
           .replaceAll('{{description}}', escapeAttribute(meta.description))
           .replaceAll('{{url}}', url)
           .replaceAll('{{siteUrl}}', SITE_URL)
-          .replaceAll(`data-nav="${page}"`, `data-nav="${page}" aria-current="page"`);
+          .replaceAll(`data-nav="${page}"`, `data-nav="${page}" aria-current="page"`)
+          .replace(/(<a\b[^>]*?\shref=")\/(?!\/)/g, `$1${base}`);
       },
     },
     // Reload the browser when a partial changes during development
@@ -91,11 +102,12 @@ function htmlPartials() {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ command, isPreview }) => ({
+  base: command === 'build' || isPreview ? BUILD_BASE : '/',
   plugins: [htmlPartials()],
   build: {
     rolldownOptions: {
       input: Object.fromEntries(Object.keys(PAGES).map((page) => [page, resolve(root, `${page}.html`)])),
     },
   },
-});
+}));

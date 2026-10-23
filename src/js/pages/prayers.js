@@ -7,6 +7,7 @@ import { initTabs } from '../components/tabs.js';
 import { initTextSize } from '../components/text-size.js';
 import { getPrayerBook } from '../services/prayers.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
+import { appUrl } from '../utils/url.js';
 
 /** Litany lines shown before "Mostrar a ladainha inteira". */
 const LITANY_PREVIEW_LINES = 12;
@@ -129,7 +130,7 @@ async function copyPrayer(button, status) {
   }
 
   label.textContent = copied ? 'Texto copiado' : 'Não foi possível copiar';
-  icon.setAttribute('href', copied ? '/icons.svg#check' : '/icons.svg#copy');
+  icon.setAttribute('href', appUrl(copied ? 'icons.svg#check' : 'icons.svg#copy'));
   status.textContent = copied ? `${title}: texto copiado.` : `Não foi possível copiar ${title}.`;
 
   clearTimeout(copyTimers.get(button));
@@ -137,7 +138,7 @@ async function copyPrayer(button, status) {
     button,
     setTimeout(() => {
       label.textContent = 'Copiar texto';
-      icon.setAttribute('href', '/icons.svg#copy');
+      icon.setAttribute('href', appUrl('icons.svg#copy'));
     }, COPY_FEEDBACK_MS),
   );
 }

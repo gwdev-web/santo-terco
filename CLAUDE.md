@@ -18,7 +18,8 @@ Guidance for working on **Santo Terço**, a website that recommends the rosary m
 ```bash
 npm run dev       # dev server
 npm run build     # production build to dist/
-npm run preview   # serve the build
+npm run preview   # serve the build at /santo-terco/
+npm run validate  # html-validate on dist/*.html (also run by CI)
 ```
 
 ## Architecture
@@ -28,6 +29,7 @@ npm run preview   # serve the build
 components.html        dev-only review page for components, icons and illustrations (not built)
 partials/              shared HTML (head, header, tab bar, footer) included at build time (see vite.config.js)
 data/                  JSON content, consumed from GitHub raw (see Data)
+.github/workflows/     ci.yml (pull requests and develop: build + validate), deploy.yml (main: GitHub Pages)
 public/                files served with a fixed name: favicon, app icons, manifest, og-image, robots.txt, icons.svg sprite
 src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
 src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
@@ -44,6 +46,13 @@ src/styles/
   components/          one BEM file per component
   pages/               page-specific styles only
 ```
+
+### Links and base path
+
+The build is published under `/santo-terco/` (GitHub Pages, from `SITE_URL` in `vite.config.js`); development runs at `/`.
+
+- In HTML, write site links and assets from the root (`/mysteries.html`, `/icons.svg#play`, `/src/assets/...`): Vite adds the base to assets and the partials plugin adds it to `<a href>`.
+- In JavaScript, build URLs with `appUrl('pray.html?…')` (`src/js/utils/url.js`), never a hard-coded `/`.
 
 ### Component pattern
 
@@ -111,7 +120,7 @@ Mobile-first, fluid sizes with `clamp()`, four ranges:
 
 ## Before handing a phase back
 
-1. `npm run build` passes.
+1. `npm run build` and `npm run validate` pass.
 2. Check every responsive range, keyboard navigation and reduced motion.
 3. Changed pages pass the W3C validator.
 4. Summarize what changed, what to test, and any design deviation, then stop.

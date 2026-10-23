@@ -11,6 +11,7 @@ import { clearProgress, getProgress, saveProgress } from '../services/progress.j
 import { buildStages, countPrayers, getRosary, isStageDone, isStepDone } from '../services/rosary.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs, qsa } from '../utils/dom.js';
+import { appUrl } from '../utils/url.js';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -152,7 +153,7 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
     concluded = true;
 
     if (countRosariesOn(setIds, todayKey) > rosariesBefore) {
-      window.location.assign('/rosary-complete.html');
+      window.location.assign(appUrl('rosary-complete.html'));
       return;
     }
 
@@ -286,7 +287,7 @@ function renderNavigation(root, set, stages, stageIndex) {
   const stage = stages[stageIndex];
   const previous = qs('[data-previous-link]', root);
   const stageUrl = (target) =>
-    `/pray.html?mystery=${encodeURIComponent(set.id)}&step=${encodeURIComponent(target.id)}`;
+    appUrl(`pray.html?mystery=${encodeURIComponent(set.id)}&step=${encodeURIComponent(target.id)}`);
 
   qs('[data-next]', root).hidden = !previousStage && !nextStage;
 
