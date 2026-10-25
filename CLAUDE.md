@@ -13,6 +13,7 @@ Guidance for working on **Santo Terço**, a website that recommends the rosary m
 - **Vite** (multi-page app), no framework.
 - **HTML5** semantic markup that validates on the W3C Nu validator. `lang="pt-BR"`.
 - **CSS3** with **BEM** naming (`.block__element--modifier`), custom properties for every design token.
+- **Prettier** formats every file, HTML included (`.prettierrc.json`); **ESLint** (`eslint.config.js`) checks the JavaScript and forbids `console.*` outside `log.js`. Run `npm run format` before handing work back.
 - **Vanilla JavaScript**, ES modules. Prefer native APIs and small hand-written code; add a runtime dependency only when it clearly beats a simple solution (size, accessibility, maintenance), and ask the user before adding it.
 
 ```bash
@@ -20,6 +21,8 @@ npm run dev       # dev server
 npm run build     # production build to dist/
 npm run preview   # serve the build at /santo-terco/
 npm run validate  # html-validate on dist/*.html (also run by CI)
+npm run lint      # ESLint + Prettier check (also run by CI)
+npm run format    # format every file with Prettier and apply ESLint fixes
 ```
 
 ## Architecture
@@ -29,7 +32,7 @@ npm run validate  # html-validate on dist/*.html (also run by CI)
 components.html        dev-only review page for components, icons and illustrations (not built)
 partials/              shared HTML (head, header, tab bar, footer) included at build time (see vite.config.js)
 data/                  JSON content, consumed from GitHub raw (see Data)
-.github/workflows/     ci.yml (pull requests and develop: build + validate), deploy.yml (main: GitHub Pages)
+.github/workflows/     ci.yml (pull requests and develop: lint + build + validate), deploy.yml (main: GitHub Pages)
 public/                files served with a fixed name: favicon, app icons, manifest, og-image, robots.txt, icons.svg sprite
 src/assets/fonts/      Playfair Display and Lato (Latin subset, woff2), served with the site
 src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
@@ -98,12 +101,12 @@ The full visual and editorial rules are in [STYLE_GUIDE.md](STYLE_GUIDE.md). Key
 
 Mobile-first, fluid sizes with `clamp()`, four ranges:
 
-| Range | Width | Media query |
-|---|---|---|
-| Mobile | ≤ 640px | base styles |
-| Tablet | 641–1024px | `@media (min-width: 40.0625em)` |
+| Range   | Width       | Media query                     |
+| ------- | ----------- | ------------------------------- |
+| Mobile  | ≤ 640px     | base styles                     |
+| Tablet  | 641–1024px  | `@media (min-width: 40.0625em)` |
 | Desktop | 1025–1439px | `@media (min-width: 64.0625em)` |
-| Large | ≥ 1440px | `@media (min-width: 90em)` |
+| Large   | ≥ 1440px    | `@media (min-width: 90em)`      |
 
 - Grids use `auto-fit` + `minmax()` instead of fixed columns. Media queries are only for structural changes.
 - Reading text stays ≤ 720px wide; pages ≤ 1200px; side gutter ≥ 16px.
@@ -129,7 +132,7 @@ Mobile-first, fluid sizes with `clamp()`, four ranges:
 
 ## Before handing a phase back
 
-1. `npm run build` and `npm run validate` pass.
+1. `npm run lint`, `npm run build` and `npm run validate` pass.
 2. Check every responsive range, keyboard navigation and reduced motion.
 3. Changed pages pass the W3C validator.
 4. Summarize what changed, what to test, and any design deviation, then stop.

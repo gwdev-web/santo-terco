@@ -388,14 +388,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .celebration--playing :is(
-    .celebration__rays,
-    .celebration__ripple,
-    .celebration__sparkle,
-    .celebration__piece,
-    .celebration__pop,
-    .celebration__reveal
-  ) {
+  .celebration--playing
+    :is(
+      .celebration__rays,
+      .celebration__ripple,
+      .celebration__sparkle,
+      .celebration__piece,
+      .celebration__pop,
+      .celebration__reveal
+    ) {
     animation: none;
   }
 

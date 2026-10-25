@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- @include head -->
     <script type="module" src="/src/js/pages/home.js"></script>
   </head>
@@ -22,27 +22,45 @@
               </p>
             </div>
 
-            <h1 id="today-title" class="today__title" data-today-title>Hoje rezamos os <span class="today__set"><span class="skeleton skeleton--block">Mistérios do dia</span></span></h1>
+            <h1 id="today-title" class="today__title" data-today-title>
+              Hoje rezamos os
+              <span class="today__set"><span class="skeleton skeleton--block">Mistérios do dia</span></span>
+            </h1>
 
-            <p class="today__lead" data-today-lead><span class="skeleton">Contemplamos os mistérios de hoje com calma, um de cada vez, oração por oração.</span></p>
+            <p class="today__lead" data-today-lead>
+              <span class="skeleton"
+                >Contemplamos os mistérios de hoje com calma, um de cada vez, oração por oração.</span
+              >
+            </p>
 
             <div class="today__actions">
               <a class="button button--primary button--large" href="/mysteries.html" data-today-start>
                 <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
                 <span data-today-start-label>Começar o terço de hoje</span>
               </a>
-              <a class="button button--outline button--large today__secondary" href="/mysteries.html">Escolher outro mistério</a>
+              <a class="button button--outline button--large today__secondary" href="/mysteries.html"
+                >Escolher outro mistério</a
+              >
             </div>
           </div>
 
           <div class="today__art" aria-hidden="true">
             <svg class="today__ring" viewBox="0 0 220 220">
-              <circle cx="110" cy="110" r="96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="0 10.053"></circle>
+              <circle
+                cx="110"
+                cy="110"
+                r="96"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-dasharray="0 10.053"
+              ></circle>
               <circle cx="110" cy="110" r="76" fill="none" stroke="currentColor" stroke-width="1"></circle>
             </svg>
           </div>
 
-          <img class="today__mary" src="/src/assets/brand/mary.png" alt="" width="584" height="572" loading="lazy">
+          <img class="today__mary" src="/src/assets/brand/mary.png" alt="" width="584" height="572" loading="lazy" />
         </div>
       </section>
 
@@ -71,7 +89,9 @@
           <div class="rosary-today__header">
             <div class="rosary-today__intro">
               <h2 id="rosary-title" class="rosary-today__title">Rosário de hoje</h2>
-              <p class="rosary-today__status" data-rosary-status>Reze os quatro terços no mesmo dia para completar um Rosário.</p>
+              <p class="rosary-today__status" data-rosary-status>
+                Reze os quatro terços no mesmo dia para completar um Rosário.
+              </p>
             </div>
             <a class="link" href="/history.html">Ver meu histórico</a>
           </div>
@@ -101,7 +121,12 @@
       <template id="rosary-set-template">
         <li>
           <a class="card card--link rosary-set" data-set-link>
-            <span class="illustration illustration--md rosary-set__illustration" aria-hidden="true" data-set-illustration hidden></span>
+            <span
+              class="illustration illustration--md rosary-set__illustration"
+              aria-hidden="true"
+              data-set-illustration
+              hidden
+            ></span>
             <span class="rosary-set__name" data-set-name></span>
             <span class="caption" data-set-days></span>
             <span class="badge badge--day rosary-set__badge" data-set-today hidden>Do dia</span>

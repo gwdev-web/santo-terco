@@ -26,16 +26,16 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 
 ## Pages
 
-| Page | File |
-|---|---|
-| Home: today's terço, the week and today's Rosary | `index.html` |
-| Mysteries: the four sets and their twenty mysteries | `mysteries.html` |
-| Prayers: rosary and complementary prayers, litanies | `prayers.html` |
-| Guided terço, one stage per URL | `pray.html?mystery=<set>&step=<opening \| 1–5 \| closing>` |
-| Full Rosary celebration | `rosary-complete.html` |
-| History | `history.html` |
-| About and Symbols and design | `about.html`, `symbols.html` |
-| Not found | `404.html` |
+| Page                                                | File                                                       |
+| --------------------------------------------------- | ---------------------------------------------------------- |
+| Home: today's terço, the week and today's Rosary    | `index.html`                                               |
+| Mysteries: the four sets and their twenty mysteries | `mysteries.html`                                           |
+| Prayers: rosary and complementary prayers, litanies | `prayers.html`                                             |
+| Guided terço, one stage per URL                     | `pray.html?mystery=<set>&step=<opening \| 1–5 \| closing>` |
+| Full Rosary celebration                             | `rosary-complete.html`                                     |
+| History                                             | `history.html`                                             |
+| About and Symbols and design                        | `about.html`, `symbols.html`                               |
+| Not found                                           | `404.html`                                                 |
 
 ## Accessibility
 
@@ -55,6 +55,8 @@ npm run dev       # start the dev server
 npm run build     # build to dist/
 npm run preview   # preview the build at /santo-terco/, as on GitHub Pages
 npm run validate  # check the built HTML (html-validate)
+npm run lint      # check code and formatting (ESLint + Prettier)
+npm run format    # format every file (Prettier) and apply ESLint fixes
 ```
 
 During development, `/components.html` shows every base component, interface icon and illustration for review (it is not part of the build).
@@ -90,9 +92,9 @@ User progress and history are stored only in the browser (`localStorage`).
 
 The site is published on GitHub Pages at <https://gwdev-web.github.io/santo-terco/> by GitHub Actions:
 
-| Workflow | When | What |
-|---|---|---|
-| [CI](.github/workflows/ci.yml) | every pull request and every push to `develop` | `npm ci`, build and HTML validation |
+| Workflow                               | When                                                 | What                                    |
+| -------------------------------------- | ---------------------------------------------------- | --------------------------------------- |
+| [CI](.github/workflows/ci.yml)         | every pull request and every push to `develop`       | `npm ci`, build and HTML validation     |
 | [Deploy](.github/workflows/deploy.yml) | every push to `main` (or by hand in the Actions tab) | the same checks, then publishes `dist/` |
 
 Work happens on `develop`; merging into `main` publishes the site and, at the same time, the data it reads from GitHub raw.

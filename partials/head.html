@@ -1,46 +1,50 @@
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>{{title}}</title>
-    <meta name="description" content="{{description}}">
-    <link rel="canonical" href="{{url}}">
-    <meta name="theme-color" content="#FAF8F5">
-    <meta name="color-scheme" content="light dark">
-    <script>
-      /* Applies the saved prayer text size before the first paint (see src/js/components/text-size.js) */
-      try {
-        const size = JSON.parse(localStorage.getItem('santo-terco:text-size'));
-        if (size === 'large' || size === 'x-large') document.documentElement.dataset.textSize = size;
-      } catch {}
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>{{title}}</title>
+<meta name="description" content="{{description}}" />
+<link rel="canonical" href="{{url}}" />
+<meta name="theme-color" content="#FAF8F5" />
+<meta name="color-scheme" content="light dark" />
+<script>
+  /* Applies the saved prayer text size before the first paint (see src/js/components/text-size.js) */
+  try {
+    const size = JSON.parse(localStorage.getItem('santo-terco:text-size'));
+    if (size === 'large' || size === 'x-large') document.documentElement.dataset.textSize = size;
+  } catch {}
 
-      /* Applies the theme before the first paint: the saved choice, or the system preference (see src/js/components/theme-toggle.js) */
-      {
-        let theme = null;
-        try {
-          theme = JSON.parse(localStorage.getItem('santo-terco:theme'));
-        } catch {}
-        if (theme !== 'light' && theme !== 'dark') theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.dataset.theme = theme;
-        document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#141C31' : '#FAF8F5';
-      }
-    </script>
+  /* Applies the theme before the first paint: the saved choice, or the system preference (see src/js/components/theme-toggle.js) */
+  {
+    let theme = null;
+    try {
+      theme = JSON.parse(localStorage.getItem('santo-terco:theme'));
+    } catch {}
+    if (theme !== 'light' && theme !== 'dark')
+      theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#141C31' : '#FAF8F5';
+  }
+</script>
 
-    <link rel="icon" href="/favicon.ico" sizes="48x48">
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Santo Terço">
-    <meta property="og:title" content="{{title}}">
-    <meta property="og:description" content="{{description}}">
-    <meta property="og:url" content="{{url}}">
-    <meta property="og:image" content="{{siteUrl}}og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Santo Terço: reze o terço do dia, passo a passo, com Nossa Senhora de braços abertos.">
-    <meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:site_name" content="Santo Terço" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:url" content="{{url}}" />
+<meta property="og:image" content="{{siteUrl}}og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta
+  property="og:image:alt"
+  content="Santo Terço: reze o terço do dia, passo a passo, com Nossa Senhora de braços abertos."
+/>
+<meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preload" href="/src/assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="/src/assets/fonts/lato-400.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- @data-preload -->
-    <link rel="stylesheet" href="/src/styles/main.css">
+<link rel="preload" href="/src/assets/fonts/playfair-display.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/src/assets/fonts/lato-400.woff2" as="font" type="font/woff2" crossorigin />
+<!-- @data-preload -->
+<link rel="stylesheet" href="/src/styles/main.css" />

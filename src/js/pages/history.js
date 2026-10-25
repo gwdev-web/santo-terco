@@ -121,7 +121,8 @@ function renderWeek(root, days, today) {
 
       qs('[data-day-count]', item).textContent = future ? '' : String(count);
       qs('[data-day-label]', item).textContent = weekdayShortName(day);
-      qs('[data-day-text]', item).textContent = `${weekdayName(day)}: ${future ? 'ainda não chegou' : countLabel(count)}`;
+      qs('[data-day-text]', item).textContent =
+        `${weekdayName(day)}: ${future ? 'ainda não chegou' : countLabel(count)}`;
       return fragment;
     }),
   );
@@ -135,8 +136,7 @@ function getHeatmapDays(today) {
 
   return Array.from(
     { length: HEATMAP_WEEKS * 7 },
-    (_, index) =>
-      new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() - (HEATMAP_WEEKS - 1) * 7 + index),
+    (_, index) => new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() - (HEATMAP_WEEKS - 1) * 7 + index),
   );
 }
 

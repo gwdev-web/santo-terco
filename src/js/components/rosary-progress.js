@@ -48,7 +48,11 @@ export function createRosaryProgress(root, stages, currentIndex) {
         medal.classList.toggle('medal--done', done);
         medal.classList.toggle('medal--current', !done && index === currentIndex);
         medal.classList.toggle('medal--unlock', Boolean(previousDone && done && !previousDone[index]));
-        qs('[data-trail-state]', step).textContent = done ? ', concluída' : index === currentIndex ? ', etapa atual' : '';
+        qs('[data-trail-state]', step).textContent = done
+          ? ', concluída'
+          : index === currentIndex
+            ? ', etapa atual'
+            : '';
       });
 
       // The gold line reaches the stage after the last one completed

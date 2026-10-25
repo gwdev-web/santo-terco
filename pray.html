@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- @include head -->
     <script type="module" src="/src/js/pages/pray.js"></script>
   </head>
@@ -29,7 +29,10 @@
         <div class="rosary-progress__summary">
           <div class="rosary-progress__text">
             <p class="rosary-progress__title">Sua caminhada de hoje</p>
-            <p class="rosary-progress__count"><b data-progress-count>0 de 71 orações</b><span class="rosary-progress__duration"> · cerca de 20 minutos no total</span></p>
+            <p class="rosary-progress__count">
+              <b data-progress-count>0 de 71 orações</b
+              ><span class="rosary-progress__duration"> · cerca de 20 minutos no total</span>
+            </p>
           </div>
           <div class="rosary-progress__meta">
             <span class="badge badge--cream" data-streak hidden>
@@ -61,11 +64,20 @@
         <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
         <div class="notice__body">
           <p class="notice__title">Este navegador não está guardando o seu progresso.</p>
-          <p>Você pode rezar normalmente. Só as marcações e o terço concluído não ficam salvos neste aparelho, o que acontece em janelas anônimas ou com os dados do site bloqueados.</p>
+          <p>
+            Você pode rezar normalmente. Só as marcações e o terço concluído não ficam salvos neste aparelho, o que
+            acontece em janelas anônimas ou com os dados do site bloqueados.
+          </p>
         </div>
       </div>
 
-      <section class="celebration pray__celebration" tabindex="-1" hidden aria-labelledby="celebration-title" data-celebration>
+      <section
+        class="celebration pray__celebration"
+        tabindex="-1"
+        hidden
+        aria-labelledby="celebration-title"
+        data-celebration
+      >
         <div class="celebration__art" aria-hidden="true">
           <span class="celebration__confetti" data-celebration-confetti></span>
           <span class="celebration__rays"></span>
@@ -77,8 +89,12 @@
           </span>
         </div>
         <p class="celebration__eyebrow celebration__reveal">Terço concluído</p>
-        <h2 id="celebration-title" class="celebration__title celebration__reveal celebration__reveal--1">Que a paz de Cristo fique com você</h2>
-        <p class="celebration__text celebration__reveal celebration__reveal--2" data-celebration-text>Você rezou os cinco mistérios.</p>
+        <h2 id="celebration-title" class="celebration__title celebration__reveal celebration__reveal--1">
+          Que a paz de Cristo fique com você
+        </h2>
+        <p class="celebration__text celebration__reveal celebration__reveal--2" data-celebration-text>
+          Você rezou os cinco mistérios.
+        </p>
         <div class="celebration__rosary celebration__reveal celebration__reveal--3">
           <p class="celebration__rosary-title" data-celebration-rosary-title>Rosário de hoje</p>
           <ul class="celebration__sets" data-celebration-sets></ul>
@@ -86,7 +102,9 @@
         <div class="celebration__actions celebration__reveal celebration__reveal--4">
           <a class="button button--primary button--large" href="/mysteries.html">
             <span>Rezar o próximo terço</span>
-            <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+            <svg class="icon icon--sm button__icon-end" aria-hidden="true">
+              <use href="/icons.svg#arrow-right"></use>
+            </svg>
           </a>
         </div>
       </section>
@@ -116,7 +134,9 @@
           <header class="pray__intro motion-fade-up" data-stage-intro>
             <p class="eyebrow" data-stage-eyebrow><span class="skeleton">Etapa 1 de 7</span></p>
             <h1 class="pray__title" data-stage-title><span class="skeleton skeleton--block">Orações iniciais</span></h1>
-            <p class="pray__lead" data-stage-lead><span class="skeleton">Reze com calma, uma de cada vez, e marque cada oração.</span></p>
+            <p class="pray__lead" data-stage-lead>
+              <span class="skeleton">Reze com calma, uma de cada vez, e marque cada oração.</span>
+            </p>
           </header>
 
           <ol class="pray__steps" data-steps data-skeleton></ol>
@@ -124,7 +144,12 @@
           <div class="pray__complete" role="status" data-stage-complete></div>
 
           <div class="pray-finish" hidden data-finish>
-            <button class="button button--primary button--large pray-finish__button" type="button" aria-describedby="finish-hint" data-finish-button>
+            <button
+              class="button button--primary button--large pray-finish__button"
+              type="button"
+              aria-describedby="finish-hint"
+              data-finish-button
+            >
               <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
               <span>Concluir o terço</span>
             </button>
@@ -144,9 +169,16 @@
               <span class="pray-next__eyebrow">A seguir</span>
               <span class="pray-next__title" data-next-title></span>
             </p>
-            <a class="button button--primary button--large pray-next__button" href="/pray.html" data-next-link data-next-part>
+            <a
+              class="button button--primary button--large pray-next__button"
+              href="/pray.html"
+              data-next-link
+              data-next-part
+            >
               <span data-next-label>Continuar</span>
-              <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
+              <svg class="icon icon--sm button__icon-end" aria-hidden="true">
+                <use href="/icons.svg#arrow-right"></use>
+              </svg>
             </a>
           </div>
         </div>
@@ -154,7 +186,10 @@
         <aside class="pray__aside" aria-labelledby="stage-list-title" data-stage-aside>
           <h2 id="stage-list-title" class="pray__aside-title">Nesta etapa</h2>
           <ul class="stage-list" data-stage-list></ul>
-          <p class="pray__aside-note">Marcar é opcional, mas ajuda a não se perder. Tudo fica salvo neste aparelho: se fechar a página, você continua de onde parou.</p>
+          <p class="pray__aside-note">
+            Marcar é opcional, mas ajuda a não se perder. Tudo fica salvo neste aparelho: se fechar a página, você
+            continua de onde parou.
+          </p>
         </aside>
       </div>
 
@@ -163,7 +198,10 @@
         <ul class="pray-more__list">
           <li>
             <a class="card card--link pray-more__card" href="/mysteries.html">
-              <span class="illustration illustration--md illustration--terco pray-more__illustration" aria-hidden="true"></span>
+              <span
+                class="illustration illustration--md illustration--terco pray-more__illustration"
+                aria-hidden="true"
+              ></span>
               <span class="pray-more__text">
                 <span class="card__title">Completar o Rosário</span>
                 <span class="card__text" data-more-rosary>Reze os quatro terços hoje e complete o Rosário.</span>
@@ -176,7 +214,10 @@
           </li>
           <li>
             <a class="card card--link pray-more__card" href="/prayers.html">
-              <span class="illustration illustration--md illustration--ladainha-nossa-senhora pray-more__illustration" aria-hidden="true"></span>
+              <span
+                class="illustration illustration--md illustration--ladainha-nossa-senhora pray-more__illustration"
+                aria-hidden="true"
+              ></span>
               <span class="pray-more__text">
                 <span class="card__title">Orações complementares</span>
                 <span class="card__text">Ladainhas, Lembrai-vos, Santo Anjo e Ato de Contrição.</span>
@@ -189,7 +230,9 @@
           </li>
           <li>
             <a class="card card--link pray-more__card" href="/history.html">
-              <svg class="icon pray-more__illustration pray-more__icon" aria-hidden="true"><use href="/icons.svg#calendar-check"></use></svg>
+              <svg class="icon pray-more__illustration pray-more__icon" aria-hidden="true">
+                <use href="/icons.svg#calendar-check"></use>
+              </svg>
               <span class="pray-more__text">
                 <span class="card__title">Meu histórico</span>
                 <span class="card__text">Veja seus dias de oração e suas medalhas.</span>
@@ -223,16 +266,23 @@
               <p class="step-card__subtitle" data-step-subtitle></p>
             </div>
             <p class="step-card__counter" aria-live="polite" hidden data-step-counter>
-              <span data-counter-value>0</span><span class="step-card__counter-total"> de <span data-counter-total>3</span></span>
+              <span data-counter-value>0</span
+              ><span class="step-card__counter-total"> de <span data-counter-total>3</span></span>
             </p>
           </div>
 
-          <p class="step-card__hint" hidden data-step-hint>Toque na <b>conta que pisca</b> ao terminar cada Ave Maria. Tocou errado? Toque de novo na última conta dourada para desmarcar.</p>
+          <p class="step-card__hint" hidden data-step-hint>
+            Toque na <b>conta que pisca</b> ao terminar cada Ave Maria. Tocou errado? Toque de novo na última conta
+            dourada para desmarcar.
+          </p>
 
           <div class="step-card__beads" role="group" hidden data-step-beads></div>
 
           <button class="step-card__add" type="button" hidden data-step-add>
-            <span class="step-card__add-count" aria-hidden="true"><span data-add-count>0</span><span class="step-card__add-total"> de <span data-add-total>10</span></span></span>
+            <span class="step-card__add-count" aria-hidden="true"
+              ><span data-add-count>0</span
+              ><span class="step-card__add-total"> de <span data-add-total>10</span></span></span
+            >
             <span class="step-card__add-label">
               <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#plus"></use></svg>
               <span>Rezei a <span data-add-next>1ª</span> Ave Maria</span>
@@ -252,7 +302,13 @@
             Rezei<span class="visually-hidden" data-toggle-context></span>
           </button>
 
-          <button class="link-button disclosure__toggle step-card__show" type="button" aria-expanded="false" hidden data-step-show>
+          <button
+            class="link-button disclosure__toggle step-card__show"
+            type="button"
+            aria-expanded="false"
+            hidden
+            data-step-show
+          >
             <span class="disclosure__closed">Mostrar o texto da oração</span>
             <span class="disclosure__open">Esconder o texto</span>
           </button>
@@ -265,7 +321,9 @@
         </span>
         <span class="step-card__decade-text">
           <span class="step-card__decade-title">Dezena completa!</span>
-          <span class="step-card__decade-detail">As dez Ave-Marias estão rezadas. Agora, o Glória fecha este mistério.</span>
+          <span class="step-card__decade-detail"
+            >As dez Ave-Marias estão rezadas. Agora, o Glória fecha este mistério.</span
+          >
         </span>
       </template>
 
@@ -319,7 +377,9 @@
           <span class="medal" aria-hidden="true">
             <span class="illustration" data-celebration-set-illustration hidden></span>
           </span>
-          <span><span data-celebration-set-name></span><span class="visually-hidden" data-celebration-set-state></span></span>
+          <span
+            ><span data-celebration-set-name></span><span class="visually-hidden" data-celebration-set-state></span
+          ></span>
         </li>
       </template>
 
