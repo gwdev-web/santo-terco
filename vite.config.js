@@ -136,4 +136,11 @@ export default defineConfig(({ command, isPreview }) => ({
       input: Object.fromEntries(Object.keys(PAGES).map((page) => [page, resolve(root, `${page}.html`)])),
     },
   },
+  // Unit and data tests (npm test); the browser tests have their own runner
+  test: {
+    include: ['tests/unit/**/*.test.js'],
+    environment: 'happy-dom',
+    restoreMocks: true,
+    unstubGlobals: true,
+  },
 }));

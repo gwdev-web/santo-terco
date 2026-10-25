@@ -21,6 +21,11 @@ export default [
     languageOptions: { globals: globals.node },
   },
   {
+    // Vitest runs in Node with a simulated browser (happy-dom)
+    files: ['tests/**/*.js'],
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  },
+  {
     rules: {
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'no-var': 'error',

@@ -23,6 +23,8 @@ npm run preview   # serve the build at /santo-terco/
 npm run validate  # html-validate on dist/*.html (also run by CI)
 npm run lint      # ESLint + Prettier check (also run by CI)
 npm run format    # format every file with Prettier and apply ESLint fixes
+npm test          # Vitest: unit tests and /data checks (also run by CI)
+npm run test:watch # Vitest in watch mode
 ```
 
 ## Architecture
@@ -32,11 +34,12 @@ npm run format    # format every file with Prettier and apply ESLint fixes
 components.html        dev-only review page for components, icons and illustrations (not built)
 partials/              shared HTML (head, header, tab bar, footer) included at build time (see vite.config.js)
 data/                  JSON content, consumed from GitHub raw (see Data)
-.github/workflows/     ci.yml (pull requests and develop: lint + build + validate), deploy.yml (main: GitHub Pages)
+.github/workflows/     ci.yml (pull requests and develop: lint + test + build + validate), deploy.yml (main: GitHub Pages)
 public/                files served with a fixed name: favicon, app icons, manifest, og-image, robots.txt, icons.svg sprite
 src/assets/fonts/      Playfair Display and Lato (Latin subset, woff2), served with the site
 src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
 src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
+tests/unit/            Vitest tests for services and utils, plus data.test.js, which checks every /data file
 src/js/
   app.js               initApp(): shared behavior for every page
   config.js            constants (the data URL itself is set in vite.config.js)
@@ -71,6 +74,7 @@ The build is published under `/santo-terco/` (GitHub Pages, from `SITE_URL` in `
 - JSON files live in `/data` in this repository and are fetched from `https://raw.githubusercontent.com/gwdev-web/santo-terco/main/data/<file>.json`.
 - Always load them through `fetchJson()` (`src/js/services/api.js`): timeout, `response.ok` check, per-URL cache. Don't add request headers: the request must match the `<link rel="preload">` that the build adds for each file listed in the page's `data` in `PAGES` (`vite.config.js`).
 - In development (`npm run dev`) the local `/data` files are served instead, so data can be tested before it is pushed. The production build only reaches data after it is pushed to `main`.
+- A push to `main` changes the live data at once, so data changes go through `develop` or a pull request, where CI runs `tests/unit/data.test.js`. When the data gets a new field or rule, add its check there.
 - User progress and history are stored only in the browser with `localStorage`, through `services/storage.js` (keys prefixed `santo-terco:`). Nothing is sent to a server.
 - Pages that load data show a skeleton while loading and a `.notice--error` with "Tentar de novo" on failure (`initDataLoader`, which also retries when the device comes back online).
 - Pages that save or read progress have a `[data-storage-notice]`, shown when the browser doesn't keep the site's data (private window, blocked or full storage).
@@ -132,7 +136,7 @@ Mobile-first, fluid sizes with `clamp()`, four ranges:
 
 ## Before handing a phase back
 
-1. `npm run lint`, `npm run build` and `npm run validate` pass.
+1. `npm run lint`, `npm test`, `npm run build` and `npm run validate` pass.
 2. Check every responsive range, keyboard navigation and reduced motion.
 3. Changed pages pass the W3C validator.
 4. Summarize what changed, what to test, and any design deviation, then stop.

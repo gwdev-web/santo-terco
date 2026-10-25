@@ -57,6 +57,7 @@ npm run preview   # preview the build at /santo-terco/, as on GitHub Pages
 npm run validate  # check the built HTML (html-validate)
 npm run lint      # check code and formatting (ESLint + Prettier)
 npm run format    # format every file (Prettier) and apply ESLint fixes
+npm test          # run the unit tests and the data checks (Vitest)
 ```
 
 During development, `/components.html` shows every base component, interface icon and illustration for review (it is not part of the build).
