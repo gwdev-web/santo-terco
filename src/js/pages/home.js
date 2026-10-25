@@ -1,14 +1,14 @@
 import { initApp } from '../app.js';
 import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
-import { getSetIdsPrayedOn } from '../services/history.js';
+import { getRosaryRound } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { hasProgress } from '../services/progress.js';
 import { formatShortDate, getWeek, toDateKey, weekdayName, weekdayShortName } from '../utils/date.js';
 import { cloneTemplate, qs, qsa } from '../utils/dom.js';
 import { appUrl } from '../utils/url.js';
 
-const DURATION_NOTE = 'Cerca de 20 minutos, com cada oração na tela e marcação opcional.';
+const DURATION_NOTE = 'Cerca de 20 minutos, com cada oração na tela, uma de cada vez.';
 
 initApp();
 initHome(qs('[data-home]'));
@@ -31,7 +31,15 @@ function initHome(root) {
 
       renderToday(root, todaySet, hasProgress(todaySet.id, toDateKey(today)));
       renderWeek(qs('[data-week]', root), sets, today);
-      renderRosary(root, sets, todaySet, getSetIdsPrayedOn(toDateKey(today)));
+      renderRosary(
+        root,
+        sets,
+        todaySet,
+        getRosaryRound(
+          sets.map((set) => set.id),
+          toDateKey(today),
+        ),
+      );
     },
     { onError: () => renderTodayFallback(root) },
   );
@@ -83,15 +91,18 @@ function renderWeek(list, sets, today) {
   );
 }
 
-/** Today's Rosary: how many of the four sets were prayed today, and a link to each one. */
-function renderRosary(root, sets, todaySet, prayedIds) {
+/**
+ * Today's Rosary: how many of the four sets were prayed toward the current Rosary, and a link
+ * to each one. After a full Rosary the count starts again, inviting the user to pray another.
+ */
+function renderRosary(root, sets, todaySet, { completed, prayedIds }) {
   const prayedCount = sets.filter((set) => prayedIds.has(set.id)).length;
   const status = qs('[data-rosary-status]', root);
+  const progress = `${prayedCount} de ${sets.length} terços`;
 
-  status.textContent =
-    prayedCount === sets.length
-      ? 'Rosário completo! Você rezou os quatro terços hoje.'
-      : `${prayedCount} de ${sets.length} terços · reze os quatro para completar um Rosário`;
+  status.textContent = completed
+    ? `${completed === 1 ? '1 Rosário completo' : `${completed} Rosários completos`} hoje! Que tal mais um? ${progress}`
+    : `${progress} · reze os quatro para completar um Rosário`;
 
   qsa('.rosary-today__segment', qs('[data-rosary-progress]', root)).forEach((segment, index) => {
     segment.classList.toggle('rosary-today__segment--filled', index < prayedCount);

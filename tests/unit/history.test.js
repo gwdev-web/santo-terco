@@ -6,7 +6,7 @@ import {
   countRosariesOn,
   getHistory,
   getLongestStreak,
-  getSetIdsPrayedOn,
+  getRosaryRound,
   getStreak,
 } from '../../src/js/services/history.js';
 import { localDate } from './helpers.js';
@@ -47,14 +47,6 @@ describe('history', () => {
     clearHistory();
     expect(getHistory()).toEqual([]);
   });
-
-  it('lists the sets prayed on a day', () => {
-    prayOn('joyful', '2026-10-25', '2026-10-25');
-    prayOn('luminous', '2026-10-25');
-    prayOn('glorious', '2026-10-24');
-
-    expect(getSetIdsPrayedOn('2026-10-25')).toEqual(new Set(['joyful', 'luminous']));
-  });
 });
 
 describe('Rosaries', () => {
@@ -74,6 +66,31 @@ describe('Rosaries', () => {
     prayOn('glorious', '2026-10-25');
     prayOn('luminous', '2026-10-24');
     expect(countRosariesOn(SET_IDS, '2026-10-25')).toBe(0);
+  });
+
+  it('lists the sets prayed toward today’s Rosary, not other days', () => {
+    prayOn('joyful', '2026-10-25');
+    prayOn('luminous', '2026-10-25');
+    prayOn('glorious', '2026-10-24');
+
+    expect(getRosaryRound(SET_IDS, '2026-10-25')).toEqual({ completed: 0, prayedIds: new Set(['joyful', 'luminous']) });
+  });
+
+  it('starts the count again after each full Rosary', () => {
+    for (const setId of SET_IDS) prayOn(setId, '2026-10-25');
+    expect(getRosaryRound(SET_IDS, '2026-10-25')).toEqual({ completed: 1, prayedIds: new Set() });
+
+    prayOn('sorrowful', '2026-10-25');
+    expect(getRosaryRound(SET_IDS, '2026-10-25')).toEqual({ completed: 1, prayedIds: new Set(['sorrowful']) });
+  });
+
+  it('counts a set prayed twice toward the next Rosary', () => {
+    prayOn('joyful', '2026-10-25', '2026-10-25');
+    prayOn('sorrowful', '2026-10-25');
+    prayOn('glorious', '2026-10-25');
+    prayOn('luminous', '2026-10-25');
+
+    expect(getRosaryRound(SET_IDS, '2026-10-25')).toEqual({ completed: 1, prayedIds: new Set(['joyful']) });
   });
 
   it('counts the least prayed set', () => {

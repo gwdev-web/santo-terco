@@ -3,7 +3,7 @@ import { MOBILE_MEDIA_QUERY } from '../config.js';
 import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
 import { initTabs } from '../components/tabs.js';
-import { getSetIdsPrayedOn } from '../services/history.js';
+import { getRosaryRound } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
@@ -23,18 +23,25 @@ function initMysteries(root) {
   initDataLoader(root, async () => {
     const sets = await getMysterySets();
     const todaySet = getSetForDate(sets, today);
-    const prayedIds = getSetIdsPrayedOn(toDateKey(today));
+    const { completed, prayedIds } = getRosaryRound(
+      sets.map((set) => set.id),
+      toDateKey(today),
+    );
 
-    renderRing(root, sets, prayedIds);
+    renderRing(root, sets, prayedIds, completed);
     renderSets(root, sets, todaySet, prayedIds);
     initTabs(qs('[data-mysteries-sets]', root), { media: MOBILE_MEDIA_QUERY });
   });
 }
 
-/** "1 de 4 terços" with a ring that fills as the sets are prayed. */
-function renderRing(root, sets, prayedIds) {
+/**
+ * "1 de 4 terços" with a ring that fills as the sets are prayed; after a full Rosary
+ * it starts again for the next one ("2º Rosário de hoje").
+ */
+function renderRing(root, sets, prayedIds, completed) {
   const count = sets.filter((set) => prayedIds.has(set.id)).length;
 
+  qs('[data-ring-label]', root).textContent = completed ? `${completed + 1}º Rosário de hoje` : 'Rosário de hoje';
   qs('[data-ring-count]', root).textContent = `${count} de ${sets.length} terços`;
   qs('[data-ring-value]', root).style.strokeDashoffset = String(100 - (count / sets.length) * 100);
 }

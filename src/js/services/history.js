@@ -62,15 +62,21 @@ export function countRosaries(dayEntries, setIds) {
 }
 
 /**
+ * Today's Rosary in progress. Each full Rosary starts the count again, so the user can pray
+ * another one: a set is in the current Rosary when it was prayed more times than the Rosaries
+ * already completed (a set prayed twice before the other three counts toward the next one too).
+ *
+ * @param {string[]} setIds - Ids of the four sets.
  * @param {string} dateKey - "YYYY-MM-DD".
- * @returns {Set<string>} Ids of the sets prayed on that day.
+ * @returns {{ completed: number, prayedIds: Set<string> }} Rosaries completed that day, and the
+ *   sets already prayed toward the next one.
  */
-export function getSetIdsPrayedOn(dateKey) {
-  return new Set(
-    getHistory()
-      .filter((entry) => entry.date === dateKey)
-      .map((entry) => entry.setId),
-  );
+export function getRosaryRound(setIds, dateKey) {
+  const dayEntries = getHistory().filter((entry) => entry.date === dateKey);
+  const completed = countRosaries(dayEntries, setIds);
+  const timesPrayed = (id) => dayEntries.filter((entry) => entry.setId === id).length;
+
+  return { completed, prayedIds: new Set(setIds.filter((id) => timesPrayed(id) > completed)) };
 }
 
 /**

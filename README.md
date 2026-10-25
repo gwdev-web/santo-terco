@@ -10,9 +10,9 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 
 - **Mystery of the day**: suggested from the day of the week (Joyful, Sorrowful, Glorious, Luminous), with the option to choose any other.
 - **Guided rosary**: opening prayers, the five mysteries (Bible reference, quote, reflections, fruit) with an Our Father, a 10 Hail Mary counter and the Glory Be, then the closing prayers.
-- **Optional marking**: mark each prayer as you go; progress is saved so you can continue where you stopped.
+- **Prayer by prayer**: mark each prayer as you go (or the whole stage at once, if you forgot to tap); the next stage opens when the current one is complete, and progress is saved so you can continue where you stopped.
 - **Celebrations**: finishing a terço shows a calm celebration and today's Rosary; the fourth set of the day opens the full Rosary page.
-- **Full Rosary**: pray the four sets of mysteries on the same day to complete a Rosary.
+- **Full Rosary**: pray the four sets of mysteries on the same day to complete a Rosary; the count then starts again, so you can pray as many as you like.
 - **Prayers**: the rosary prayers in the order they are prayed, complementary prayers and three litanies, with an adjustable text size and a copy button.
 - **History**: this week, days in a row, a 12-week heatmap, totals per mystery, recent days and medals, with an option to clear everything.
 - **Works offline**: install it on the phone's home screen like an app; after the first visit it opens and guides the terço without internet, and loads instantly.

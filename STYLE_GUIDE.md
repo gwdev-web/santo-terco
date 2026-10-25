@@ -8,12 +8,12 @@ Implementation lives in [`src/styles/tokens.css`](src/styles/tokens.css). This d
 
 ## 1. Principles
 
-| Principle               | What it means on screen                                                                                                                                          |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Serene**              | Beige background instead of pure white, generous space around text, no flashy animation. The screen invites silence.                                             |
-| **Clear**               | One main action per screen. The prayer text is always the most legible element; buttons and markers stay secondary.                                              |
-| **Welcoming**           | Nothing is mandatory: marking prayers is optional and there is no "error". Copy guides without demanding, written for beginners.                                 |
-| **Obviously clickable** | Much of the audience is older and not used to websites. Nothing clickable is loose text (see [Affordance](#62-affordance-everything-clickable-looks-clickable)). |
+| Principle               | What it means on screen                                                                                                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Serene**              | Beige background instead of pure white, generous space around text, no flashy animation. The screen invites silence.                                                                      |
+| **Clear**               | One main action per screen. The prayer text is always the most legible element; buttons and markers stay secondary.                                                                       |
+| **Welcoming**           | No "error" and no pressure: each stage opens once its prayers are marked, with "Rezei todas desta etapa" for whoever forgot to tap. Copy guides without demanding, written for beginners. |
+| **Obviously clickable** | Much of the audience is older and not used to websites. Nothing clickable is loose text (see [Affordance](#62-affordance-everything-clickable-looks-clickable)).                          |
 
 ---
 
@@ -216,7 +216,8 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Focus page:** the guided terço has its own header ("Sair do terço", the set with its illustration, "Trocar de mistério"), no tab bar and no footer. One stage per URL: `pray.html?mystery=<set>&step=<opening | 1–5 | closing>`; without `step` it opens the first stage not finished today.
 - **Prayer step card:** number, illustration, title (Playfair 24px; 21px on mobile), a short hint (e.g. "Abre a dezena · 1 vez") and the full prayer in a light-beige box with a 4px gold left border (`--text-prayer`).
   - States: _current_ (gold border + gold halo, `aria-current="step"`), _done_ (soft green border, number in green, text folded with "Mostrar o texto da oração"), _upcoming_ (neutral border).
-  - "Rezei" folds the step and lights up the next one; the page never scrolls on its own, so the user keeps their place. Marking is optional.
+  - "Rezei" folds the step and lights up the next one; the page never scrolls on its own, so the user keeps their place.
+  - The next stage opens only when every prayer of this one is marked: until then its button is flat and muted (`aria-disabled`, no `href`) and the bar says "Faltam N orações nesta etapa". Below the prayers, "Rezei todas desta etapa" (outline) marks the whole stage at once, for whoever prayed and forgot to tap. A `step` further ahead in the URL opens the first unfinished stage.
 - **Mark toggle ("Rezei"):** a box and the verb, `aria-pressed`. Pressed: soft green with a filled check. Full width and 52px on mobile, a pill beside the title from tablet. The label stays "Rezei"; screen readers also hear the prayer's name.
 - **Beads:** round buttons with `aria-pressed`, 56px (64–68px for the opening's three). _Gold_ = prayed · _navy outline, breathing_ = next (only in the current step) · _white_ = remaining. Tapping a bead marks every bead up to it; tapping the last gold bead unmarks it. The opening's three show their virtue (Fé, Esperança, Caridade).
 - **Decade (10 Hail Marys):** a cream hint ("Toque na conta que pisca…"), the beads and a navy "Rezei a 4ª Ave Maria" button that marks the next bead. Mobile: the beads form a ring (placed with `cos()`/`sin()`) around that button, which shows the count ("3 de 10"). Tablet and up: one row of ten when it fits, otherwise two rows of five, with the button below. When the ten are prayed, "Dezena completa!" takes the button's place (announced with `role="status"`).
@@ -225,9 +226,10 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Medals:** round, with an illustration. _Done_ = navy with a gold drawing · _current_ = navy outline with a gold halo · _to do_ = white. A medal earned during the visit pops in (800ms). Finishing a stage shows "Primeira medalha conquistada!" (or "Mais uma medalha!") with its medal below the prayers and, at the same moment, as a toast at the top right.
 - **"A seguir":** navy card in two rows: the next stage (illustration, "A seguir" and its title) on top, then a thin line and the buttons at each end: "Voltar" (previous stage: "Orações iniciais", "Mistério anterior" or "5º mistério") at the left and the gold button ("Ir para o 1º mistério", "Próximo mistério", "Orações finais"), which breathes once the stage is done. On mobile it is a bar fixed at the bottom with "Voltar" and the next button.
 - **Stage list ("Nesta etapa"):** the step names with a green check when done; beside the stage on desktop, below it on tablet, hidden on mobile.
-- **Closing ("Orações finais"):** Agradecimento, Salve Rainha and Sinal da Cruz, then the gold "Concluir o terço" (full width on mobile), which breathes once the three are marked. Its hint says the user may conclude at any time ("Você pode concluir a qualquer momento." / "Tudo pronto! Toque para registrar o seu terço."). Below, "Quer continuar rezando?" with three link cards: Completar o Rosário (terços left today), Orações complementares and Meu histórico (rows on mobile, columns from tablet).
+- **Closing ("Orações finais"):** Agradecimento, Salve Rainha and Sinal da Cruz, then the gold "Concluir o terço" (full width on mobile), enabled and breathing once every prayer of the terço is marked. Its hint says what is left ("Marque as orações finais para concluir o terço." / "Tudo pronto! Toque para registrar o seu terço."). Below, "Quer continuar rezando?" with three link cards: Completar o Rosário (terços left today), Orações complementares and Meu histórico (rows on mobile, columns from tablet).
 - **Concluding a terço:** it is saved in the history and today's marks for that set are cleared, so praying it again starts from the beginning. The "Terço concluído" celebration appears above the stage, the page scrolls so it is centered in what is visible below the sticky header and trail, and it receives focus. It is sized to fit the screen height: the set's medal, "Que a paz de Cristo fique com você", the streak (from 2 days), "Rosário de hoje · N de 4" with the four sets and "Rezar o próximo terço". The fourth set of the day opens the full Rosary page instead.
-- **Full Rosary page:** a navy page of its own (no header, tab bar or footer), everything fitting the screen height and centered (art beside the text on landscape screens; on short phones the two facts side by side): the ring draws, the four set medals pop in around it (top, right, bottom, left) and then the Rosary medal in the center; "Você completou um Rosário hoje" (or "2 Rosários"), the count of the day, the new medal and "Ver meu histórico" and "Voltar ao início". Opened without a full Rosary today, it calmly shows which sets were prayed and which are left, with "Escolher um mistério".
+- **Rosary count:** "Rosário de hoje" counts the sets prayed toward the Rosary in progress (`getRosaryRound`). After each full Rosary it starts again at 0 of 4, inviting another one ("1 Rosário completo hoje! Que tal mais um?", "2º Rosário de hoje"); a set prayed twice before the other three counts toward the next Rosary.
+- **Full Rosary page:** a navy page of its own (no header, tab bar or footer), everything fitting the screen height and centered (art beside the text on landscape screens; on short phones the two facts side by side): the ring draws, the four set medals pop in around it (top, right, bottom, left) and then the Rosary medal in the center; "Você completou um Rosário hoje" (or "2 Rosários"), the count of the day, the new medal, an invitation to pray another ("Rezar outro Rosário", to the Mysteries page) and "Ver meu histórico". Opened without a full Rosary today, it calmly shows which sets were prayed and which are left, with "Escolher um mistério".
 
 ### 6.4 Other components
 
@@ -318,7 +320,7 @@ Speak like someone praying beside the user: close, simple, unhurried and never d
 
 | Do                                             | Avoid                                 |
 | ---------------------------------------------- | ------------------------------------- |
-| Reze com calma. Marcar é opcional.             | Você precisa marcar todas as orações. |
+| Faltam 3 orações nesta etapa.                  | Você precisa marcar todas as orações. |
 | Hoje contemplamos os Mistérios Luminosos.      | Mistério obrigatório de quinta-feira. |
 | Que a paz de Cristo fique com você.            | PARABÉNS!!! Missão cumprida!!!        |
 | Ou escolha outro mistério                      | Clique aqui para mudar a configuração |
