@@ -163,8 +163,6 @@
 
 .pray__steps {
   --skeleton-height: 24rem;
-  /* Leaves room for the sticky header, trail and bottom bar when a step scrolls into view */
-  --step-scroll-margin: 210px;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -225,10 +223,41 @@
 
 /* "Terço concluído": the celebration above the stage, at the top of the page */
 
+/* Fits the screen height, so it can be centered once the terço is concluded */
 .pray__celebration {
+  --celebration-medal: clamp(5rem, 13dvh, 8.75rem);
+  gap: var(--space-3);
   padding: 0 var(--space-4) var(--space-6);
   border-radius: var(--radius-xl);
   outline: none;
+}
+
+.pray__celebration .celebration__art {
+  block-size: calc(var(--celebration-medal) * 1.6);
+}
+
+/* Short phones: the sticky header and trail take part of the screen */
+@media (max-width: 40em) and (max-height: 47.5em) {
+  .pray__celebration {
+    padding-bottom: var(--space-4);
+  }
+
+  .pray__celebration .celebration__art {
+    block-size: calc(var(--celebration-medal) * 1.4);
+  }
+
+  .pray__celebration .celebration__title {
+    font-size: 1.625rem;
+  }
+
+  .pray__celebration .celebration__rosary {
+    gap: var(--space-2);
+    padding-block: var(--space-3);
+  }
+
+  .pray__celebration .celebration__set .medal {
+    --medal-size: 2.75rem;
+  }
 }
 
 /* "Quer continuar rezando?": three link cards, in rows on mobile */
@@ -405,7 +434,7 @@
 .meditation__quote blockquote {
   font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
   line-height: 1.5;
-  color: var(--color-beige);
+  color: var(--color-on-navy-quote);
 }
 
 .meditation__reference {
@@ -602,13 +631,15 @@
     height: 12px;
   }
 
-  .pray__steps {
-    --step-scroll-margin: var(--space-6);
-  }
-
+  /* Two rows: what comes next with the whole width for its title, then the buttons at each end */
   .pray-next {
     position: static;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "chip text text"
+      "line line line"
+      "previous previous button"; /* spans two columns, so the first one fits the chip */
     align-items: center;
     gap: var(--space-4);
     margin: var(--space-2) 0 0;
@@ -618,7 +649,34 @@
     border-radius: var(--radius-lg);
   }
 
+  .pray-next::before {
+    grid-area: line;
+    block-size: 1px;
+    content: "";
+    background-color: var(--color-navy-border);
+  }
+
+  /* Last stage: only "Voltar", without the line */
+  .pray-next:has(.pray-next__text[hidden]) {
+    grid-template-areas: "previous";
+  }
+
+  .pray-next:has(.pray-next__text[hidden])::before {
+    display: none;
+  }
+
+  .pray-next__previous {
+    grid-area: previous;
+    justify-self: start;
+  }
+
+  .pray-next__button {
+    grid-area: button;
+    justify-self: end;
+  }
+
   .pray-next__chip {
+    grid-area: chip;
     display: grid;
     place-items: center;
     inline-size: 3.75rem;
@@ -629,8 +687,8 @@
   }
 
   .pray-next__text {
+    grid-area: text;
     display: flex;
-    flex: 1;
     flex-direction: column;
     gap: 2px;
     order: 0;
@@ -695,11 +753,9 @@
   .pray-next__title {
     font-family: var(--font-heading);
     font-size: 1.375rem;
+    line-height: 1.3;
     color: var(--color-on-navy);
-  }
-
-  .pray-next__button {
-    flex: none;
+    text-wrap: balance;
   }
 
   .pray-finish__button {
@@ -707,7 +763,9 @@
   }
 
   .pray__celebration {
-    padding: var(--space-2) var(--space-8) var(--space-12);
+    --celebration-medal: clamp(6rem, 15dvh, 10.625rem);
+    gap: var(--space-4);
+    padding: var(--space-2) var(--space-8) var(--space-8);
   }
 
   .pray-more {

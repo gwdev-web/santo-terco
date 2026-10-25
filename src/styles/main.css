@@ -27,6 +27,7 @@
 @import "./components/bead.css";
 @import "./components/step-card.css";
 @import "./components/celebration.css";
+@import "./components/toast.css";
 
 /* Pages */
 @import "./pages/home.css";

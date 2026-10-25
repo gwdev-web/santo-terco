@@ -77,19 +77,19 @@
 
             <div class="history__row">
               <section class="history-card history-card--wide" aria-labelledby="heatmap-title">
-                <div class="history-card__head">
-                  <h2 id="heatmap-title" class="history-card__title">Últimas 12 semanas</h2>
-                  <div class="heatmap-legend" aria-hidden="true">
-                    <span>0</span>
-                    <span class="heatmap__day heatmap__day--0"></span>
-                    <span class="heatmap__day heatmap__day--1"></span>
-                    <span class="heatmap__day heatmap__day--2"></span>
-                    <span class="heatmap__day heatmap__day--3"></span>
-                    <span class="heatmap__day heatmap__day--4"></span>
-                    <span>4 terços (Rosário)</span>
-                  </div>
-                </div>
+                <h2 id="heatmap-title" class="history-card__title">Últimas 12 semanas</h2>
                 <div class="heatmap" role="img" aria-label="Terços por dia nas últimas 12 semanas" data-heatmap data-skeleton></div>
+                <div class="heatmap-legend">
+                  <p id="heatmap-legend-title" class="heatmap-legend__title">O que cada cor significa</p>
+                  <ul class="heatmap-legend__list" aria-labelledby="heatmap-legend-title">
+                    <li class="heatmap-legend__item"><span class="heatmap__day heatmap__day--0" aria-hidden="true"></span>Nenhum terço no dia</li>
+                    <li class="heatmap-legend__item"><span class="heatmap__day heatmap__day--1" aria-hidden="true"></span>1 terço</li>
+                    <li class="heatmap-legend__item"><span class="heatmap__day heatmap__day--2" aria-hidden="true"></span>2 terços</li>
+                    <li class="heatmap-legend__item"><span class="heatmap__day heatmap__day--3" aria-hidden="true"></span>3 terços</li>
+                    <li class="heatmap-legend__item"><span class="heatmap__day heatmap__day--4" aria-hidden="true"></span>4 terços: o Rosário completo</li>
+                    <li class="heatmap-legend__item"><span class="heatmap__day heatmap__day--future" aria-hidden="true"></span>Dia que ainda vai chegar</li>
+                  </ul>
+                </div>
               </section>
 
               <section class="history-card" aria-labelledby="by-set-title">

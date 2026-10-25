@@ -37,14 +37,6 @@
   flex: 999 1 34rem;
 }
 
-.history-card__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-
 .history-card__title {
   font-size: 1.1875rem;
 }
@@ -217,11 +209,11 @@
 }
 
 .heatmap__day--2 {
-  background-color: var(--color-gold);
+  background-color: var(--color-heat-2);
 }
 
 .heatmap__day--3 {
-  background-color: var(--color-gold-heading);
+  background-color: var(--color-heat-3);
 }
 
 .heatmap__day--4 {
@@ -233,17 +225,41 @@
   border: 1px dashed var(--color-border);
 }
 
+/* Legend: one square per meaning, in a list under the grid */
 .heatmap-legend {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.heatmap-legend__title {
   font-size: var(--text-caption);
-  color: var(--color-text-muted);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.heatmap-legend__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-caption);
+  color: var(--color-text);
+  list-style: none;
+}
+
+.heatmap-legend__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
 .heatmap-legend .heatmap__day {
-  inline-size: 14px;
+  flex: none;
+  inline-size: 1rem;
 }
 
 /* Per set */
@@ -468,6 +484,12 @@
 /* Tablet (> 640px): the week is in the heatmap, more room in the cards */
 
 @media (min-width: 40.0625em) {
+  .heatmap-legend__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+  }
+
   .history {
     gap: var(--space-8);
   }

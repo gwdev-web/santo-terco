@@ -20,7 +20,7 @@ const SPARKLES = [
  * Celebration: rays turning slowly, ripples, sparkles and falling gold beads around
  * medals that pop in, then the text fades up (see celebration.css).
  * The beads are added to `[data-celebration-confetti]` and the sparkles to
- * `[data-celebration-sparkles]`; `[data-celebration-replay]` plays it again.
+ * `[data-celebration-sparkles]`.
  * Under reduced motion CSS shows it still.
  *
  * @param {HTMLElement} root - The `.celebration` element.
@@ -30,7 +30,7 @@ export function createCelebration(root) {
   const confetti = qs('[data-celebration-confetti]', root);
   const sparkles = qs('[data-celebration-sparkles]', root);
 
-  // Spread with fixed steps instead of random numbers, so every replay looks the same
+  // Spread with fixed steps instead of random numbers, so every visit looks the same
   for (let index = 0; index < CONFETTI_COUNT; index += 1) {
     const piece = document.createElement('span');
     piece.className = 'celebration__piece';
@@ -60,8 +60,6 @@ export function createCelebration(root) {
     void root.offsetWidth; // a reflow restarts the CSS animations
     root.classList.add('celebration--playing');
   }
-
-  qs('[data-celebration-replay]', root)?.addEventListener('click', play);
 
   return { play };
 }

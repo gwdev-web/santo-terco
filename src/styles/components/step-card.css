@@ -14,7 +14,6 @@
   background-color: var(--color-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
-  scroll-margin-block: var(--step-scroll-margin, var(--space-6));
   transition:
     border-color var(--duration-slow) var(--ease-standard),
     box-shadow var(--duration-slow) var(--ease-standard);

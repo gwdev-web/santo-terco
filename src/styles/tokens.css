@@ -30,6 +30,8 @@
   --color-border-strong: #cfc5b0; /* outline of neutral buttons and toggles */
   --color-track: #ede6d6; /* empty progress tracks */
   --color-heat-1: #e3cfa6; /* heatmap: one terço in a day */
+  --color-heat-2: var(--color-gold); /* heatmap: two terços */
+  --color-heat-3: var(--color-gold-heading); /* heatmap: three terços */
   --color-heat-4: var(--color-navy); /* heatmap: the whole Rosário */
   --color-success: #2f6b4a;
   --color-success-bg: #e7f1ea;
@@ -49,6 +51,7 @@
   /* On navy backgrounds */
   --color-on-navy: #faf8f5;
   --color-on-navy-muted: #d9d4c7;
+  --color-on-navy-quote: #ece3cf; /* warm parchment for quotes on navy, in both themes */
   --color-gold-light: #e7cb86; /* highlights on navy */
   --color-navy-border: #3a4c72;
   --color-on-navy-surface: rgba(250, 248, 245, 0.06); /* boxes inside celebrations */
@@ -161,7 +164,9 @@
   --color-damask: #253050;
   --color-border-strong: #4a5674;
   --color-track: #263049;
-  --color-heat-1: #4d412b;
+  --color-heat-1: #4d412b; /* an even ramp up to light gold, so each level stands apart */
+  --color-heat-2: #8a6a35;
+  --color-heat-3: #c29b62;
   --color-heat-4: var(--color-gold-light);
 
   --color-success: #82c9a0;

@@ -2,8 +2,8 @@
    Celebration — end of a terço and of a full Rosary, on navy
    Rays turning slowly, ripples, sparkles and falling gold beads around medals
    that pop in (.celebration__pop), then the text fades up (.celebration__reveal).
-   JS adds .celebration--playing to start it (again). Timings can be shifted with
-   --pop-delay, --ripple-start and --reveal-start; the text order with .celebration__reveal--1…4.
+   JS adds .celebration--playing to start it. Timings can be shifted with
+   --pop-delay, --ripple-start, --burst-start (sparkles and beads) and --reveal-start; the text order with .celebration__reveal--1…4.
    Under reduced motion everything is shown still, without the loops.
    ========================================================================== */
 
@@ -242,12 +242,12 @@
 }
 
 .celebration--playing .celebration__sparkle {
-  animation: celebration-twinkle 2.4s var(--delay) var(--ease-in-out) infinite;
+  animation: celebration-twinkle 2.4s calc(var(--burst-start, 0s) + var(--delay)) var(--ease-in-out) infinite backwards;
 }
 
 /* Three falls, then the beads rest: joyful, not endless */
 .celebration--playing .celebration__piece {
-  animation: celebration-fall var(--duration) var(--delay) ease-in 3;
+  animation: celebration-fall var(--duration) calc(var(--burst-start, 0s) + var(--delay)) ease-in 3;
 }
 
 .celebration--playing .celebration__pop {

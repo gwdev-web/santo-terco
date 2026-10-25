@@ -1,8 +1,10 @@
 /* ==========================================================================
    Full Rosary — a navy page of its own (no header, tab bar or footer)
    The ring draws, the four set medals pop in one by one around it, then the
-   Rosary medal in the center and the text. The art scales with its width
-   (container units), from phones to large screens.
+   Rosary medal in the center, a burst of sparkles and beads, then the text.
+   Everything fits the screen height: the art scales with the width and the height
+   of the screen (its inner parts use container units), the content is centered,
+   and landscape screens put the art beside the text.
    ========================================================================== */
 
 .page--celebration {
@@ -13,10 +15,12 @@
   --skeleton-base: var(--color-navy-2);
   --skeleton-shine: var(--color-navy-hover);
   --ripple-start: 2.4s;
+  --burst-start: 2.4s; /* sparkles and beads once the Rosary medal is in */
   --reveal-start: 2.6s;
+  justify-content: center;
   min-block-size: 100vh;
   min-block-size: 100dvh;
-  padding-block: var(--space-6) var(--space-12);
+  padding-block: var(--space-6);
   outline: none;
 }
 
@@ -25,7 +29,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   max-width: calc(47.5rem + 2 * var(--gutter));
 }
 
@@ -34,10 +38,10 @@
 .rosary-complete__art {
   --celebration-medal: 36.5cqi;
   container-type: inline-size;
-  inline-size: min(100%, 32.5rem);
+  inline-size: min(100%, 32.5rem, 32dvh);
   block-size: auto;
   aspect-ratio: 1;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4); /* room for the label of the bottom set */
 }
 
 .rosary-complete__art .celebration__rays {
@@ -110,7 +114,7 @@
   align-items: center;
   gap: 2px;
   padding: 2px var(--space-2);
-  font-size: clamp(0.75rem, 2.7cqi, 0.875rem);
+  font-size: clamp(0.6875rem, 2.7cqi, 0.875rem);
   font-weight: 700;
   color: var(--color-on-navy-muted);
   white-space: nowrap;
@@ -164,13 +168,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   inline-size: 100%;
 }
 
 .rosary-complete__title {
-  max-width: 14ch;
-  font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem);
+  max-width: 16ch;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem);
   line-height: 1.08;
 }
 
@@ -195,7 +199,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-6);
   font-size: 0.9375rem;
   line-height: 1.4;
   text-align: left;
@@ -209,7 +213,7 @@
 
 .rosary-complete__number {
   font-family: var(--font-heading);
-  font-size: clamp(2.625rem, 2.375rem + 1vw, 3rem);
+  font-size: clamp(2.25rem, 2rem + 1vw, 2.75rem);
   font-weight: 700;
   line-height: 1;
 }
@@ -223,7 +227,7 @@
 }
 
 .rosary-complete__medal .medal {
-  --medal-size: 3.25rem;
+  --medal-size: 3rem;
 }
 
 .rosary-complete__highlight {
@@ -252,15 +256,15 @@
 
 @media (min-width: 40.0625em) {
   .rosary-complete {
-    padding-block: var(--space-8) var(--space-16);
+    padding-block: var(--space-8);
   }
 
-  .rosary-complete__inner {
-    gap: var(--space-6);
+  .rosary-complete__art {
+    inline-size: min(100%, 32.5rem, 40dvh);
   }
 
   .rosary-complete__lead {
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
   }
 
   .rosary-complete__facts {
@@ -268,6 +272,87 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--space-4);
+  }
+}
+
+/* Landscape screens: the art beside the text, both centered on the screen */
+
+@media (min-width: 40.0625em) and (orientation: landscape) {
+  .rosary-complete__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 35rem);
+    grid-template-rows: 1fr auto auto auto 1fr; /* the text block stays together, centered beside the art */
+    grid-template-areas:
+      "art ."
+      "art text"
+      "art notice"
+      "art actions"
+      "art .";
+    align-content: center;
+    justify-content: center;
+    gap: var(--space-4) clamp(var(--space-8), 5vw, var(--space-16));
+    max-width: calc(var(--width-page) + 2 * var(--gutter));
+  }
+
+  .rosary-complete__art {
+    grid-area: art;
+    inline-size: min(32.5rem, 80dvh - 2 * var(--space-8), 42vw);
+    margin-bottom: 0;
+  }
+
+  .rosary-complete__text {
+    grid-area: text;
+  }
+
+  .rosary-complete__notice {
+    grid-area: notice;
+  }
+
+  .rosary-complete .celebration__actions {
+    grid-area: actions;
+    margin-top: var(--space-2);
+  }
+}
+
+/* Short phones: the two facts side by side, without the note about tomorrow */
+
+@media (max-width: 40em) and (max-height: 47.5em) {
+  .rosary-complete {
+    padding-block: var(--space-3);
+  }
+
+  .rosary-complete__art {
+    inline-size: min(100%, 25dvh);
+    margin-bottom: var(--space-3);
+  }
+
+  .rosary-complete__title {
+    font-size: 1.75rem;
+  }
+
+  .rosary-complete__facts {
+    flex-direction: row;
+  }
+
+  .rosary-complete__count,
+  .rosary-complete__medal {
+    flex: 1;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    font-size: 0.875rem;
+  }
+
+  .rosary-complete__count br,
+  .rosary-complete__muted {
+    display: none;
+  }
+
+  .rosary-complete__medal .medal {
+    --medal-size: 2.5rem;
+  }
+
+  .rosary-complete__lead {
+    font-size: 0.9375rem;
   }
 }
 

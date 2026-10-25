@@ -88,10 +88,6 @@
             <span>Rezar o próximo terço</span>
             <svg class="icon icon--sm button__icon-end" aria-hidden="true"><use href="/icons.svg#arrow-right"></use></svg>
           </a>
-          <button class="button button--on-navy button--large" type="button" data-celebration-replay>
-            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#arrows-clockwise"></use></svg>
-            <span>Ver a animação de novo</span>
-          </button>
         </div>
       </section>
 
@@ -296,6 +292,25 @@
             <span class="stage-complete__title" data-complete-title></span>
             <span data-complete-text></span>
           </p>
+        </div>
+      </template>
+
+      <div class="toast-region" data-toast-region></div>
+
+      <template id="toast-template">
+        <div class="toast" data-toast>
+          <span class="medal toast__medal" aria-hidden="true">
+            <span class="illustration" data-toast-illustration hidden></span>
+          </span>
+          <div class="toast__body">
+            <p class="toast__eyebrow">Nova medalha</p>
+            <p class="toast__title" data-toast-title></p>
+            <p class="toast__text" data-toast-text></p>
+          </div>
+          <button class="toast__close" type="button" aria-label="Fechar aviso" data-toast-close>
+            <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#x"></use></svg>
+          </button>
+          <span class="toast__timer" aria-hidden="true"></span>
         </div>
       </template>
 

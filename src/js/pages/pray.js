@@ -5,6 +5,7 @@ import { setIllustration } from '../components/illustration.js';
 import { createRosaryProgress } from '../components/rosary-progress.js';
 import { createStepCard } from '../components/step-card.js';
 import { showStorageNotice } from '../components/storage-notice.js';
+import { showToast } from '../components/toast.js';
 import { addHistoryEntry, countRosariesOn, getSetIdsPrayedOn, getStreak } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { getPrayerBook, getPrayersById } from '../services/prayers.js';
@@ -75,6 +76,8 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
   const isClosing = stage.kind === 'closing';
   let progress = { ...counts };
   let concluded = false;
+  let stageWasDone = null; // unknown until the first update
+  let toastShown = false;
 
   document.title = `${stage.title} · ${set.name} · Santo Terço`;
   renderHeader(set);
@@ -107,14 +110,10 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
   update();
 
   function mark(step, value) {
-    const wasDone = isStepDone(step, progress);
-
     progress = { ...progress, [step.key]: value };
     // After "Concluir", the next terço starts clean. A failed save still lets the user pray, with a notice
     if (!concluded && !saveProgress(set.id, dateKey, progress)) showStorageNotice();
     update();
-
-    if (!wasDone && isStepDone(step, progress)) revealCurrentStep();
   }
 
   function update() {
@@ -134,6 +133,12 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
     });
 
     renderCompletion(root, stage, stageDone && !isClosing); // the closing stage ends with the celebration
+    // The medal toast only when the stage is finished now, once per visit
+    if (stageDone && stageWasDone === false && !isClosing && !toastShown) {
+      showToast({ title: stage.completedTitle, text: stage.completedText, illustration: stage.illustration });
+      toastShown = true;
+    }
+    stageWasDone = stageDone;
     qs('[data-next-link]', root).classList.toggle('motion-breathe', stageDone);
     qs('[data-finish-button]', root).classList.toggle('motion-breathe', stageDone);
     qs('[data-finish-hint]', root).textContent = stageDone
@@ -178,22 +183,11 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
     renderMoreRosary(root, sets, prayedIds);
     showCelebration(root, { set, sets, prayedIds, streak });
   }
-
-  /** After a step is done, brings the next one into view if it is off screen. */
-  function revealCurrentStep() {
-    const next = qs('.step-card--current', root);
-    if (!next) return;
-
-    const { top, bottom } = next.getBoundingClientRect();
-    if (top < 0 || bottom > window.innerHeight) {
-      next.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-    }
-  }
 }
 
 /**
  * "Terço concluído": the set's medal, the streak and today's Rosary (the four sets,
- * the ones prayed today in light medals). Focus moves to it, at the top of the page.
+ * the ones prayed today in light medals). The page centers it on the screen and focus moves to it.
  */
 function showCelebration(root, { set, sets, prayedIds, streak }) {
   const section = qs('[data-celebration]', root);
@@ -231,8 +225,26 @@ function showCelebration(root, { set, sets, prayedIds, streak }) {
 
   section.hidden = false;
   createCelebration(section).play();
-  window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+  centerInView(section);
   section.focus({ preventScroll: true });
+}
+
+/**
+ * Scrolls so the element sits in the middle of what is visible below the sticky header
+ * and trail; when it is taller than that, its top goes just below them.
+ */
+function centerInView(element) {
+  const covered = qsa('.pray-header, .rosary-progress')
+    .filter((item) => getComputedStyle(item).position === 'sticky')
+    .reduce((sum, item) => sum + item.offsetHeight, 0);
+  const visible = window.innerHeight - covered;
+  const { top, height } = element.getBoundingClientRect();
+  const offset = covered + Math.max((visible - height) / 2, 0);
+
+  window.scrollTo({
+    top: window.scrollY + top - offset,
+    behavior: reducedMotion.matches ? 'auto' : 'smooth',
+  });
 }
 
 /** "Completar o Rosário": how many of today's four terços are left. */
