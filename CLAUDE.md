@@ -25,6 +25,7 @@ npm run lint      # ESLint + Prettier check (also run by CI)
 npm run format    # format every file with Prettier and apply ESLint fixes
 npm test          # Vitest: unit tests and /data checks (also run by CI)
 npm run test:watch # Vitest in watch mode
+npm run test:e2e  # Playwright + axe on the production build (also run by CI)
 ```
 
 ## Architecture
@@ -34,12 +35,13 @@ npm run test:watch # Vitest in watch mode
 components.html        dev-only review page for components, icons and illustrations (not built)
 partials/              shared HTML (head, header, tab bar, footer) included at build time (see vite.config.js)
 data/                  JSON content, consumed from GitHub raw (see Data)
-.github/workflows/     ci.yml (pull requests and develop: lint + test + build + validate), deploy.yml (main: GitHub Pages)
+.github/workflows/     ci.yml (pull requests and develop: lint + test + build + validate, and the browser tests), deploy.yml (main: GitHub Pages)
 public/                files served with a fixed name: favicon, app icons, manifest, og-image, robots.txt, icons.svg sprite
 src/assets/fonts/      Playfair Display and Lato (Latin subset, woff2), served with the site
 src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
 src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
 tests/unit/            Vitest tests for services and utils, plus data.test.js, which checks every /data file
+tests/e2e/             Playwright tests on the build: every page (axe, no sideways scroll), the terço flow and failures
 src/js/
   app.js               initApp(): shared behavior for every page
   config.js            constants (the data URL itself is set in vite.config.js)
@@ -136,7 +138,7 @@ Mobile-first, fluid sizes with `clamp()`, four ranges:
 
 ## Before handing a phase back
 
-1. `npm run lint`, `npm test`, `npm run build` and `npm run validate` pass.
+1. `npm run lint`, `npm test`, `npm run build`, `npm run validate` and `npm run test:e2e` pass.
 2. Check every responsive range, keyboard navigation and reduced motion.
 3. Changed pages pass the W3C validator.
 4. Summarize what changed, what to test, and any design deviation, then stop.

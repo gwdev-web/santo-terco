@@ -58,6 +58,7 @@ npm run validate  # check the built HTML (html-validate)
 npm run lint      # check code and formatting (ESLint + Prettier)
 npm run format    # format every file (Prettier) and apply ESLint fixes
 npm test          # run the unit tests and the data checks (Vitest)
+npm run test:e2e  # run the browser tests on the build (Playwright + axe); first time: npx playwright install chromium
 ```
 
 During development, `/components.html` shows every base component, interface icon and illustration for review (it is not part of the build).
