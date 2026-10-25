@@ -30,6 +30,7 @@
   --color-border-strong: #cfc5b0; /* outline of neutral buttons and toggles */
   --color-track: #ede6d6; /* empty progress tracks */
   --color-heat-1: #e3cfa6; /* heatmap: one terço in a day */
+  --color-heat-4: var(--color-navy); /* heatmap: the whole Rosário */
   --color-success: #2f6b4a;
   --color-success-bg: #e7f1ea;
   --color-success-border: #bfd9c8;
@@ -37,6 +38,13 @@
   --color-danger-bg: #fbefef;
   --color-danger-border: #d9a3a3;
   --color-danger-hover: #7f2222;
+
+  /* Roles that change with the theme */
+  --color-ink: var(--color-navy); /* headings, links and strong text */
+  --color-surface: var(--color-white); /* cards, fields and buttons */
+  --color-on-gold: #1c2b4b; /* text on gold, in both themes */
+  --color-on-success: var(--color-white);
+  --color-on-danger: var(--color-white);
 
   /* On navy backgrounds */
   --color-on-navy: #faf8f5;
@@ -125,6 +133,52 @@
   --ease-standard: cubic-bezier(0.3, 0.7, 0.4, 1);
   --ease-in-out: ease-in-out;
   --transition: var(--duration-base) var(--ease-standard);
+}
+
+/* Dark theme: night navy instead of beige, light ink, the same gold.
+   `data-theme` is set on <html> before the first paint (partials/head.html),
+   from the saved choice or the system preference. */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-beige: #10172a; /* page background */
+  --color-beige-light: #141c31; /* header, tab bar, inner panels */
+  --color-surface: #19223a;
+  --color-cream: #222c47;
+  --color-gold-soft: #3a3222;
+  --color-navy: #1f2e52; /* navy blocks stay a little above the page */
+  --color-navy-hover: #2a3d66;
+  --color-navy-2: #283960;
+  --color-navy-border: #3d5080;
+
+  --color-ink: #f1ece1;
+  --color-text: #d8d4ca;
+  --color-text-muted: #a9aebb;
+  --color-gold-heading: #d8b77c;
+  --color-gold-text: #dcbb82;
+  --color-border: #2b3652;
+  --color-damask: #253050;
+  --color-border-strong: #4a5674;
+  --color-track: #263049;
+  --color-heat-1: #4d412b;
+  --color-heat-4: var(--color-gold-light);
+
+  --color-success: #82c9a0;
+  --color-success-bg: #15302a;
+  --color-success-border: #2d5c46;
+  --color-on-success: #0e1a14;
+  --color-danger: #f0a6a6;
+  --color-danger-bg: #3a1d24;
+  --color-danger-border: #7a3c43;
+  --color-danger-hover: #f7c2c2;
+  --color-on-danger: #2a0f13;
+
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.35);
+  --shadow-gold: 0 10px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 /* Prayer text size chosen by the user (set on <html> by the text size control) */

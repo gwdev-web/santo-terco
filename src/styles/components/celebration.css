@@ -116,7 +116,7 @@
   place-items: center;
   inline-size: var(--celebration-medal);
   block-size: var(--celebration-medal);
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-beige-light);
   border: 5px solid var(--color-gold-bright);
   box-shadow: 0 0 0 8px var(--color-gold-glow);
@@ -222,7 +222,7 @@
 }
 
 .celebration__set--done .medal {
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-beige-light);
   border: 3px solid var(--color-gold-bright);
 }

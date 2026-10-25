@@ -10,7 +10,7 @@
   font-size: 0.8125rem;
   font-weight: 700;
   line-height: 1.2;
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-beige);
   border-radius: var(--radius-pill);
 }
@@ -29,7 +29,7 @@
 
 .badge--example {
   color: var(--color-text-muted);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px dashed var(--color-border-strong);
 }
 

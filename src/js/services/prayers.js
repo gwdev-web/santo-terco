@@ -43,6 +43,16 @@ export async function getPrayerBook() {
     throw new Error('prayers.json is missing "rosaryGroups", "complementary" or "litanies"');
   }
 
+  const groupWithoutPrayers = data.rosaryGroups.find((group) => !Array.isArray(group?.prayers));
+  if (groupWithoutPrayers) {
+    throw new Error(`prayers.json: group "${groupWithoutPrayers?.id}" has no "prayers" list`);
+  }
+
+  const litanyWithoutLines = data.litanies.find((litany) => !Array.isArray(litany?.lines));
+  if (litanyWithoutLines) {
+    throw new Error(`prayers.json: litany "${litanyWithoutLines?.id}" has no "lines" list`);
+  }
+
   return data;
 }
 

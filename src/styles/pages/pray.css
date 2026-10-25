@@ -39,7 +39,7 @@
   min-width: 0;
   font-size: 0.9375rem;
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 
 .pray-header__chip {
@@ -180,7 +180,7 @@
   align-items: center;
   gap: var(--space-4);
   padding: var(--space-4) var(--space-6);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-lg);
   animation: fade-up var(--duration-slow) var(--ease-standard) both;
@@ -200,7 +200,7 @@
   font-family: var(--font-heading);
   font-size: 1.3125rem;
   font-weight: 600;
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 
 /* "Concluir o terço": closing stage only; it breathes once every prayer is marked */
@@ -328,13 +328,13 @@
 .pray-next__previous {
   min-height: var(--tap-primary-mobile);
   padding-inline: var(--space-4);
-  color: var(--color-navy);
-  background-color: var(--color-white);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
   border-color: var(--color-gold);
 }
 
 .pray-next__previous:hover {
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-cream);
   border-color: var(--color-gold);
 }
@@ -377,7 +377,7 @@
   place-items: center;
   inline-size: 5.75rem;
   block-size: 5.75rem;
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-beige-light);
   border: 3px solid var(--color-gold);
   border-radius: var(--radius-pill);
@@ -420,7 +420,7 @@
   flex-direction: column;
   gap: var(--space-3);
   padding: var(--space-4);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
 }
@@ -489,12 +489,12 @@
 }
 
 .stage-list__item--done {
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 
 .stage-list__item--current {
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-cream);
 }
 
@@ -510,11 +510,11 @@
 }
 
 .stage-list__item--current .stage-list__dot {
-  border-color: var(--color-navy);
+  border-color: var(--color-ink);
 }
 
 .stage-list__item--done .stage-list__dot {
-  color: var(--color-white);
+  color: var(--color-on-success);
   background-color: var(--color-success);
   border-color: var(--color-success);
 }
@@ -573,7 +573,7 @@
     gap: var(--space-6);
     margin-inline: 0;
     padding: var(--space-6) var(--space-8);
-    background-color: var(--color-white);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
   }
@@ -583,7 +583,7 @@
     font-family: var(--font-heading);
     font-size: 1.375rem;
     font-weight: 600;
-    color: var(--color-navy);
+    color: var(--color-ink);
   }
 
   .rosary-progress__duration {
@@ -623,7 +623,7 @@
     place-items: center;
     inline-size: 3.75rem;
     block-size: 3.75rem;
-    color: var(--color-navy);
+    color: var(--color-ink);
     background-color: var(--color-beige-light);
     border-radius: var(--radius-pill);
   }
@@ -753,7 +753,7 @@
     flex-direction: column;
     gap: var(--space-4);
     padding: var(--space-6);
-    background-color: var(--color-white);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
   }

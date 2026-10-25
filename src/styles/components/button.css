@@ -16,8 +16,8 @@
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
-  color: var(--color-navy);
-  background-color: var(--color-white);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
   border: 1.5px solid var(--color-gold);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -30,7 +30,7 @@
 }
 
 .button:hover {
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-cream);
 }
 
@@ -47,6 +47,11 @@
 }
 
 /* Variants */
+
+.button--primary,
+.button--primary:hover {
+  color: var(--color-on-gold);
+}
 
 .button--primary {
   background-color: var(--color-gold);
@@ -89,7 +94,7 @@
 
 .button--danger {
   color: var(--color-danger);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-color: var(--color-danger-border);
 }
 
@@ -99,13 +104,13 @@
 }
 
 .button--danger-solid {
-  color: var(--color-white);
+  color: var(--color-on-danger);
   background-color: var(--color-danger);
   border-color: var(--color-danger);
 }
 
 .button--danger-solid:hover {
-  color: var(--color-white);
+  color: var(--color-on-danger);
   background-color: var(--color-danger-hover);
   border-color: var(--color-danger-hover);
 }
@@ -155,7 +160,7 @@
   min-height: var(--tap-min);
   padding: 0;
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-ink);
   text-decoration-line: underline;
   text-decoration-color: var(--color-gold);
   text-decoration-thickness: 2px;

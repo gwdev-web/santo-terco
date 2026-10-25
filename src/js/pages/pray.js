@@ -4,6 +4,7 @@ import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
 import { createRosaryProgress } from '../components/rosary-progress.js';
 import { createStepCard } from '../components/step-card.js';
+import { showStorageNotice } from '../components/storage-notice.js';
 import { addHistoryEntry, countRosariesOn, getSetIdsPrayedOn, getStreak } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { getPrayerBook, getPrayersById } from '../services/prayers.js';
@@ -11,6 +12,7 @@ import { clearProgress, getProgress, saveProgress } from '../services/progress.j
 import { buildStages, countPrayers, getRosary, isStageDone, isStepDone } from '../services/rosary.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs, qsa } from '../utils/dom.js';
+import { logWarning } from '../utils/log.js';
 import { appUrl } from '../utils/url.js';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -33,12 +35,19 @@ function initPray(root) {
     root,
     async () => {
       const [sets, book, rosary] = await Promise.all([getMysterySets(), getPrayerBook(), getRosary()]);
-      const set = sets.find((item) => item.id === params.get('mystery')) ?? getSetForDate(sets, today);
+      const requestedSet = sets.find((item) => item.id === params.get('mystery'));
+      const set = requestedSet ?? getSetForDate(sets, today);
       const stages = buildStages(rosary, set, getPrayersById(book));
       const dateKey = toDateKey(today);
       const counts = getProgress(set.id, dateKey);
 
       const requested = stages.findIndex((stage) => stage.id === params.get('step'));
+      if (params.has('mystery') && !requestedSet) {
+        logWarning(`Unknown mystery "${params.get('mystery')}" in the URL; showing today's set, "${set.id}"`);
+      }
+      if (params.has('step') && requested < 0) {
+        logWarning(`Unknown step "${params.get('step')}" in the URL; continuing where the user stopped`);
+      }
       const firstUnfinished = stages.findIndex((stage) => !isStageDone(stage, counts));
       const stageIndex = requested >= 0 ? requested : firstUnfinished >= 0 ? firstUnfinished : stages.length - 1;
 
@@ -101,7 +110,8 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
     const wasDone = isStepDone(step, progress);
 
     progress = { ...progress, [step.key]: value };
-    if (!concluded) saveProgress(set.id, dateKey, progress); // after "Concluir", the next terço starts clean
+    // After "Concluir", the next terço starts clean. A failed save still lets the user pray, with a notice
+    if (!concluded && !saveProgress(set.id, dateKey, progress)) showStorageNotice();
     update();
 
     if (!wasDone && isStepDone(step, progress)) revealCurrentStep();
@@ -148,7 +158,7 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
     const setIds = sets.map((item) => item.id);
     const rosariesBefore = countRosariesOn(setIds, todayKey);
 
-    addHistoryEntry(set.id, now);
+    if (!addHistoryEntry(set.id, now)) showStorageNotice();
     clearProgress(set.id, dateKey);
     concluded = true;
 

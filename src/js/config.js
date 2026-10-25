@@ -4,15 +4,9 @@
  * reads it through its GitHub raw URL, so data updates go live with a push to
  * main, without a new build. In development, Vite serves the local /data files,
  * so changes can be tested before they are pushed.
+ * Both URLs are set in vite.config.js, which also preloads each page's data files.
  */
-const GITHUB_OWNER = 'gwdev-web';
-const GITHUB_REPO = 'santo-terco';
-const GITHUB_BRANCH = 'main';
-const DATA_DIR = 'data';
-
-const RAW_DATA_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${GITHUB_BRANCH}/${DATA_DIR}`;
-
-export const DATA_BASE_URL = import.meta.env.DEV ? `${import.meta.env.BASE_URL}${DATA_DIR}` : RAW_DATA_URL;
+export const DATA_BASE_URL = import.meta.env.DATA_URL;
 
 export const FETCH_TIMEOUT_MS = 10000;
 

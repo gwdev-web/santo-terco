@@ -11,7 +11,7 @@
   inline-size: var(--medal-size, 3.5rem);
   block-size: var(--medal-size, 3.5rem);
   color: var(--color-text-muted);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 2px solid var(--color-border-strong);
   border-radius: var(--radius-pill);
   transition:
@@ -26,8 +26,8 @@
 }
 
 .medal--current {
-  color: var(--color-navy);
-  border-color: var(--color-navy);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
   box-shadow: var(--shadow-halo);
 }
 

@@ -79,6 +79,6 @@
 
   .trail__step[aria-current="step"] .trail__label,
   .trail__step--done .trail__label {
-    color: var(--color-navy);
+    color: var(--color-ink);
   }
 }

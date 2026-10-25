@@ -3,7 +3,9 @@
     <header class="site-header">
       <div class="site-header__inner container">
         <a class="brand" href="/">
-          <img class="brand__emblem" src="/src/assets/brand/emblem-small.png" alt="" width="45" height="55">
+          <!-- Lazy, so the browser only downloads the emblem of the active theme (the other one is display: none) -->
+          <img class="brand__emblem theme-light-only" src="/src/assets/brand/emblem-small.png" alt="" width="45" height="55" loading="lazy">
+          <img class="brand__emblem theme-dark-only" src="/src/assets/brand/emblem-light-small.png" alt="" width="45" height="55" loading="lazy">
           <span class="brand__name">Santo <svg class="brand__star" aria-hidden="true"><use href="/icons.svg#star"></use></svg> Terço</span>
           <span class="visually-hidden">, página inicial</span>
         </a>
@@ -18,6 +20,12 @@
           </ul>
         </nav>
 
-        <a class="site-header__about" href="/about.html" data-nav="about">Sobre</a>
+        <div class="site-header__actions">
+          <a class="site-header__about" href="/about.html" data-nav="about">Sobre</a>
+          <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Tema escuro" data-theme-toggle>
+            <svg class="icon icon--menu theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"><use href="/icons.svg#moon"></use></svg>
+            <svg class="icon icon--menu theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"><use href="/icons.svg#sun"></use></svg>
+          </button>
+        </div>
       </div>
     </header>

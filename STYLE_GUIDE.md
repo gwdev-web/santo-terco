@@ -71,6 +71,22 @@ Approved pairs: 4.5:1 for normal text, 3:1 for text 24px and up.
 | `#FFFFFF` / `#C29B62` | 2.6:1 | **Fail** | Never white on gold |
 | `#C29B62` / `#F4F1EA` | 2.3:1 | **Fail** | Decoration only, never text |
 
+### 2.5 Dark theme
+
+A night version of the same palette: deep navy instead of beige, light ink, the same gold. It follows the system preference until the user picks a theme with the moon/sun button in the header; the choice is saved in the browser (`santo-terco:theme`) and applied as `data-theme="dark"` on `<html>` before the first paint.
+
+- Components use **role tokens**, never a base color that changes meaning: `--color-ink` (headings, links, strong text), `--color-surface` (cards, fields, buttons), `--color-on-gold` (text on gold, navy in both themes), `--color-on-success` and `--color-on-danger`.
+- `--color-white` stays white and is only for text on navy or color; backgrounds use `--color-surface`.
+- In the dark theme, navy blocks (`--color-navy` `#1F2E52`) sit a little above the page (`#10172A`) and cards (`#19223A`); gold headings and labels lighten (`#D8B77C`, `#DCBB82`).
+- Images with navy lines have a light twin, shown with `.theme-light-only` / `.theme-dark-only` (header and Symbols emblem).
+
+| Text / background (dark) | Ratio | Use |
+|---|---|---|
+| `#F1ECE1` / `#10172A` | 15.1:1 | Main text |
+| `#A9AEBB` / `#19223A` | 7.1:1 | Supporting text on cards |
+| `#DCBB82` / `#19223A` | 8.6:1 | Small gold labels |
+| `#1C2B4B` / `#C29B62` | 5.5:1 | Text on gold button |
+
 ---
 
 ## 3. Typography
@@ -80,7 +96,7 @@ Approved pairs: 4.5:1 for normal text, 3:1 for text 24px and up.
 | **Playfair Display** | Headings, prayer text, quotes. Classic and liturgical; invites slow reading. | 500, 600, 700; italic 500 for quotes and highlights |
 | **Lato** | Interface: buttons, labels, navigation, explanations, UI numbers. Humanist and legible on small screens. | 400, 700 |
 
-Tokens: `--font-heading`, `--font-body`. Each has a local fallback (Georgia, Arial) resized with `size-adjust` to the web font's width, per weight, so the text doesn't reflow when the fonts arrive.
+Tokens: `--font-heading`, `--font-body`. The fonts are served with the site (`src/assets/fonts/`, Latin subset, `font-display: swap`); Playfair Display and Lato regular are preloaded. Each has a local fallback (Georgia, Arial) resized with `size-adjust` to the web font's width, per weight, so the text doesn't reflow when the fonts arrive.
 
 ### 3.1 Scale
 
@@ -227,7 +243,7 @@ Sizes: `--small`, default, `--large`; `--full` for full width (mobile). Shape: p
 - **Show more (disclosure):** a full-width outline button with a caret and `aria-expanded`; the panel opens with `grid-template-rows` (450ms). Closed content is hidden from keyboard and screen readers.
 - **Text size control:** three "A" buttons with `aria-pressed` (normal, grande, muito grande = ×1, ×1.15, ×1.3). The choice is saved in the browser and applies to prayer text on every page, without a flash on load.
 - **History page:** "Esta semana" (navy, one bar per day Monday to Sunday, a full Rosary in bright gold; mobile only), four numbers (terços in the last 12 weeks, full Rosaries in navy, days in a row, days with prayer), "Últimas 12 semanas" (one square per day, one column per week, Monday at the top: track → light gold → gold → dark gold → navy for 4 terços), "Por mistério" bars with the set illustrations, "Registros recentes" (the last six days with prayer) and "Medalhas" (Primeiro terço, Rosário completo, 3/7/30 dias seguidos: navy when earned, a dashed circle with the goal until then). Medals are worked out from the history; nothing else is stored. Without records: "Nenhum registro ainda" and "Rezar o terço do dia".
-- **About page:** the intro beside a navy quote, the four steps of the terço as numbered cards, "Seus dados ficam com você" (cream) and "Feito à mão" (code and the Symbols page), then "Pronto para começar?" with the gold button.
+- **About page:** the intro beside a navy quote, the four steps of the terço as numbered cards, "Seus dados ficam com você" (cream), then "Pronto para começar?" with the gold button.
 - **Symbols page:** a light hero with the emblem, then numbered sections (01 · O logotipo … 07 · As letras): text cards, color swatches, the four set icons with their days, the twenty mystery illustrations and the prayer illustrations (both from the data), the menu icons, the two fonts and the navy credits.
 - **404:** the rosary illustration, "Esta página não existe", "Voltar ao início" and links to Mistérios, Orações and Histórico. Not indexed.
 - **Inline confirmation:** destructive actions show "Apagar todo o histórico?" with Cancel / Confirm in place, no browser dialogs.

@@ -2,6 +2,42 @@
    Base — reset and element defaults
    ========================================================================== */
 
+/* Web fonts, served with the site (Latin subset, which covers Portuguese), so the first paint
+   doesn't wait for a third-party stylesheet. Playfair Display is variable: one file for 400–700.
+   The ones used above the fold are preloaded in partials/head.html. */
+
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/playfair-display.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/fonts/playfair-display-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/lato-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/lato-700.woff2") format("woff2");
+}
+
 /* Fallback fonts sized like the web fonts, so the text doesn't reflow when they arrive
    (widths measured against Playfair Display and Lato; bold has its own local face) */
 
@@ -95,7 +131,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-heading);
-  color: var(--color-navy);
+  color: var(--color-ink);
   overflow-wrap: break-word;
   text-wrap: balance;
 }
@@ -129,7 +165,7 @@ blockquote {
   font-style: italic;
   font-weight: 500;
   line-height: var(--leading-quote);
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 
 small {
@@ -140,7 +176,7 @@ small {
 
 /* Text links are always underlined in gold: nothing clickable is loose text */
 a {
-  color: var(--color-navy);
+  color: var(--color-ink);
   text-decoration-line: underline;
   text-decoration-color: var(--color-gold);
   text-decoration-thickness: 2px;
@@ -158,7 +194,7 @@ a:hover {
 /* Focus */
 
 :focus-visible {
-  outline: 3px solid var(--color-navy);
+  outline: 3px solid var(--color-ink);
   outline-offset: 3px;
 }
 

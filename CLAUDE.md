@@ -31,13 +31,14 @@ partials/              shared HTML (head, header, tab bar, footer) included at b
 data/                  JSON content, consumed from GitHub raw (see Data)
 .github/workflows/     ci.yml (pull requests and develop: build + validate), deploy.yml (main: GitHub Pages)
 public/                files served with a fixed name: favicon, app icons, manifest, og-image, robots.txt, icons.svg sprite
+src/assets/fonts/      Playfair Display and Lato (Latin subset, woff2), served with the site
 src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
 src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
 src/js/
   app.js               initApp(): shared behavior for every page
-  config.js            data URL and constants
+  config.js            constants (the data URL itself is set in vite.config.js)
   services/            data access and persistence (api, mysteries, prayers, rosary, storage, progress, history)
-  utils/               small pure helpers (dom, date, text)
+  utils/               small pure helpers (dom, date, text, url, log)
   components/          reusable UI behavior: initTabs, initAccordion, initBeadCounter, ...
   pages/               one entry module per page
 src/styles/
@@ -65,10 +66,18 @@ The build is published under `/santo-terco/` (GitHub Pages, from `SITE_URL` in `
 ## Data
 
 - JSON files live in `/data` in this repository and are fetched from `https://raw.githubusercontent.com/gwdev-web/santo-terco/main/data/<file>.json`.
-- Always load them through `fetchJson()` (`src/js/services/api.js`): timeout, `response.ok` check, per-URL cache.
+- Always load them through `fetchJson()` (`src/js/services/api.js`): timeout, `response.ok` check, per-URL cache. Don't add request headers: the request must match the `<link rel="preload">` that the build adds for each file listed in the page's `data` in `PAGES` (`vite.config.js`).
 - In development (`npm run dev`) the local `/data` files are served instead, so data can be tested before it is pushed. The production build only reaches data after it is pushed to `main`.
 - User progress and history are stored only in the browser with `localStorage`, through `services/storage.js` (keys prefixed `santo-terco:`). Nothing is sent to a server.
-- Pages that load data show a skeleton while loading and a `.notice--error` with "Tentar de novo" on failure.
+- Pages that load data show a skeleton while loading and a `.notice--error` with "Tentar de novo" on failure (`initDataLoader`, which also retries when the device comes back online).
+- Pages that save or read progress have a `[data-storage-notice]`, shown when the browser doesn't keep the site's data (private window, blocked or full storage).
+
+## Errors and the console
+
+- The user always gets feedback in the page (error notice, storage notice, button label); the console is for developers.
+- Log through `logError()` / `logWarning()` (`src/js/utils/log.js`), which add the `[Santo Terço]` prefix. Never call `console.*` directly.
+- `logError` only for what the user sees fail (data that didn't load); `logWarning` for problems the app works around (storage, invalid data values, clipboard, unknown URL parameters). Lighthouse counts console errors against Best Practices, so a normal visit logs nothing.
+- Error messages are in English and name what failed (the URL, the JSON file and field, the storage key).
 
 ## Style guide rules
 

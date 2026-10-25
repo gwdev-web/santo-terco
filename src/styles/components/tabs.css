@@ -35,13 +35,13 @@
 }
 
 .tabs__tab:hover {
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-cream);
 }
 
 .tabs__tab[aria-selected="true"] {
-  color: var(--color-navy);
-  background-color: var(--color-white);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
   border-color: var(--color-gold);
 }
 
