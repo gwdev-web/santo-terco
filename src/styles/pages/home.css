@@ -316,7 +316,7 @@
 
 .rosary-set__badge {
   align-self: flex-start;
-  margin-top: var(--space-1);
+  margin-block: var(--space-1); /* keeps "Rezado", pushed to the bottom, from touching it */
 }
 
 /* The action, or "Rezado hoje", sits at the bottom, aligned across the row */

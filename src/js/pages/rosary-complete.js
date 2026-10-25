@@ -2,7 +2,7 @@ import { initApp } from '../app.js';
 import { createCelebration } from '../components/celebration.js';
 import { initDataLoader } from '../components/data-loader.js';
 import { setIllustration } from '../components/illustration.js';
-import { countRosariesOn, getSetIdsPrayedOn, getStreak } from '../services/history.js';
+import { getRosaryRound, getStreak } from '../services/history.js';
 import { getMysterySets } from '../services/mysteries.js';
 import { toDateKey } from '../utils/date.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
@@ -14,8 +14,8 @@ initRosaryComplete(qs('[data-rosary-complete]'));
 
 /**
  * Full Rosary: the four sets prayed on the same day. The ring draws, the four medals
- * and the Rosary medal pop in and the text fades up. Opened without a full Rosary
- * today, it calmly shows which sets are left instead.
+ * and the Rosary medal pop in and the text fades up, with an invitation to pray another one.
+ * Opened without a full Rosary today, it calmly shows which sets are left instead.
  *
  * @param {HTMLElement} root - The page's <main>, marked with `data-rosary-complete`.
  */
@@ -26,18 +26,18 @@ function initRosaryComplete(root) {
     const today = new Date();
     const dateKey = toDateKey(today);
     const sets = await getMysterySets();
-    const prayedIds = getSetIdsPrayedOn(dateKey);
-    const rosaries = countRosariesOn(
+    const { completed, prayedIds } = getRosaryRound(
       sets.map((set) => set.id),
       dateKey,
     );
 
-    renderRing(root, sets, prayedIds, rosaries > 0);
-
-    if (rosaries > 0) {
-      renderComplete(root, rosaries, getStreak(today));
+    if (completed > 0) {
+      // The Rosary just completed: all four medals, whatever was prayed since toward the next one
+      renderRing(root, sets, new Set(sets.map((set) => set.id)), true);
+      renderComplete(root, sets, completed, prayedIds, getStreak(today));
       celebration.play();
     } else {
+      renderRing(root, sets, prayedIds, false);
       renderPending(root, sets, prayedIds);
     }
   });
@@ -67,14 +67,24 @@ function renderRing(root, sets, prayedIds, complete) {
   );
 }
 
-function renderComplete(root, rosaries, streak) {
+/** Full Rosary: the count of the day, and an invitation to pray another (the count starts again). */
+function renderComplete(root, sets, rosaries, nextPrayedIds, streak) {
   const amount = document.createElement('em');
   amount.textContent = rosaries === 1 ? 'um Rosário' : `${rosaries} Rosários`;
+  const nextCount = sets.filter((set) => nextPrayedIds.has(set.id)).length;
 
   qs('[data-eyebrow]', root).textContent = 'Parabéns!';
   qs('[data-title]', root).replaceChildren('Você completou ', amount, ' hoje');
   qs('[data-lead]', root).textContent =
-    'Os vinte mistérios da vida de Jesus e de Maria, meditados num só dia. Que Nossa Senhora interceda por suas intenções.';
+    `Os vinte mistérios da vida de Jesus e de Maria, meditados num só dia. Que Nossa Senhora interceda por suas intenções. ${
+      nextCount
+        ? `Para o próximo Rosário, você já rezou ${nextCount} de ${sets.length} terços.`
+        : 'Se quiser, comece outro: cada Rosário rezado conta.'
+    }`;
+  qs('[data-primary]', root).href = appUrl('mysteries.html');
+  qs('[data-primary-label]', root).textContent = 'Rezar outro Rosário';
+  qs('[data-secondary]', root).href = appUrl('history.html');
+  qs('[data-secondary]', root).textContent = 'Ver meu histórico';
   qs('[data-count]', root).textContent = String(rosaries);
   qs('[data-count-label]', root).textContent = rosaries === 1 ? 'Rosário completo hoje' : 'Rosários completos hoje';
   qs('[data-streak]', root).textContent = streak >= 2 ? ` · ${streak} dias seguidos` : '';

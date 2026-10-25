@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-6);
   max-width: calc(47.5rem + 2 * var(--gutter));
 }
 
@@ -319,6 +319,10 @@
 @media (max-width: 40em) and (max-height: 47.5em) {
   .rosary-complete {
     padding-block: var(--space-3);
+  }
+
+  .rosary-complete__inner {
+    gap: var(--space-3); /* everything on one screen */
   }
 
   .rosary-complete__art {

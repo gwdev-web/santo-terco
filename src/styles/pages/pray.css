@@ -203,6 +203,25 @@
 
 /* "Concluir o terço": closing stage only; it breathes once every prayer is marked */
 
+/* "Rezei todas desta etapa": below the prayers while some are left unmarked */
+
+.pray-mark-all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.pray-mark-all__button {
+  inline-size: 100%;
+}
+
+.pray-mark-all__hint {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
 .pray-finish {
   display: flex;
   flex-direction: column;
@@ -321,6 +340,7 @@
 /* "A seguir": sticky bar at the bottom on mobile, navy card from tablet */
 
 .pray-next {
+  container: pray-next / inline-size;
   position: sticky;
   bottom: 0;
   z-index: 10;
@@ -351,6 +371,9 @@
 
 .pray-next__button {
   flex: 1;
+  min-width: 0;
+  padding-inline: var(--space-4);
+  white-space: nowrap; /* one line, so both buttons keep the same height */
 }
 
 /* "Voltar": an outline button on the light bar (mobile), on navy from tablet */
@@ -375,6 +398,20 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+}
+
+/* Narrow phones (under ~380px): "Voltar" becomes a square arrow button, so the next step keeps
+   its label on one line; its name still comes from the hidden long label */
+@container pray-next (max-width: 21rem) {
+  .pray-next__previous {
+    flex: none;
+    inline-size: var(--tap-primary-mobile);
+    padding-inline: 0;
+  }
+
+  .pray-next__previous-short {
+    display: none;
+  }
 }
 
 /* Mystery meditation: illustration, quote, reflections and fruit */
@@ -568,6 +605,11 @@
     padding-block: var(--space-6) var(--space-16);
   }
 
+  /* Larger cards: more room between them, so the current one's halo doesn't reach the next */
+  .pray__steps {
+    gap: var(--space-6);
+  }
+
   .pray-header {
     position: static;
   }
@@ -758,8 +800,16 @@
     text-wrap: balance;
   }
 
-  .pray-finish__button {
+  .pray-finish__button,
+  .pray-mark-all__button {
     inline-size: auto;
+  }
+
+  /* The next stage, not open yet, on the navy bar */
+  .pray-next__button[aria-disabled="true"] {
+    color: var(--color-on-navy-muted);
+    background-color: var(--color-navy-2);
+    border-color: var(--color-navy-border);
   }
 
   .pray__celebration {

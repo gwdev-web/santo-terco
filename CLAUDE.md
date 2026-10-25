@@ -111,7 +111,7 @@ The full visual and editorial rules are in [STYLE_GUIDE.md](STYLE_GUIDE.md). Key
 - Icons: Phosphor (Light weight, Regular at 14–18px, Fill only for "play") from the `public/icons.svg` sprite for menu, arrows and buttons; the 38 custom rosary illustrations (mystery sets, each mystery, prayers) are applied as CSS masks colored by `currentColor`. Never emoji.
 - Logo: emblem of Our Lady in prayer inside a circle wrapped by the rosary, plus the "Santo ✦ Terço" small-caps wordmark. Favicon is a gold "M" on navy.
 - Everything clickable looks clickable: filled or gold-bordered buttons, gold-underlined links, cards with border and arrow, the next step gently pulsing.
-- Voice: close, simple, unhurried, never demanding. Address the user as "você". Marking prayers is always optional.
+- Voice: close, simple, unhurried, never demanding. Address the user as "você". Each stage opens once its prayers are marked; "Rezei todas desta etapa" marks a whole stage for whoever forgot to tap.
 - Prayer texts are complete, in the traditional version used in Brazil. Ordinals use "º"/"ª". Bible references use the "Lc 22,39-46" format.
 
 ## Responsive design

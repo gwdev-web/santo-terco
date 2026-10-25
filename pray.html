@@ -141,6 +141,19 @@
 
           <ol class="pray__steps" data-steps data-skeleton></ol>
 
+          <div class="pray-mark-all" hidden data-mark-all>
+            <button
+              class="button button--outline pray-mark-all__button"
+              type="button"
+              aria-describedby="mark-all-hint"
+              data-mark-all-button
+            >
+              <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
+              <span>Rezei todas desta etapa</span>
+            </button>
+            <p id="mark-all-hint" class="pray-mark-all__hint">Rezou e esqueceu de marcar? Marque todas de uma vez.</p>
+          </div>
+
           <div class="pray__complete" role="status" data-stage-complete></div>
 
           <div class="pray-finish" hidden data-finish>
@@ -153,7 +166,9 @@
               <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#check"></use></svg>
               <span>Concluir o terço</span>
             </button>
-            <p id="finish-hint" class="pray-finish__hint" data-finish-hint>Você pode concluir a qualquer momento.</p>
+            <p id="finish-hint" class="pray-finish__hint" data-finish-hint>
+              Marque as orações finais para concluir o terço.
+            </p>
           </div>
 
           <div class="pray-next" hidden data-next>
@@ -166,7 +181,7 @@
               <span class="illustration illustration--md" data-next-illustration hidden></span>
             </span>
             <p class="pray-next__text" data-next-part>
-              <span class="pray-next__eyebrow">A seguir</span>
+              <span class="pray-next__eyebrow" data-next-eyebrow>A seguir</span>
               <span class="pray-next__title" data-next-title></span>
             </p>
             <a
@@ -187,8 +202,8 @@
           <h2 id="stage-list-title" class="pray__aside-title">Nesta etapa</h2>
           <ul class="stage-list" data-stage-list></ul>
           <p class="pray__aside-note">
-            Marcar é opcional, mas ajuda a não se perder. Tudo fica salvo neste aparelho: se fechar a página, você
-            continua de onde parou.
+            Marque cada oração ao terminar: a próxima etapa abre quando todas estiverem marcadas. Tudo fica salvo neste
+            aparelho: se fechar a página, você continua de onde parou.
           </p>
         </aside>
       </div>

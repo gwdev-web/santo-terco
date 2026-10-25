@@ -31,15 +31,17 @@ test('a terço never opened before can be prayed offline', async ({ page, contex
   await installApp(page, context);
   await context.setOffline(true);
 
-  await page.goto('pray.html?mystery=luminous&step=3');
+  await page.goto('pray.html?mystery=luminous');
   await waitForData(page);
-  await expect(page.getByText('3º Mistério Luminoso')).toBeVisible();
-
-  const illustration = page.locator('[data-meditation-illustration]');
-  await expect(illustration).toBeVisible();
-  const toggle = page.getByRole('button', { name: /^Rezei ?: Pai Nosso/ }).first();
+  const toggle = page.getByRole('button', { name: /^Rezei ?: Sinal da Cruz/ }).first();
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+
+  await page.getByRole('button', { name: 'Rezei todas desta etapa' }).click();
+  await page.locator('[data-next-link]').click();
+  await waitForData(page);
+  await expect(page.getByText('1º Mistério Luminoso')).toBeVisible();
+  await expect(page.locator('[data-meditation-illustration]')).toBeVisible();
 });
 
 test('repeat visits load pages, assets and data from the device', async ({ page, context, browserName }) => {

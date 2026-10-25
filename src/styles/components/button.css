@@ -177,6 +177,24 @@
   text-decoration-color: currentColor;
 }
 
+/* Not available yet (e.g. the next stage before every prayer is marked): flat and muted,
+   without hover or press feedback. Placed after the variants so it wins over their hover. */
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  color: var(--color-text-muted);
+  background-color: var(--color-track);
+  border-color: var(--color-track);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button:disabled .button__icon-end,
+.button[aria-disabled="true"] .button__icon-end {
+  transform: none;
+}
+
 /* Mobile: primary actions are 52px tall */
 
 @media (max-width: 40em) {

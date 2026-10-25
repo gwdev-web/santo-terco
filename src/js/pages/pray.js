@@ -6,7 +6,7 @@ import { createRosaryProgress } from '../components/rosary-progress.js';
 import { createStepCard } from '../components/step-card.js';
 import { showStorageNotice } from '../components/storage-notice.js';
 import { showToast } from '../components/toast.js';
-import { addHistoryEntry, countRosariesOn, getSetIdsPrayedOn, getStreak } from '../services/history.js';
+import { addHistoryEntry, countRosariesOn, getRosaryRound, getStreak } from '../services/history.js';
 import { getMysterySets, getSetForDate } from '../services/mysteries.js';
 import { getPrayerBook, getPrayersById } from '../services/prayers.js';
 import { clearProgress, getProgress, saveProgress } from '../services/progress.js';
@@ -25,6 +25,8 @@ initPray(qs('[data-pray]'));
  * Guided terço: `pray.html?mystery=<set id>&step=<opening | 1…5 | closing>`.
  * Without `mystery`, today's set; without `step`, the first stage not finished yet,
  * so the user continues where they stopped (the closing one when every prayer is marked).
+ * A stage opens only when the ones before it are finished: a `step` further ahead
+ * shows the first unfinished stage instead.
  *
  * @param {HTMLElement} root - The page's <main>, marked with `data-pray`.
  */
@@ -50,7 +52,9 @@ function initPray(root) {
         logWarning(`Unknown step "${params.get('step')}" in the URL; continuing where the user stopped`);
       }
       const firstUnfinished = stages.findIndex((stage) => !isStageDone(stage, counts));
-      const stageIndex = requested >= 0 ? requested : firstUnfinished >= 0 ? firstUnfinished : stages.length - 1;
+      const lastOpen = firstUnfinished >= 0 ? firstUnfinished : stages.length - 1;
+      const stageIndex = requested >= 0 ? Math.min(requested, lastOpen) : lastOpen;
+      if (requested > lastOpen) window.history.replaceState(null, '', stageUrl(set, stages[stageIndex]));
 
       renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, streak: getStreak(today) });
     },
@@ -103,9 +107,16 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
   qs('[data-finish]', root).hidden = !isClosing;
   qs('[data-more]', root).hidden = !isClosing;
   if (isClosing) {
-    renderMoreRosary(root, sets, getSetIdsPrayedOn(dateKey));
+    renderMoreRosary(root, sets, getRosaryRound(setIdsOf(sets), dateKey));
     qs('[data-finish-button]', root).addEventListener('click', conclude);
   }
+
+  // For when the user prayed and forgot to tap: marks every prayer of the stage at once
+  qs('[data-mark-all-button]', root).addEventListener('click', () => {
+    for (const step of stage.steps) progress = { ...progress, [step.key]: step.count };
+    if (!saveProgress(set.id, dateKey, progress)) showStorageNotice();
+    update();
+  });
 
   update();
 
@@ -139,11 +150,21 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
       toastShown = true;
     }
     stageWasDone = stageDone;
+    const { marked, total } = countPrayers([stage], progress);
+    const allDone = stages.every((item) => isStageDone(item, progress));
+
+    qs('[data-mark-all]', root).hidden = stageDone || concluded;
+    renderNextLock(root, stageDone, total - marked);
     qs('[data-next-link]', root).classList.toggle('motion-breathe', stageDone);
-    qs('[data-finish-button]', root).classList.toggle('motion-breathe', stageDone);
-    qs('[data-finish-hint]', root).textContent = stageDone
+
+    const finishButton = qs('[data-finish-button]', root);
+    finishButton.disabled = !allDone;
+    finishButton.classList.toggle('motion-breathe', allDone);
+    qs('[data-finish-hint]', root).textContent = allDone
       ? 'Tudo pronto! Toque para registrar o seu terço.'
-      : 'Você pode concluir a qualquer momento.';
+      : stageDone
+        ? 'Faltam orações em etapas anteriores: volte e marque para concluir.'
+        : 'Marque as orações finais para concluir o terço.';
 
     trail.update({
       ...countPrayers(stages, progress),
@@ -160,7 +181,7 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
   function conclude() {
     const now = new Date();
     const todayKey = toDateKey(now);
-    const setIds = sets.map((item) => item.id);
+    const setIds = setIdsOf(sets);
     const rosariesBefore = countRosariesOn(setIds, todayKey);
 
     if (!addHistoryEntry(set.id, now)) showStorageNotice();
@@ -172,16 +193,14 @@ function renderStage(root, { set, sets, stages, stageIndex, dateKey, counts, str
       return;
     }
 
-    // The closing prayers count as prayed, even the ones left unmarked
-    for (const step of stage.steps) progress = { ...progress, [step.key]: step.count };
     streak = getStreak(now);
     update();
 
-    const prayedIds = getSetIdsPrayedOn(todayKey);
+    const round = getRosaryRound(setIds, todayKey);
     qs('[data-finish]', root).hidden = true;
     qs('[data-next]', root).hidden = true;
-    renderMoreRosary(root, sets, prayedIds);
-    showCelebration(root, { set, sets, prayedIds, streak });
+    renderMoreRosary(root, sets, round);
+    showCelebration(root, { set, sets, prayedIds: round.prayedIds, streak });
   }
 }
 
@@ -247,16 +266,24 @@ function centerInView(element) {
   });
 }
 
-/** "Completar o Rosário": how many of today's four terços are left. */
-function renderMoreRosary(root, sets, prayedIds) {
+/** "Completar o Rosário": how many terços are left for the Rosary in progress today. */
+function renderMoreRosary(root, sets, { completed, prayedIds }) {
   const left = sets.filter((item) => !prayedIds.has(item.id)).length;
+  const rosary = completed ? 'mais um Rosário' : 'o Rosário';
 
   qs('[data-more-rosary]', root).textContent =
-    left === 0
-      ? 'Você rezou os quatro terços hoje. Pode rezar outro mistério quando quiser.'
-      : left === 1
-        ? 'Falta 1 terço hoje para completar o Rosário.'
-        : `Faltam ${left} terços hoje para completar o Rosário.`;
+    left === 1
+      ? `Falta 1 terço hoje para completar ${rosary}.`
+      : `Faltam ${left} terços hoje para completar ${rosary}.`;
+}
+
+function setIdsOf(sets) {
+  return sets.map((item) => item.id);
+}
+
+/** @returns {string} Link to one stage of a set's terço. */
+function stageUrl(set, stage) {
+  return appUrl(`pray.html?mystery=${encodeURIComponent(set.id)}&step=${encodeURIComponent(stage.id)}`);
 }
 
 /** Set name and illustration in the focus header. */
@@ -308,14 +335,12 @@ function renderNavigation(root, set, stages, stageIndex) {
   const nextStage = stages[stageIndex + 1];
   const stage = stages[stageIndex];
   const previous = qs('[data-previous-link]', root);
-  const stageUrl = (target) =>
-    appUrl(`pray.html?mystery=${encodeURIComponent(set.id)}&step=${encodeURIComponent(target.id)}`);
 
   qs('[data-next]', root).hidden = !previousStage && !nextStage;
 
   previous.hidden = !previousStage;
   if (previousStage) {
-    previous.href = stageUrl(previousStage);
+    previous.href = stageUrl(set, previousStage);
     qs('[data-previous-label]', root).textContent = previousLabel(stage, previousStage);
   }
 
@@ -324,13 +349,38 @@ function renderNavigation(root, set, stages, stageIndex) {
 
   const isMystery = nextStage.kind === 'mystery';
 
-  qs('[data-next-title]', root).textContent = isMystery
+  // Shown, and the link opened, by renderNextLock() once every prayer of the stage is marked
+  qs('[data-next-title]', root).dataset.title = isMystery
     ? `${nextStage.trailLabel} Mistério · ${nextStage.title}`
     : nextStage.title;
   qs('[data-next-label]', root).textContent =
     stage.kind === 'opening' ? `Ir para o ${nextStage.name}` : isMystery ? 'Próximo mistério' : nextStage.title;
-  qs('[data-next-link]', root).href = stageUrl(nextStage);
+  qs('[data-next-link]', root).dataset.href = stageUrl(set, nextStage);
   setIllustration(qs('[data-next-illustration]', root), nextStage.illustration);
+}
+
+/**
+ * The next stage opens only when every prayer of this one is marked ("Rezei todas desta etapa"
+ * marks them at once). Until then the link has no href and the bar says how many are left.
+ */
+function renderNextLock(root, stageDone, left) {
+  const link = qs('[data-next-link]', root);
+  const title = qs('[data-next-title]', root);
+  if (!link.dataset.href) return; // the closing stage ends with "Concluir o terço"
+
+  if (stageDone) {
+    link.href = link.dataset.href;
+    link.removeAttribute('aria-disabled');
+  } else {
+    link.removeAttribute('href');
+    link.setAttribute('aria-disabled', 'true');
+  }
+  qs('[data-next-eyebrow]', root).textContent = stageDone ? 'A seguir' : 'Para seguir';
+  title.textContent = stageDone
+    ? title.dataset.title
+    : left === 1
+      ? 'Falta 1 oração nesta etapa'
+      : `Faltam ${left} orações nesta etapa`;
 }
 
 /** "Orações iniciais", "Mistério anterior" or "5º mistério". */

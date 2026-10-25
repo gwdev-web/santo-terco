@@ -18,6 +18,39 @@ async function prayStage(page) {
   }
 }
 
+/** "Rezei todas desta etapa", then on to the next stage. */
+async function markAllAndContinue(page) {
+  await page.getByRole('button', { name: 'Rezei todas desta etapa' }).click();
+  await page.locator('[data-next-link]').click();
+  await waitForData(page);
+}
+
+/** Saves today's terço of a set as if these stages were prayed (stage ids: "opening", "1"…"5"). */
+const STAGE_STEPS = { opening: [1, 1, 1, 1, 3, 1], mystery: [1, 10, 1], closing: [1, 1, 1] };
+const seedProgress = (page, setId, stageIds) =>
+  page.evaluate(
+    ({ setId, stageIds, steps, date }) => {
+      const counts = {};
+      for (const id of stageIds) {
+        const [prefix, list] = id === 'opening' ? ['opening', steps.opening] : [`mystery-${id}`, steps.mystery];
+        list.forEach((count, index) => (counts[`${prefix}/${index}`] = count));
+      }
+      localStorage.setItem('santo-terco:progress', JSON.stringify({ date, sets: { [setId]: counts } }));
+    },
+    { setId, stageIds, steps: STAGE_STEPS, date: TODAY_KEY },
+  );
+
+/** Saves finished terços of today in the history. */
+const seedHistory = (page, setIds) =>
+  page.evaluate(
+    ({ setIds, date }) =>
+      localStorage.setItem(
+        'santo-terco:history',
+        JSON.stringify(setIds.map((setId) => ({ setId, date, completedAt: `${date}T08:00:00.000Z` }))),
+      ),
+    { setIds, date: TODAY_KEY },
+  );
+
 const savedHistory = (page) => page.evaluate(() => JSON.parse(localStorage.getItem('santo-terco:history') ?? '[]'));
 
 test('prays a whole terço, stage by stage, and saves it in the history', async ({ page }) => {
@@ -79,6 +112,8 @@ test('keeps the marks after reloading and continues where the user stopped', asy
 });
 
 test('a bead can be unmarked by tapping it again', async ({ page }) => {
+  await page.goto('index.html');
+  await seedProgress(page, 'glorious', ['opening']);
   await page.goto('pray.html?mystery=glorious&step=1');
   await waitForData(page);
 
@@ -89,25 +124,99 @@ test('a bead can be unmarked by tapping it again', async ({ page }) => {
   await expect(page.getByRole('button', { name: /de 10:/, pressed: true })).toHaveCount(2);
 });
 
-test('the fourth terço of the day completes the Rosary', async ({ page }) => {
+test('the next stage opens only when every prayer is marked', async ({ page }) => {
+  await page.goto('pray.html?mystery=glorious');
+  await waitForData(page);
+  const next = page.locator('[data-next-link]');
+
+  await expect(next).toHaveAttribute('aria-disabled', 'true');
+  await expect(next).not.toHaveAttribute('href');
+  await expect(page.locator('[data-next-title]')).toHaveText('Faltam 8 orações nesta etapa');
+
+  await page
+    .getByRole('button', { name: /^Rezei ?: Sinal da Cruz/ })
+    .first()
+    .click();
+  await expect(page.locator('[data-next-title]')).toHaveText('Faltam 7 orações nesta etapa');
+
+  // Prayed and forgot to tap: one button marks the whole stage
+  await page.getByRole('button', { name: 'Rezei todas desta etapa' }).click();
+  await expect(page.locator('[data-progress-count]')).toHaveText('8 de 71 orações');
+  await expect(page.getByRole('button', { name: 'Rezei todas desta etapa' })).toBeHidden();
+  await expect(next).not.toHaveAttribute('aria-disabled');
+  await expect(page.locator('[data-next-title]')).toHaveText('1º Mistério · A Ressurreição de Jesus');
+
+  await next.click();
+  await expect(page).toHaveURL(/step=1$/);
+});
+
+test('a stage further ahead in the URL opens the first unfinished one', async ({ page }) => {
   await page.goto('index.html');
-  await page.evaluate(
-    (date) =>
-      localStorage.setItem(
-        'santo-terco:history',
-        JSON.stringify(
-          ['joyful', 'sorrowful', 'luminous'].map((setId) => ({ setId, date, completedAt: `${date}T08:00:00.000Z` })),
-        ),
-      ),
-    TODAY_KEY,
-  );
+  await seedProgress(page, 'glorious', ['opening', '1']);
 
   await page.goto('pray.html?mystery=glorious&step=closing');
   await waitForData(page);
-  // Marking is optional: the terço can be concluded at any moment
+  await expect(page.getByText('2º Mistério Glorioso')).toBeVisible();
+  await expect(page).toHaveURL(/mystery=glorious&step=2$/);
+
+  // Stages already prayed stay open
+  await page.goto('pray.html?mystery=glorious&step=opening');
+  await waitForData(page);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Orações iniciais');
+});
+
+test('the terço is concluded only with every prayer marked', async ({ page }) => {
+  await page.goto('index.html');
+  await seedProgress(page, 'glorious', ['opening', '1', '2', '3', '4', '5']);
+  await page.goto('pray.html?mystery=glorious&step=closing');
+  await waitForData(page);
+
+  const finish = page.getByRole('button', { name: 'Concluir o terço' });
+  await expect(finish).toBeDisabled();
+  await expect(page.locator('[data-finish-hint]')).toHaveText('Marque as orações finais para concluir o terço.');
+
+  await page.getByRole('button', { name: 'Rezei todas desta etapa' }).click();
+  await expect(finish).toBeEnabled();
+  await finish.click();
+  await expect(page.locator('[data-celebration]')).toBeVisible();
+});
+
+test('the fourth terço of the day completes the Rosary, and the count starts again', async ({ page }) => {
+  await page.goto('index.html');
+  await seedHistory(page, ['joyful', 'sorrowful', 'luminous']);
+  await seedProgress(page, 'glorious', ['opening', '1', '2', '3', '4', '5']);
+
+  await page.goto('pray.html?mystery=glorious&step=closing');
+  await waitForData(page);
+  await page.getByRole('button', { name: 'Rezei todas desta etapa' }).click();
   await page.getByRole('button', { name: 'Concluir o terço' }).click();
 
   await expect(page).toHaveURL(/rosary-complete\.html$/);
-  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Você completou um Rosário hoje');
   expect(await savedHistory(page)).toHaveLength(4);
+
+  // An invitation to pray another one, counted from zero
+  await page.getByRole('link', { name: 'Rezar outro Rosário' }).click();
+  await expect(page).toHaveURL(/mysteries\.html$/);
+  await waitForData(page);
+  await expect(page.locator('[data-ring-label]')).toHaveText('2º Rosário de hoje');
+  await expect(page.locator('[data-ring-count]')).toHaveText('0 de 4 terços');
+
+  await page.goto('index.html');
+  await waitForData(page);
+  await expect(page.locator('[data-rosary-status]')).toHaveText(
+    '1 Rosário completo hoje! Que tal mais um? 0 de 4 terços',
+  );
+  await expect(page.locator('[data-set-done]:visible')).toHaveCount(0);
+});
+
+test('a terço prayed through with "Rezei todas" in every stage', async ({ page }) => {
+  await page.goto('pray.html?mystery=luminous');
+  await waitForData(page);
+  for (let stage = 0; stage < 6; stage += 1) await markAllAndContinue(page);
+
+  await expect(page).toHaveURL(/step=closing$/);
+  await page.getByRole('button', { name: 'Rezei todas desta etapa' }).click();
+  await page.getByRole('button', { name: 'Concluir o terço' }).click();
+  await expect(page.locator('[data-celebration-rosary-title]')).toHaveText('Rosário de hoje · 1 de 4');
 });
