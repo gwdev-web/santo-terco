@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- @include head -->
     <script type="module" src="/src/js/pages/history.js"></script>
   </head>
@@ -27,11 +27,24 @@
           </button>
         </div>
 
+        <div class="notice" role="status" hidden data-storage-notice>
+          <svg class="icon notice__icon" aria-hidden="true"><use href="/icons.svg#info"></use></svg>
+          <div class="notice__body">
+            <p class="notice__title">Este navegador não está guardando o histórico.</p>
+            <p>
+              Em janelas anônimas ou com os dados do site bloqueados, os terços que você reza não ficam salvos neste
+              aparelho.
+            </p>
+          </div>
+        </div>
+
         <div class="history__body" data-load-content>
           <section class="history-empty" tabindex="-1" hidden aria-labelledby="history-empty-title" data-empty>
             <span class="illustration illustration--terco history-empty__illustration" aria-hidden="true"></span>
             <h2 id="history-empty-title" class="history-empty__title" data-empty-title>Nenhum registro ainda</h2>
-            <p class="history-empty__text" data-empty-text>Cada terço concluído aparecerá aqui, com os seus dias de oração e as suas medalhas.</p>
+            <p class="history-empty__text" data-empty-text>
+              Cada terço concluído aparecerá aqui, com os seus dias de oração e as suas medalhas.
+            </p>
             <a class="button button--primary button--large" href="/pray.html">
               <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#play"></use></svg>
               <span>Rezar o terço do dia</span>
@@ -51,15 +64,21 @@
             <ul class="history-stats">
               <li class="history-stat">
                 <span class="history-stat__label">Terços nas últimas 12 semanas</span>
-                <span class="history-stat__value" data-stat-total><span class="skeleton skeleton--block">00</span></span>
+                <span class="history-stat__value" data-stat-total
+                  ><span class="skeleton skeleton--block">00</span></span
+                >
               </li>
               <li class="history-stat history-stat--navy">
                 <span class="history-stat__label">Rosários completos</span>
-                <span class="history-stat__value" data-stat-rosaries><span class="skeleton skeleton--block">00</span></span>
+                <span class="history-stat__value" data-stat-rosaries
+                  ><span class="skeleton skeleton--block">00</span></span
+                >
               </li>
               <li class="history-stat">
                 <span class="history-stat__label">Dias seguidos</span>
-                <span class="history-stat__value" data-stat-streak><span class="skeleton skeleton--block">00</span></span>
+                <span class="history-stat__value" data-stat-streak
+                  ><span class="skeleton skeleton--block">00</span></span
+                >
               </li>
               <li class="history-stat">
                 <span class="history-stat__label">Dias com oração</span>
@@ -69,19 +88,37 @@
 
             <div class="history__row">
               <section class="history-card history-card--wide" aria-labelledby="heatmap-title">
-                <div class="history-card__head">
-                  <h2 id="heatmap-title" class="history-card__title">Últimas 12 semanas</h2>
-                  <div class="heatmap-legend" aria-hidden="true">
-                    <span>0</span>
-                    <span class="heatmap__day heatmap__day--0"></span>
-                    <span class="heatmap__day heatmap__day--1"></span>
-                    <span class="heatmap__day heatmap__day--2"></span>
-                    <span class="heatmap__day heatmap__day--3"></span>
-                    <span class="heatmap__day heatmap__day--4"></span>
-                    <span>4 terços (Rosário)</span>
-                  </div>
+                <h2 id="heatmap-title" class="history-card__title">Últimas 12 semanas</h2>
+                <div
+                  class="heatmap"
+                  role="img"
+                  aria-label="Terços por dia nas últimas 12 semanas"
+                  data-heatmap
+                  data-skeleton
+                ></div>
+                <div class="heatmap-legend">
+                  <p id="heatmap-legend-title" class="heatmap-legend__title">O que cada cor significa</p>
+                  <ul class="heatmap-legend__list" aria-labelledby="heatmap-legend-title">
+                    <li class="heatmap-legend__item">
+                      <span class="heatmap__day heatmap__day--0" aria-hidden="true"></span>Nenhum terço no dia
+                    </li>
+                    <li class="heatmap-legend__item">
+                      <span class="heatmap__day heatmap__day--1" aria-hidden="true"></span>1 terço
+                    </li>
+                    <li class="heatmap-legend__item">
+                      <span class="heatmap__day heatmap__day--2" aria-hidden="true"></span>2 terços
+                    </li>
+                    <li class="heatmap-legend__item">
+                      <span class="heatmap__day heatmap__day--3" aria-hidden="true"></span>3 terços
+                    </li>
+                    <li class="heatmap-legend__item">
+                      <span class="heatmap__day heatmap__day--4" aria-hidden="true"></span>4 terços: o Rosário completo
+                    </li>
+                    <li class="heatmap-legend__item">
+                      <span class="heatmap__day heatmap__day--future" aria-hidden="true"></span>Dia que ainda vai chegar
+                    </li>
+                  </ul>
                 </div>
-                <div class="heatmap" role="img" aria-label="Terços por dia nas últimas 12 semanas" data-heatmap data-skeleton></div>
               </section>
 
               <section class="history-card" aria-labelledby="by-set-title">
@@ -119,7 +156,10 @@
         <section class="history-data" aria-labelledby="history-data-title">
           <div class="history-data__text">
             <h2 id="history-data-title" class="history-data__title">Seus dados</h2>
-            <p>Tudo fica salvo só neste aparelho, sem cadastro. Apagar remove o histórico e o terço em andamento hoje; não dá para desfazer.</p>
+            <p>
+              Tudo fica salvo só neste aparelho, sem cadastro. Apagar remove o histórico e o terço em andamento hoje;
+              não dá para desfazer.
+            </p>
           </div>
           <button class="button button--danger history-data__clear" type="button" hidden data-clear>
             <svg class="icon icon--sm" aria-hidden="true"><use href="/icons.svg#trash"></use></svg>
@@ -147,7 +187,12 @@
       <template id="by-set-template">
         <li class="by-set__item">
           <span class="by-set__head">
-            <span class="illustration illustration--sm by-set__illustration" aria-hidden="true" data-set-illustration hidden></span>
+            <span
+              class="illustration illustration--sm by-set__illustration"
+              aria-hidden="true"
+              data-set-illustration
+              hidden
+            ></span>
             <span class="by-set__name" data-set-name></span>
             <b class="by-set__count" data-set-count></b>
           </span>
@@ -161,7 +206,12 @@
         <li class="recent__item">
           <span class="recent__date" data-recent-date></span>
           <span class="recent__title">
-            <span class="illustration illustration--sm recent__illustration" aria-hidden="true" data-recent-illustration hidden></span>
+            <span
+              class="illustration illustration--sm recent__illustration"
+              aria-hidden="true"
+              data-recent-illustration
+              hidden
+            ></span>
             <span data-recent-title></span>
           </span>
           <span class="recent__extra" data-recent-extra></span>

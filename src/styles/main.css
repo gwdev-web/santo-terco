@@ -18,6 +18,7 @@
 @import "./components/tabs.css";
 @import "./components/prayer-text.css";
 @import "./components/text-size.css";
+@import "./components/theme-toggle.css";
 @import "./components/disclosure.css";
 @import "./components/progress-bar.css";
 @import "./components/medal.css";
@@ -26,6 +27,7 @@
 @import "./components/bead.css";
 @import "./components/step-card.css";
 @import "./components/celebration.css";
+@import "./components/toast.css";
 
 /* Pages */
 @import "./pages/home.css";

@@ -2,8 +2,8 @@
    Celebration — end of a terço and of a full Rosary, on navy
    Rays turning slowly, ripples, sparkles and falling gold beads around medals
    that pop in (.celebration__pop), then the text fades up (.celebration__reveal).
-   JS adds .celebration--playing to start it (again). Timings can be shifted with
-   --pop-delay, --ripple-start and --reveal-start; the text order with .celebration__reveal--1…4.
+   JS adds .celebration--playing to start it. Timings can be shifted with
+   --pop-delay, --ripple-start, --burst-start (sparkles and beads) and --reveal-start; the text order with .celebration__reveal--1…4.
    Under reduced motion everything is shown still, without the loops.
    ========================================================================== */
 
@@ -116,7 +116,7 @@
   place-items: center;
   inline-size: var(--celebration-medal);
   block-size: var(--celebration-medal);
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-beige-light);
   border: 5px solid var(--color-gold-bright);
   box-shadow: 0 0 0 8px var(--color-gold-glow);
@@ -222,7 +222,7 @@
 }
 
 .celebration__set--done .medal {
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-beige-light);
   border: 3px solid var(--color-gold-bright);
 }
@@ -242,12 +242,12 @@
 }
 
 .celebration--playing .celebration__sparkle {
-  animation: celebration-twinkle 2.4s var(--delay) var(--ease-in-out) infinite;
+  animation: celebration-twinkle 2.4s calc(var(--burst-start, 0s) + var(--delay)) var(--ease-in-out) infinite backwards;
 }
 
 /* Three falls, then the beads rest: joyful, not endless */
 .celebration--playing .celebration__piece {
-  animation: celebration-fall var(--duration) var(--delay) ease-in 3;
+  animation: celebration-fall var(--duration) calc(var(--burst-start, 0s) + var(--delay)) ease-in 3;
 }
 
 .celebration--playing .celebration__pop {
@@ -388,14 +388,15 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .celebration--playing :is(
-    .celebration__rays,
-    .celebration__ripple,
-    .celebration__sparkle,
-    .celebration__piece,
-    .celebration__pop,
-    .celebration__reveal
-  ) {
+  .celebration--playing
+    :is(
+      .celebration__rays,
+      .celebration__ripple,
+      .celebration__sparkle,
+      .celebration__piece,
+      .celebration__pop,
+      .celebration__reveal
+    ) {
     animation: none;
   }
 

@@ -168,9 +168,9 @@
   gap: 2px;
   min-width: 0;
   padding: var(--space-2) var(--space-1);
-  color: var(--color-navy);
+  color: var(--color-ink);
   text-align: center;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 }
@@ -298,7 +298,7 @@
 }
 
 .rosary-set--today {
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-color: var(--color-gold);
 }
 
@@ -346,13 +346,13 @@
 
   .today__badge {
     color: var(--color-gold-heading);
-    background-color: var(--color-white);
+    background-color: var(--color-surface);
     border-color: var(--color-border);
   }
 
   .today__date {
     color: var(--color-gold-text);
-    background-color: var(--color-white);
+    background-color: var(--color-surface);
   }
 
   .today__date .icon {
@@ -360,7 +360,7 @@
   }
 
   .today__title {
-    color: var(--color-navy);
+    color: var(--color-ink);
   }
 
   .today__set {
@@ -376,11 +376,11 @@
   }
 
   .today__secondary {
-    color: var(--color-navy);
+    color: var(--color-ink);
   }
 
   .today__secondary:hover {
-    color: var(--color-navy);
+    color: var(--color-ink);
     background-color: var(--color-cream);
   }
 

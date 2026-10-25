@@ -1,0 +1,6 @@
+dist
+package-lock.json
+public/icons.svg
+src/assets
+test-results
+playwright-report

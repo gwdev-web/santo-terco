@@ -16,7 +16,10 @@ export function initTabs(root, { media } = {}) {
   const tabs = qsa('[role="tab"]', tabList);
   const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
   const query = media ? window.matchMedia(media) : null;
-  let selected = Math.max(0, tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true'));
+  let selected = Math.max(
+    0,
+    tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true'),
+  );
 
   function render() {
     const active = !query || query.matches;

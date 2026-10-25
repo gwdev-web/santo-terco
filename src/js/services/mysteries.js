@@ -33,6 +33,19 @@ export async function getMysterySets() {
     throw new Error('mysteries.json has no "sets" list');
   }
 
+  data.sets.forEach((set, index) => {
+    const isValid =
+      typeof set?.id === 'string' &&
+      typeof set.name === 'string' &&
+      Array.isArray(set.weekdays) &&
+      Array.isArray(set.mysteries) &&
+      set.mysteries.length > 0;
+
+    if (!isValid) {
+      throw new Error(`mysteries.json: set ${index} ("${set?.id}") needs "id", "name", "weekdays" and "mysteries"`);
+    }
+  });
+
   return data.sets;
 }
 

@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Theme toggle — round gold-bordered button in the header (aria-pressed = dark)
+   Shows the moon in the light theme and the sun in the dark theme.
+   ========================================================================== */
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--tap-min);
+  block-size: var(--tap-min);
+  padding: 0;
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-pill);
+  transition:
+    color var(--transition),
+    background-color var(--transition),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.theme-toggle:hover {
+  color: var(--color-gold-text);
+  background-color: var(--color-cream);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle__icon {
+  grid-area: 1 / 1;
+  transition:
+    opacity var(--transition),
+    transform var(--duration-slow) var(--ease-standard);
+}
+
+.theme-toggle__icon--sun,
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--moon {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.6);
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__icon--sun {
+  opacity: 1;
+  transform: none;
+}

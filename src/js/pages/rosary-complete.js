@@ -79,7 +79,6 @@ function renderComplete(root, rosaries, streak) {
   qs('[data-count-label]', root).textContent = rosaries === 1 ? 'Rosário completo hoje' : 'Rosários completos hoje';
   qs('[data-streak]', root).textContent = streak >= 2 ? ` · ${streak} dias seguidos` : '';
   qs('[data-facts]', root).hidden = false;
-  qs('[data-celebration-replay]', root).hidden = false;
 }
 
 /** No full Rosary today yet: which sets were prayed and which are left. */

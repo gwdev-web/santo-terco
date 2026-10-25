@@ -11,10 +11,9 @@
   display: grid;
   gap: var(--space-4);
   padding: var(--space-4);
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
-  scroll-margin-block: var(--step-scroll-margin, var(--space-6));
   transition:
     border-color var(--duration-slow) var(--ease-standard),
     box-shadow var(--duration-slow) var(--ease-standard);
@@ -56,7 +55,7 @@
 }
 
 .step-card--done .step-card__number {
-  color: var(--color-white);
+  color: var(--color-on-success);
   background-color: var(--color-success);
 }
 
@@ -84,7 +83,7 @@
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 
 .step-card__counter-total {
@@ -106,7 +105,7 @@
 .step-card__hint {
   padding: var(--space-3) var(--space-4);
   font-size: 0.9375rem;
-  color: var(--color-navy);
+  color: var(--color-ink);
   background-color: var(--color-cream);
   border-radius: var(--radius-sm);
 }

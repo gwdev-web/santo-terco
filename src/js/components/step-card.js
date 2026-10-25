@@ -70,9 +70,10 @@ export function createStepCard(step, { number, onChange }) {
     }
 
     beads = createBeadCounter(group, {
+      // The name starts with the bead's visible number, so voice control can reach it (WCAG 2.5.3)
       labels: Array.from({ length: step.count }, (_, index) => {
         const intention = step.intentions[index];
-        return `${index + 1}ª Ave Maria${intention ? `, pela ${intention}` : ''}`;
+        return `${index + 1} de ${step.count}: Ave Maria${intention ? `, pela ${intention}` : ''}`;
       }),
       intentions: step.intentions,
       onChange,

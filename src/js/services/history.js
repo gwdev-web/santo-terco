@@ -66,7 +66,11 @@ export function countRosaries(dayEntries, setIds) {
  * @returns {Set<string>} Ids of the sets prayed on that day.
  */
 export function getSetIdsPrayedOn(dateKey) {
-  return new Set(getHistory().filter((entry) => entry.date === dateKey).map((entry) => entry.setId));
+  return new Set(
+    getHistory()
+      .filter((entry) => entry.date === dateKey)
+      .map((entry) => entry.setId),
+  );
 }
 
 /**

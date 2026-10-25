@@ -16,7 +16,7 @@
 
 .bead-slot__label {
   font-weight: 700;
-  color: var(--color-navy);
+  color: var(--color-ink);
 }
 
 .bead {
@@ -27,8 +27,8 @@
   font-family: var(--font-heading);
   font-size: 1.125rem;
   font-weight: 700;
-  color: var(--color-navy);
-  background-color: var(--color-white);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
   border: 2px solid var(--color-border-strong);
   border-radius: var(--radius-pill);
   transition:
@@ -52,7 +52,7 @@
 }
 
 .bead--next {
-  border-color: var(--color-navy);
+  border-color: var(--color-ink);
   animation: breathe 2.2s var(--ease-in-out) infinite;
 }
 

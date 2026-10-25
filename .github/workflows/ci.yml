@@ -1,4 +1,5 @@
-# Checks every pull request and every push to develop: the site builds and its HTML is valid.
+# Checks every pull request and every push to develop: the code is linted and formatted, the tests and data checks pass, the site builds and its HTML is valid,
+# and the main flows work in a real browser without accessibility violations.
 name: CI
 
 on:
@@ -15,7 +16,7 @@ concurrency:
 
 jobs:
   check:
-    name: Build and validate
+    name: Lint, test, build and validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,5 +27,30 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run lint
+      - run: npm test
       - run: npm run build
       - run: npm run validate
+
+  e2e:
+    name: Browser tests (Chrome and Safari, Playwright + axe)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:e2e
+
+      # The report and traces of failed tests: download it from the run's page and open with `npx playwright show-report`
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7

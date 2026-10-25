@@ -1,16 +1,38 @@
 {
+  "id": "./",
   "name": "Santo Terço",
   "short_name": "Santo Terço",
   "description": "Reze o terço do dia, oração por oração.",
   "lang": "pt-BR",
+  "dir": "ltr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#F4F1EA",
   "theme_color": "#FAF8F5",
+  "categories": ["lifestyle", "books"],
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Rezar o terço de hoje",
+      "short_name": "Rezar",
+      "url": "pray.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Orações",
+      "url": "prayers.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Histórico",
+      "url": "history.html",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
   ]
 }

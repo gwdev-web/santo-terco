@@ -7,6 +7,7 @@ import { initTabs } from '../components/tabs.js';
 import { initTextSize } from '../components/text-size.js';
 import { getPrayerBook } from '../services/prayers.js';
 import { cloneTemplate, qs } from '../utils/dom.js';
+import { logWarning } from '../utils/log.js';
 import { appUrl } from '../utils/url.js';
 
 /** Litany lines shown before "Mostrar a ladainha inteira". */
@@ -125,8 +126,10 @@ async function copyPrayer(button, status) {
 
   try {
     await navigator.clipboard.writeText(`${title}\n\n${qs('[data-prayer-text]', card).textContent}`);
-  } catch {
+  } catch (error) {
     copied = false;
+    // The Clipboard API needs HTTPS (or localhost) and can be blocked by the browser
+    logWarning(`Could not copy "${title}" to the clipboard`, error);
   }
 
   label.textContent = copied ? 'Texto copiado' : 'Não foi possível copiar';

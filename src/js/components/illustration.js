@@ -1,3 +1,5 @@
+import { logWarning } from '../utils/log.js';
+
 /** Illustration names are file names: lowercase letters, digits and hyphens. */
 const ILLUSTRATION_NAME = /^[a-z0-9-]+$/;
 
@@ -9,7 +11,10 @@ const ILLUSTRATION_NAME = /^[a-z0-9-]+$/;
  * @param {string} name - Illustration name from the data, e.g. "m-anunciacao".
  */
 export function setIllustration(element, name) {
-  if (!ILLUSTRATION_NAME.test(name)) return;
+  if (typeof name !== 'string' || !ILLUSTRATION_NAME.test(name)) {
+    logWarning(`Invalid illustration name ${JSON.stringify(name)}; the illustration stays hidden`);
+    return;
+  }
 
   element.classList.add(`illustration--${name}`);
   element.hidden = false;

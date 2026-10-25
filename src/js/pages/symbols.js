@@ -17,11 +17,7 @@ initSymbols(qs('[data-symbols]'));
 function initSymbols(root) {
   initDataLoader(root, async () => {
     const [sets, book] = await Promise.all([getMysterySets(), getPrayerBook()]);
-    const prayers = [
-      ...book.rosaryGroups.flatMap((group) => group.prayers),
-      ...book.complementary,
-      ...book.litanies,
-    ];
+    const prayers = [...book.rosaryGroups.flatMap((group) => group.prayers), ...book.complementary, ...book.litanies];
 
     qs('[data-mystery-sets]', root).replaceChildren(
       ...sets.map((set) => {

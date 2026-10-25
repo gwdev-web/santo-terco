@@ -11,8 +11,8 @@
   min-height: var(--tap-primary-mobile);
   padding: var(--space-2) var(--space-6) var(--space-2) var(--space-4);
   font-weight: 700;
-  color: var(--color-navy);
-  background-color: var(--color-white);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-md);
   transition:
@@ -36,7 +36,7 @@
   inline-size: 1.5rem;
   block-size: 1.5rem;
   color: transparent;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border: 2px solid var(--color-border-strong);
   border-radius: calc(var(--radius-sm) / 2);
   transition:
@@ -56,7 +56,7 @@
 }
 
 .mark-toggle[aria-pressed="true"] .mark-toggle__box {
-  color: var(--color-white);
+  color: var(--color-on-success);
   background-color: var(--color-success);
   border-color: var(--color-success);
   animation: pop var(--duration-slow) var(--ease-standard);

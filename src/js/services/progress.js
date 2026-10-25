@@ -26,12 +26,13 @@ export function getProgress(setId, dateKey) {
  * @param {string} setId
  * @param {string} dateKey
  * @param {Record<string, number>} counts
+ * @returns {boolean} Whether it was saved.
  */
 export function saveProgress(setId, dateKey, counts) {
   const saved = readJson(PROGRESS_KEY, null);
   const sets = saved?.date === dateKey && isRecord(saved.sets) ? saved.sets : {};
 
-  writeJson(PROGRESS_KEY, { date: dateKey, sets: { ...sets, [setId]: counts } });
+  return writeJson(PROGRESS_KEY, { date: dateKey, sets: { ...sets, [setId]: counts } });
 }
 
 /** @returns {boolean} Whether anything was marked today for this set. */
