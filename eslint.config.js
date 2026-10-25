@@ -13,6 +13,11 @@ export default [
     },
   },
   {
+    // __SW_MANIFEST__ is filled in by the build (serviceWorker() in vite.config.js)
+    files: ['src/sw.js'],
+    languageOptions: { globals: { ...globals.serviceworker, __SW_MANIFEST__: 'readonly' } },
+  },
+  {
     files: ['src/js/utils/log.js'],
     rules: { 'no-console': 'off' },
   },

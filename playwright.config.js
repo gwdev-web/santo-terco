@@ -19,11 +19,16 @@ export default defineConfig({
     timezoneId: 'America/Sao_Paulo',
     // The motion is checked by hand; here it would only slow the tests and the "next step" pulse never settles
     reducedMotion: 'reduce',
+    // page.route() doesn't see the requests a service worker makes; offline.spec.js turns it on
+    serviceWorkers: 'block',
     trace: 'retain-on-failure',
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
+    // Safari (WebKit): on the Mac and on the iPhone, where many visitors pray
+    { name: 'safari', use: { ...devices['Desktop Safari'] } },
+    { name: 'iphone', use: { ...devices['iPhone 15'] } },
   ],
   webServer: {
     command: `npm run build && npm run preview -- --port ${PORT} --strictPort`,

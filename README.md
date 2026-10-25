@@ -15,6 +15,7 @@ A simple website to pray the rosary every day. It recommends the mystery of the 
 - **Full Rosary**: pray the four sets of mysteries on the same day to complete a Rosary.
 - **Prayers**: the rosary prayers in the order they are prayed, complementary prayers and three litanies, with an adjustable text size and a copy button.
 - **History**: this week, days in a row, a 12-week heatmap, totals per mystery, recent days and medals, with an option to clear everything.
+- **Works offline**: install it on the phone's home screen like an app; after the first visit it opens and guides the terço without internet, and loads instantly.
 - **Privacy**: no sign-up, no ads. Data stays in your browser and can be cleared at any time.
 
 ## Tech stack
@@ -58,7 +59,7 @@ npm run validate  # check the built HTML (html-validate)
 npm run lint      # check code and formatting (ESLint + Prettier)
 npm run format    # format every file (Prettier) and apply ESLint fixes
 npm test          # run the unit tests and the data checks (Vitest)
-npm run test:e2e  # run the browser tests on the build (Playwright + axe); first time: npx playwright install chromium
+npm run test:e2e  # run the browser tests on the build in Chrome and Safari (Playwright + axe); first time: npx playwright install chromium webkit
 ```
 
 During development, `/components.html` shows every base component, interface icon and illustration for review (it is not part of the build).
@@ -73,6 +74,7 @@ During development, `/components.html` shows every base component, interface ico
 └── src/
     ├── assets/         brand images (emblem, logos, banner) and the custom rosary illustrations (SVG)
     ├── js/             app code: services, utils, components, pages
+    ├── sw.js           service worker (offline), completed by the build
     └── styles/         tokens, base, layout, utilities, motion, components, pages
 ```
 
@@ -86,7 +88,7 @@ The content lives as JSON in [`/data`](data) and is fetched at runtime from GitH
 https://raw.githubusercontent.com/gwdev-web/santo-terco/main/data/<file>.json
 ```
 
-Updating a JSON file on `main` updates the site without a new build. During development (`npm run dev`) the local files in `/data` are used, so changes can be tested before they are pushed.
+Updating a JSON file on `main` updates the site without a new build (visitors who already have the site offline see it on their next visit, as the service worker refreshes the data in the background). During development (`npm run dev`) the local files in `/data` are used, so changes can be tested before they are pushed.
 
 User progress and history are stored only in the browser (`localStorage`).
 

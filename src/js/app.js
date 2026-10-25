@@ -1,3 +1,4 @@
+import { initServiceWorker } from './components/service-worker.js';
 import { initStorageNotice } from './components/storage-notice.js';
 import { initThemeToggle } from './components/theme-toggle.js';
 import { qs, qsa } from './utils/dom.js';
@@ -15,4 +16,5 @@ export function initApp() {
   if (themeToggle) initThemeToggle(themeToggle);
 
   initStorageNotice();
+  initServiceWorker();
 }

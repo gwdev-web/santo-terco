@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -125,12 +126,63 @@ function htmlPartials() {
   };
 }
 
+/** Files of /public the service worker keeps offline (the app icons and share image are left out). */
+const SW_PUBLIC_FILES = ['icons.svg', 'site.webmanifest', 'favicon.svg'];
+
+/**
+ * Builds `sw.js` from `src/sw.js`, filling `__SW_MANIFEST__` with what it keeps offline:
+ * - core: every page, the JS, CSS, fonts and images of the build, and SW_PUBLIC_FILES;
+ * - extra: the illustrations (SVG), cached without holding up the install;
+ * - dataFiles: the JSON files the pages load, from BUILD_DATA_URL;
+ * - version: a hash of all of it, so each deploy that changes a file is a new version.
+ */
+function serviceWorker() {
+  return {
+    name: 'service-worker',
+    apply: 'build',
+    generateBundle: {
+      order: 'post',
+      handler(_options, bundle) {
+        const files = Object.values(bundle).map((file) => ({
+          path: file.fileName,
+          source: file.type === 'chunk' ? file.code : file.source,
+        }));
+        const publicFiles = SW_PUBLIC_FILES.map((path) => ({
+          path,
+          source: readFileSync(resolve(root, 'public', path)),
+        }));
+        const offline = [...files, ...publicFiles].filter(({ path }) => !path.endsWith('.map'));
+
+        const hash = createHash('sha256');
+        for (const { path, source } of offline) hash.update(path).update(source);
+
+        const manifest = {
+          version: hash.digest('hex').slice(0, 12),
+          core: offline.map(({ path }) => path).filter((path) => !path.endsWith('.svg') || !path.startsWith('assets/')),
+          extra: offline.map(({ path }) => path).filter((path) => path.endsWith('.svg') && path.startsWith('assets/')),
+          dataUrl: `${BUILD_DATA_URL}/`,
+          dataFiles: [...new Set(Object.values(PAGES).flatMap((page) => page.data ?? []))],
+        };
+
+        this.emitFile({
+          type: 'asset',
+          fileName: 'sw.js',
+          source: readFileSync(resolve(root, 'src/sw.js'), 'utf8').replace(
+            '= __SW_MANIFEST__;',
+            `= ${JSON.stringify(manifest)};`,
+          ),
+        });
+      },
+    },
+  };
+}
+
 export default defineConfig(({ command, isPreview }) => ({
   base: command === 'build' || isPreview ? BUILD_BASE : '/',
   define: {
     'import.meta.env.DATA_URL': JSON.stringify(command === 'build' ? BUILD_DATA_URL : DEV_DATA_URL),
   },
-  plugins: [htmlPartials()],
+  plugins: [htmlPartials(), serviceWorker()],
   build: {
     rolldownOptions: {
       input: Object.fromEntries(Object.keys(PAGES).map((page) => [page, resolve(root, `${page}.html`)])),

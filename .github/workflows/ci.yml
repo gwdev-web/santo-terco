@@ -33,7 +33,7 @@ jobs:
       - run: npm run validate
 
   e2e:
-    name: Browser tests (Playwright + axe)
+    name: Browser tests (Chrome and Safari, Playwright + axe)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +44,7 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:e2e
 
       # The report and traces of failed tests: download it from the run's page and open with `npx playwright show-report`

@@ -50,6 +50,9 @@ describe('fetchJson', () => {
     await expect(fetchJson('rosary.json')).rejects.toThrow('network or CORS error');
     await expect(fetchJson('rosary.json')).resolves.toEqual({ ok: true });
     expect(fetch).toHaveBeenCalledTimes(2);
+    // The first request matches the page's preload; the retry skips the browser's copy of the failure
+    expect(fetch.mock.calls[0][1]).not.toHaveProperty('cache');
+    expect(fetch.mock.calls[1][1]).toHaveProperty('cache', 'reload');
   });
 
   it('explains a failure when the device is offline', async () => {

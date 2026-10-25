@@ -25,7 +25,7 @@ npm run lint      # ESLint + Prettier check (also run by CI)
 npm run format    # format every file with Prettier and apply ESLint fixes
 npm test          # Vitest: unit tests and /data checks (also run by CI)
 npm run test:watch # Vitest in watch mode
-npm run test:e2e  # Playwright + axe on the production build (also run by CI)
+npm run test:e2e  # Playwright + axe on the production build, Chrome and Safari (also run by CI)
 ```
 
 ## Architecture
@@ -41,9 +41,10 @@ src/assets/fonts/      Playfair Display and Lato (Latin subset, woff2), served w
 src/assets/brand/      emblem, full and horizontal logos (normal and light, for navy) and the Our Lady banner art (PNG)
 src/assets/illustrations/  the 38 custom rosary illustrations (single-path SVG masks)
 tests/unit/            Vitest tests for services and utils, plus data.test.js, which checks every /data file
-tests/e2e/             Playwright tests on the build: every page (axe, no sideways scroll), the terço flow and failures
+tests/e2e/             Playwright tests on the build, in Chrome and Safari (desktop and phone): every page (axe, no sideways scroll), the terço flow, failures and offline
 src/js/
   app.js               initApp(): shared behavior for every page
+src/sw.js              service worker (offline); the build turns it into dist/sw.js with the file list (see Offline)
   config.js            constants (the data URL itself is set in vite.config.js)
   services/            data access and persistence (api, mysteries, prayers, rosary, storage, progress, history)
   utils/               small pure helpers (dom, date, text, url, log)
@@ -80,6 +81,16 @@ The build is published under `/santo-terco/` (GitHub Pages, from `SITE_URL` in `
 - User progress and history are stored only in the browser with `localStorage`, through `services/storage.js` (keys prefixed `santo-terco:`). Nothing is sent to a server.
 - Pages that load data show a skeleton while loading and a `.notice--error` with "Tentar de novo" on failure (`initDataLoader`, which also retries when the device comes back online).
 - Pages that save or read progress have a `[data-storage-notice]`, shown when the browser doesn't keep the site's data (private window, blocked or full storage).
+
+## Offline (PWA)
+
+The site is installable (`public/site.webmanifest`) and works offline through a hand-written service worker, `src/sw.js`.
+
+- The `serviceWorker()` plugin in `vite.config.js` builds `dist/sw.js` with a manifest: every page, JS, CSS, font and image of the build (`core`), the illustrations (`extra`), the data files of `PAGES` and a version hash. A deploy that changes any file is a new version; it takes over at once (`skipWaiting`) and deletes the old cache.
+- Pages and assets come from the cache; data is served from the cache and refreshed in the background (stale-while-revalidate), so a data change reaches installed users on their second visit after it is pushed.
+- Performance first: the worker is registered only in the production build, after `load`, when the browser is idle (`components/service-worker.js`). Hashed files already cached are copied, not downloaded again. Don't add files to the install that a page doesn't need offline, and keep the first visit free of extra requests.
+- A new page or a new kind of file is picked up by the plugin automatically; a new file in `/public` that must work offline goes in `SW_PUBLIC_FILES`.
+- The browser tests block the service worker (`serviceWorkers: 'block'`), except `tests/e2e/offline.spec.js`.
 
 ## Errors and the console
 

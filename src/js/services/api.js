@@ -1,11 +1,14 @@
 import { DATA_BASE_URL, FETCH_TIMEOUT_MS } from '../config.js';
 
 const cache = new Map();
+const failed = new Set();
 
 /**
  * Fetches a JSON file from the data source (GitHub raw).
  * Responses are cached per URL, so each file is requested only once per session.
  * The request has no custom headers, so it reuses the page's `<link rel="preload">` (see vite.config.js).
+ * After a failure, the next attempt asks for a fresh copy (`cache: 'reload'`): Safari keeps the
+ * preload's response, even a failed one, for the life of the page and would answer with it again.
  *
  * @param {string} fileName - File name relative to DATA_BASE_URL, e.g. "mysteries.json".
  * @returns {Promise<unknown>} Parsed JSON.
@@ -15,22 +18,29 @@ export function fetchJson(fileName) {
   const url = `${DATA_BASE_URL}/${fileName.replace(/^\/+/, '')}`;
 
   if (!cache.has(url)) {
-    const request = requestJson(url).catch((error) => {
-      cache.delete(url); // allow a retry on the next call
-      throw error;
-    });
+    const request = requestJson(url, failed.has(url)).then(
+      (data) => {
+        failed.delete(url);
+        return data;
+      },
+      (error) => {
+        cache.delete(url); // allow a retry on the next call
+        failed.add(url);
+        throw error;
+      },
+    );
     cache.set(url, request);
   }
 
   return cache.get(url);
 }
 
-async function requestJson(url) {
+async function requestJson(url, isRetry) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
   try {
-    const response = await fetch(url, { signal: controller.signal });
+    const response = await fetch(url, { signal: controller.signal, ...(isRetry && { cache: 'reload' }) });
 
     if (!response.ok) {
       throw new Error(`Failed to load ${url}: HTTP ${response.status}`);

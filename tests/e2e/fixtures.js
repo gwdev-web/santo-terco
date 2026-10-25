@@ -20,9 +20,9 @@ export const PAGES = [
   '404.html',
 ];
 
-/** Answers the GitHub raw requests with the local /data files, as GitHub would (CORS allowed). */
-export const serveLocalData = (page) =>
-  page.route(`${DATA_URL}*.json`, (route) =>
+/** Answers the GitHub raw requests with the local /data files, as GitHub would (CORS allowed), on a page or a whole context. */
+export const serveLocalData = (target) =>
+  target.route(`${DATA_URL}*.json`, (route) =>
     route.fulfill({
       path: resolve(import.meta.dirname, '../../data', new URL(route.request().url()).pathname.split('/').pop()),
       contentType: 'application/json; charset=utf-8',
@@ -35,6 +35,9 @@ export const serveLocalData = (page) =>
  * - A normal visit logs nothing (CLAUDE.md, "Errors and the console"): any console error
  *   or warning fails the test, except the ones matching `test.use({ expectedConsole: /pattern/ })`.
  */
+/** Logged by Playwright itself when it blocks the service worker (`serviceWorkers: 'block'`), not by the site. */
+const PLAYWRIGHT_MESSAGE = /Service Worker registration blocked by Playwright/;
+
 export const test = base.extend({
   expectedConsole: [null, { option: true }],
 
@@ -49,7 +52,7 @@ export const test = base.extend({
     await serveLocalData(page);
     await use(page);
 
-    const unexpected = messages.filter((text) => !expectedConsole?.test(text));
+    const unexpected = messages.filter((text) => !PLAYWRIGHT_MESSAGE.test(text) && !expectedConsole?.test(text));
     expect(unexpected, 'console errors and warnings').toEqual([]);
   },
 });
