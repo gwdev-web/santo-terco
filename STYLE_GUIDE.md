@@ -96,7 +96,7 @@ A night version of the same palette: deep navy instead of beige, light ink, the 
 | **Playfair Display** | Headings, prayer text, quotes. Classic and liturgical; invites slow reading.                             | 500, 600, 700; italic 500 for quotes and highlights |
 | **Lato**             | Interface: buttons, labels, navigation, explanations, UI numbers. Humanist and legible on small screens. | 400, 700                                            |
 
-Tokens: `--font-heading`, `--font-body`. The fonts are served with the site (`src/assets/fonts/`, Latin subset, `font-display: swap`); Playfair Display and Lato regular are preloaded. Each has a local fallback (Georgia, Arial) resized with `size-adjust` to the web font's width, per weight, so the text doesn't reflow when the fonts arrive.
+Tokens: `--font-heading`, `--font-body`. The fonts are served with the site (`src/assets/fonts/`, Latin subset, `font-display: swap`), without a preload (Safari and Chrome disagree on how to reuse it, so one of them would download the fonts twice; see `base.css`). Each has a local fallback (Georgia, Arial) resized with `size-adjust` to the web font's width, per weight, so the text doesn't reflow when the fonts arrive.
 
 ### 3.1 Scale
 

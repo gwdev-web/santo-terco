@@ -4,7 +4,9 @@
 
 /* Web fonts, served with the site (Latin subset, which covers Portuguese), so the first paint
    doesn't wait for a third-party stylesheet. Playfair Display is variable: one file for 400–700.
-   The ones used above the fold are preloaded in partials/head.html. */
+   They are not preloaded: Chrome only reuses a font preload with `crossorigin` and Safari only
+   without it, so either way one of them downloads the fonts twice. Measured on slow 4G, the text
+   also paints sooner without the preload, with the same small shift when the fonts swap in. */
 
 @font-face {
   font-family: "Playfair Display";

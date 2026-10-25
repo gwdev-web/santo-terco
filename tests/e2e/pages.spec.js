@@ -46,6 +46,15 @@ for (const path of PAGES) {
   });
 }
 
+// The browser warns about an unused preload only a few seconds after `load`: in a short test it would
+// slip by (Safari, for one, didn't reuse the font preloads and downloaded the fonts twice)
+for (const path of ['index.html', 'prayers.html', 'pray.html']) {
+  test(`${path} uses everything it preloads`, async ({ page }) => {
+    await open(page, path);
+    await page.waitForTimeout(4000);
+  });
+}
+
 test('the skip link moves the focus to the content', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'keyboard navigation');
   await open(page, 'index.html');
